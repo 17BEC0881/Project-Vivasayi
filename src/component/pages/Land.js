@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import classes from "../pages/land.module.css";
+import classes from "./land.module.css";
 import { useEffect } from "react";
 
 const Land = () => {
@@ -768,46 +768,7 @@ const Land = () => {
         <div>
           <button onClick={submitHandler}>submit</button>
         </div>
-
-        <table></table>
       </form>
-
-      {/* <table>
-        <thead>
-          <tr>
-            <th>Name</th>
-       
-            <th>status</th>
-            <th>action</th>
-          </tr>
-        </thead>
-        <tbody>
-          {check
-            ? banks.map((details, ind) => (
-                <tr key={details.name} id="user">
-                  <td>{details.name}</td>
-                  {details.active ? (
-                    <td>
-                      <AiOutlineCheck />
-                    </td>
-                  ) : (
-                    <td>
-                      <AiOutlineClose />
-                    </td>
-                  )}
-                  <td>
-                 
-                    <NavLink onClick={() => editHandler(ind)} to="/editpage">
-                      <FaPencilAlt size={10} />
-                    </NavLink>
-                   
-                  </td>
-              
-                </tr>
-              ))
-            : ""}
-        </tbody>
-      </table> */}
     </div>
   );
 };

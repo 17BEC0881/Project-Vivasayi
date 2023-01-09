@@ -1,17 +1,21 @@
 // import logo from './logo.svg';
-import { Navigate, Route, Routes } from "react-router-dom";
-import Farmerdetails from "./component/Farmerdetails";
-import Machinedetails from "./component/Machinedetails";
-import Land from "./component/pages/Land";
-import "./App.css";
+import { Navigate, Route, Routes } from 'react-router-dom';
+import Farmerdetails from './component/pages/Farmerdetails';
+import Machinedetails from './component/pages/Machinedetails';
+import Login from './component/pages/Login';
+import Land from './component/pages/Land';
+import './App.css';
+import ViewFarmer from './component/pages/ViewFarmer';
 
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<Navigate to="/farmerdetails" />} />
-      <Route path="/farmerdetails" element={<Farmerdetails />} />
-      <Route path="/machinedetails" element={<Machinedetails />} />
-      <Route path="/land" element={<Land />} />
+          <Route path='/' element={<Navigate to='/login' />} />
+          <Route path='/login' element={<Login />} />
+          <Route path='/farmerdetails' element={<Farmerdetails />} />
+          <Route path='/land' element={<Land />} />
+          <Route path='/machinedetails' element={<Machinedetails />} />
+          <Route path='/viewfarmer' element={<ViewFarmer />} />
     </Routes>
   );
 }
