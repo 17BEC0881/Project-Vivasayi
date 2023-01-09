@@ -1,6 +1,6 @@
 import classes from './Farmerdetails.module.css';
 import { useState } from 'react';
-import { farmeractions } from '../store/reducer';
+import { farmeractions } from '../../store/reducer';
 import { useDispatch } from 'react-redux';
 import axios from 'axios';
 
