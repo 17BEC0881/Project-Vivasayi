@@ -1,6 +1,6 @@
 import classes from './Farmerdetails.module.css';
 import { useState } from 'react';
-import { CREATE_FARMER } from '../store/action';
+import { farmeractions } from '../store/reducer';
 import { useDispatch } from 'react-redux';
 import axios from 'axios';
 
@@ -24,9 +24,16 @@ const Farmerdetails = () => {
     const [enteredunion,setEnteredUnion] = useState('');
     const [enteredpanchayat,setEnteredPanchayat] = useState('');
     const [enteredvillage,setEnteredVillage] = useState('');
+    const [enteredcrop,setEnteredCrop] = useState(false);
+    const [enteredRentland,setEnteredRentLand] = useState(false);
+    const [enteredOwnland,setEnteredOwnLand] = useState(false);
+    const [enteredOrganic,setEnteredOrganic] = useState(false);
+    const [enteredSeed,setEnteredSeed] = useState(false);
+    const [enteredSeedtype,setEnteredSeedType] = useState(false);
 
     const stateHandler = async (event) => {
         event.preventDefault();
+        setEnteredState(event.target.value);
         await axios.get('http://192.168.0.103:8000/farmer/states')
         .then((response) => {
             console.log(response);
@@ -55,6 +62,7 @@ const Farmerdetails = () => {
 
     const districtHandler = async (event) => {
         event.preventDefault();
+        setEnteredDistrict(event.target.value);
         await axios.get(`http://192.168.0.103:8000/farmer/districts/?state=${state_val}`)
         .then((response) => {
             console.log(response);
@@ -81,6 +89,7 @@ const Farmerdetails = () => {
 
     const unionHandler = async (event) => {
         event.preventDefault();
+        setEnteredUnion(event.target.value);
         await axios.get(`http://192.168.0.103:8000/farmer/unions/?district=${district_val}`)
         .then((response) => {
             console.log(response);
@@ -107,6 +116,7 @@ const Farmerdetails = () => {
 
     const panchayatHandler = async (event) => {
         event.preventDefault();
+        setEnteredPanchayat(event.target.value);
         await axios.get(`http://192.168.0.103:8000/farmer/panchayats/?union=${union_val}`)
         .then((response) => {
             console.log(response);
@@ -127,12 +137,13 @@ const Farmerdetails = () => {
     for(let i=0;i<panchayat.length;i++){
         if(enteredpanchayat === panchayat[i]) {
             var panchayat_val = (panchayat[i]);
-            console.log("up",panchayat_val);
+            // console.log("up",panchayat_val);
         }
     }
 
     const villageHandler = async (event) => {
         event.preventDefault();
+        setEnteredVillage(event.target.value);
         await axios.get(`http://192.168.0.103:8000/farmer/villages/?panchayat=${panchayat_val}`)
         .then((response) => {
             console.log(response);
@@ -150,28 +161,53 @@ const Farmerdetails = () => {
             }
         })   
     };
+    for(let i=0;i<village.length;i++){
+        if(enteredvillage === village[i]) {
+            var village_val = (village[i]);
+            console.log("up",village_val);
+        }
+    }
 
-    const submitHandler = (e) => {
+    const submitHandler = async (e) => {
         e.preventDefault();
         const data = {
-            name:enteredname,
-            nickname:enterednickname,
-            father:enteredfathername,
+            farmerName:enteredname,
+            nickName:enterednickname,
+            fatherName:enteredfathername,
             gender:enteredgender,
             age:enteredage,
-            contact:enteredcontact,
-            whatsapp:enteredwhatsapp,
-            person:enteredperson,
+            phoneNumber:enteredcontact,
+            whatsappNumber:enteredwhatsapp,
+            residentialType:enteredperson,
             state:enteredstate,
             district:entereddistrict,
             union:enteredunion,
             panchayat:enteredpanchayat,
-            village:enteredvillage
+            village:enteredvillage,
+            altCrop:enteredcrop,
+            farmRentedLand:enteredRentland,
+            leaseOwnLand:enteredOwnland,
+            organic:enteredOrganic,
+            seedVariety:enteredSeed,
+            singleSeed:enteredSeedtype
         };
         console.log("data",data);
-        dispatch ({
-            type:CREATE_FARMER,
-            payload:data,
+        dispatch (farmeractions.create_farmer([data])
+        )
+        
+        await axios.post("http://192.168.0.103:8000/farmer/create",{ farmerDetails : data })
+        .then((response) => {
+            console.log(response);
+            dispatch (farmeractions.create_id([response.data.farmerId]))
+        }).catch((error) => {
+            if (error.response) {
+                console.log(error.response);
+                console.log(error.response.status);
+            } else if (error.request) {
+                console.log("network error");
+            } else {
+                console.log(error);
+            }
         })
     };
 
@@ -179,62 +215,58 @@ const Farmerdetails = () => {
         <section className={classes.box}>
             <form>
                 <h3>Farmer Details</h3>
-                <label>Name</label>
-                <input name="name" id="name" type="text" value={enteredname} onChange={(e) => setEnteredName(e.target.value)}/>
-                <label>Nickname</label>
-                <input name="nickname" id="nickname" type="text" value={enterednickname} onChange={(e) => setEnteredNickname(e.target.value)}/>
-                <label>Father/Husband's name</label>
-                <input name="fathername" id="fathername" type="text" value={enteredfathername} onChange={(e) => setEnteredFathername(e.target.value)} />
-                <label>Gender</label>
+                <input name="name" id="name" type="text" placeholder="Name" value={enteredname} onChange={(e) => setEnteredName(e.target.value)}/>
+                <input name="nickname" id="nickname" type="text" placeholder="Nickname" value={enterednickname} onChange={(e) => setEnteredNickname(e.target.value)}/>
+                <input name="fathername" id="fathername" type="text" placeholder="Father/Husband's name" value={enteredfathername} onChange={(e) => setEnteredFathername(e.target.value)} />
                 <select name="gender" id="gender" value={enteredgender} onChange={(e) => setEnteredGender(e.target.value)}>
                     <option value="Gender">Gender</option>
                     <option value="male">Male</option>
                     <option value="female">Female</option>
                 </select>
-                <label>Age</label>
-                <input name="age" id="age" type="number" value={enteredage} onChange={(e) => setEnteredAge(e.target.value)}/>
-                <label>Contact number</label>
-                <input name="con_num" id="con_num" type="tel" value={enteredcontact} onChange={(e) => setEnteredContact(e.target.value)}/>
-                <label>Whatsapp number</label>
-                <input name="w_num" id="w_num" type="tel" value={enteredwhatsapp} onChange={(e) => setEnteredWhatsapp(e.target.value)} />
-                <label>Local person/Foreigner</label>
+                <input name="age" id="age" type="number" placeholder="Age" value={enteredage} onChange={(e) => setEnteredAge(e.target.value)}/>
+                <input name="con_num" id="con_num" type="tel" placeholder="Contact number" value={enteredcontact} onChange={(e) => setEnteredContact(e.target.value)}/>
+                <input name="w_num" id="w_num" type="tel" placeholder="Whatsapp number" value={enteredwhatsapp} onChange={(e) => setEnteredWhatsapp(e.target.value)} />
                 <select name="person" id="person" value={enteredperson} onChange={(e) => setEnteredPerson(e.target.value)}>
                     <option value="Local person/Foreigner">Local person/Foreigner</option>
                     <option value="local">Local Person</option>
                     <option value="foreigner">Outsider</option>
                 </select>
-                <label>State</label> 
                 <select name="state" id="state" value={enteredstate} onChange={(e) => setEnteredState(e.target.value)} onClick={stateHandler}>
-                    <option defaultValue>Choose the State</option>
-                    {state.map( (x) => 
-                    <option value={x}>{x}</option> )}
+                    <option defaultValue>State</option>
+                    {state.map( (x,y) => 
+                    <option key={y} value={x}>{x}</option> )}
                 </select>  
-                <label>District</label>
                 <select name="district" id="district" value={entereddistrict} onChange={(e) => setEnteredDistrict(e.target.value)} onClick={districtHandler}>
-                    <option defaultValue>Choose the District</option>
-                    {district.map( (x) => 
-                    <option value={x}>{x}</option> )}
+                    <option defaultValue>District</option>
+                    {district.map( (x,y) => 
+                    <option key={y} value={x}>{x}</option> )}
                 </select> 
-                <label>Union</label>
-                <select name="union" id="union" value={enteredunion} onChange={(e) => setEnteredUnion(e.target.value)} onClick={unionHandler}>
-                    <option defaultValue>Choose the Union</option>
-                    {union.map( (x) => 
-                    <option value={x}>{x}</option> )}
+                <select name="union" id="union" placeholder="Nickname" value={enteredunion} onChange={(e) => setEnteredUnion(e.target.value)} onClick={unionHandler}>
+                    <option defaultValue>Union</option>
+                    {union.map( (x,y) => 
+                    <option key={y} value={x}>{x}</option> )}
                 </select> 
-                <label>Panchayat</label>
                 <select name="panchayat" id="panchayat" value={enteredpanchayat} onChange={(e) => setEnteredPanchayat(e.target.value)} onClick={panchayatHandler}>
-                    <option defaultValue>Choose the Panchayat</option>
-                    {panchayat.map( (x) => 
-                    <option value={x}>{x}</option> )}
+                    <option defaultValue>Panchayat</option>
+                    {panchayat.map( (x,y) => 
+                    <option key={y} value={x}>{x}</option> )}
                 </select> 
-                <label>Village</label>
                 <select name="village" id="village" value={enteredvillage} onChange={(e) => setEnteredVillage(e.target.value)} onClick={villageHandler}>
-                    <option defaultValue>Choose the Village</option>       
-                    {village.map( (x) => 
-                    <option value={x}>{x}</option> )}
+                    <option defaultValue>Village</option>       
+                    {village.map( (x,y) => 
+                    <option key={y} value={x}>{x}</option> )}
                 </select> 
                 <button type="submit" onClick={submitHandler}>Submit</button>
             </form>
+            <div className={classes.check}>
+                <h4>Interested In</h4>
+                <input type="checkbox" id="own" name="own" checked={enteredOwnland} value={enteredOwnland} onChange={() => setEnteredOwnLand(!enteredOwnland)} /><label>Own Land</label>
+                <input type="checkbox" id="rent" name="rent" checked={enteredRentland} value={enteredRentland} onChange={() => setEnteredRentLand(!enteredRentland)} /><label>Rented Land</label>
+                <input type="checkbox" id="crop" name="crop" checked={enteredcrop} value={enteredcrop} onChange={() => setEnteredCrop(!enteredcrop)} /><label>Alternate Crop</label>
+                <input type="checkbox" id="seed" name="seed" checked={enteredSeed} value={enteredSeed} onChange={() => setEnteredSeed(!enteredSeed)} /><label>Seed Variety</label>
+                <input type="checkbox" id="seedtype" name="seedtype" checked={enteredSeedtype} value={enteredSeedtype} onChange={() => setEnteredSeedType(!enteredSeedtype)} /><label>Single Seed</label>
+                <input type="checkbox" id="organic" name="organic" checked={enteredOrganic} value={enteredOrganic} onChange={() => setEnteredOrganic(!enteredOrganic)} /><label>Organic</label>
+            </div>
         </section>
     );
 };
