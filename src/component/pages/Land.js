@@ -632,7 +632,7 @@ const Land = () => {
     //     console.log(error);
     //   });
   };
-  if (interestedFor == "leasedLand") {
+  if (interestedFor == "availableForLease") {
     console.log("yes");
 
     farmerDetails.map((farmer) => {
@@ -706,7 +706,6 @@ const Land = () => {
             type="number"
           />
         </div>
-
         <div>
           <select
             placeholder="category"
@@ -717,10 +716,12 @@ const Land = () => {
             <option value="ownFarming"> ownFarming </option>
             <option value="leasedLand"> leasedLand </option>
             <option value="wasteLand"> wasteLand </option>
+            <option value="takenLease"> takenLease </option>
             <option value="availableForLease"> availableForLease </option>
           </select>
         </div>
-
+        if (interestedFor == "ownFarming") {""}
+        else if(interestedFor == "leasedLand") {}
         <div>
           <select
             name="states"
@@ -735,7 +736,6 @@ const Land = () => {
             ))}
           </select>
         </div>
-
         <div>
           <select
             name="states"
@@ -764,7 +764,6 @@ const Land = () => {
             ))}
           </select>
         </div>
-
         <div>
           <button onClick={submitHandler}>submit</button>
         </div>
