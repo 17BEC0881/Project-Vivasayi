@@ -1,16 +1,19 @@
 import classes from './Farmerdetails.module.css';
 import { useState } from 'react';
 import { farmeractions } from '../../store/reducer';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
 
 const Farmerdetails = () => {
+    const api = "http://192.168.0.103:8000";
     const dispatch = useDispatch();
     const [state,setState] = useState([]);
     const [district,setDistrict] = useState([]);
     const [union,setUnion] = useState([]);
     const [panchayat,setPanchayat] = useState([]);
     const [village,setVillage] = useState([]);
+    const { editData } = useSelector((state) => state.farmer);
+    console.log("new",editData);
     const [enteredname,setEnteredName] = useState('');
     const [enterednickname,setEnteredNickname] = useState('');
     const [enteredfathername,setEnteredFathername] = useState('');
@@ -34,7 +37,7 @@ const Farmerdetails = () => {
     const stateHandler = async (event) => {
         event.preventDefault();
         setEnteredState(event.target.value);
-        await axios.get('http://192.168.0.103:8000/farmer/states')
+        await axios.get(`${api}/farmer/states`)
         .then((response) => {
             console.log(response);
             if (response) {
@@ -63,7 +66,7 @@ const Farmerdetails = () => {
     const districtHandler = async (event) => {
         event.preventDefault();
         setEnteredDistrict(event.target.value);
-        await axios.get(`http://192.168.0.103:8000/farmer/districts/?state=${state_val}`)
+        await axios.get(`${api}/farmer/districts/?state=${state_val}`)
         .then((response) => {
             console.log(response);
             if (response) {
@@ -90,7 +93,7 @@ const Farmerdetails = () => {
     const unionHandler = async (event) => {
         event.preventDefault();
         setEnteredUnion(event.target.value);
-        await axios.get(`http://192.168.0.103:8000/farmer/unions/?district=${district_val}`)
+        await axios.get(`${api}/farmer/unions/?district=${district_val}`)
         .then((response) => {
             console.log(response);
             if (response) {
@@ -117,7 +120,7 @@ const Farmerdetails = () => {
     const panchayatHandler = async (event) => {
         event.preventDefault();
         setEnteredPanchayat(event.target.value);
-        await axios.get(`http://192.168.0.103:8000/farmer/panchayats/?union=${union_val}`)
+        await axios.get(`${api}/farmer/panchayats/?union=${union_val}`)
         .then((response) => {
             console.log(response);
             if (response) {
@@ -144,7 +147,7 @@ const Farmerdetails = () => {
     const villageHandler = async (event) => {
         event.preventDefault();
         setEnteredVillage(event.target.value);
-        await axios.get(`http://192.168.0.103:8000/farmer/villages/?panchayat=${panchayat_val}`)
+        await axios.get(`${api}/farmer/villages/?panchayat=${panchayat_val}`)
         .then((response) => {
             console.log(response);
             if (response) {
@@ -195,7 +198,7 @@ const Farmerdetails = () => {
         dispatch (farmeractions.create_farmer([data])
         )
         
-        await axios.post("http://192.168.0.103:8000/farmer/create",{ farmerDetails : data })
+        await axios.post(`${api}/farmer/create`,{ farmerDetails : data })
         .then((response) => {
             console.log(response);
             dispatch (farmeractions.create_id([response.data.farmerId]))
@@ -227,7 +230,7 @@ const Farmerdetails = () => {
                 <input name="con_num" id="con_num" type="tel" placeholder="Contact number" value={enteredcontact} onChange={(e) => setEnteredContact(e.target.value)}/>
                 <input name="w_num" id="w_num" type="tel" placeholder="Whatsapp number" value={enteredwhatsapp} onChange={(e) => setEnteredWhatsapp(e.target.value)} />
                 <select name="person" id="person" value={enteredperson} onChange={(e) => setEnteredPerson(e.target.value)}>
-                    <option value="Local person/Foreigner">Local person/Foreigner</option>
+                    <option value="Local person/Outsider">Local person/Outsider</option>
                     <option value="local">Local Person</option>
                     <option value="foreigner">Outsider</option>
                 </select>
