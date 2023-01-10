@@ -3,13 +3,17 @@
 }
 .box {
     width: 100%;
-    /* border: solid; */
+    border: solid;
 }
 .box form {
-    width : 500px;
+    /* padding-top: 2rem;
+    width : 500px; */
     /* border: solid; */
-    margin:auto;
-    margin-top: 5%;
+    /* margin:auto;
+    margin-top: 5%; */
+    width:50%;
+    /* border:solid; */
+    margin-left: 30%;
 }
 .box form h3 {
     margin: 0px 180px 5px 180px;
