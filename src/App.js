@@ -5,6 +5,7 @@ import Machinedetails from "./component/pages/Machinedetails";
 import Login from "./component/pages/Login";
 import Land from "./component/pages/Land";
 import "./App.css";
+import EditFarmerdetails from './component/pages/Editfarmerdetails';
 import ViewFarmer from "./component/pages/ViewFarmer";
 import Layout from "./component/Layout/Layout";
 import Add from "./component/pages/Add_Emploee";
@@ -20,6 +21,7 @@ function App() {
       <Route path="/home" element={<Home />} />
       <Route path="/add_employee" element={<Add />} />
       <Route path="/farmerdetails" element={<Farmerdetails />} />
+      <Route path='/editfarmer' element={<EditFarmerdetails />} />
       <Route path="/land" element={<Land />} />
       <Route path="/machinedetails" element={<Machinedetails />} />
       <Route path="/viewfarmer" element={<ViewFarmer />} />
