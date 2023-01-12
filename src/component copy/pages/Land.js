@@ -3,7 +3,14 @@ import axios from "axios";
 import classes from "./land.module.css";
 import { useEffect } from "react";
 import LandTable from "./LandTable";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { farmeractions } from "../../store/reducer";
+import { useSelector } from "react-redux";
+import { Action } from "@remix-run/router";
+
 const Land = () => {
+  const navigate = useNavigate();
   const farmerDetails = [
     {
       farmerDetails: {
@@ -611,6 +618,9 @@ const Land = () => {
     },
   ];
 
+  const dispatch = useDispatch();
+  const { farmerLandDetails } = useSelector((state) => state.farmer || []);
+  console.log(farmerLandDetails, "landdetails");
   const availabelLeaseOwnerIdList = [];
   const availableLeaseLandIdList = [];
   const availabelLeaseList = {};
@@ -621,10 +631,12 @@ const Land = () => {
   const [update, setUpdate] = useState([]);
   const [addOns, setAddOns] = useState("None");
   const [supervisorID, setSupervisorID] = useState("");
-  const [wasteland, setWasteLand] = useState("");
+  // const [wasteland, setWasteLand] = useState("");
   const [landId, setLandId] = useState("");
   const [list, setList] = useState([]);
   const [landid, setLandid] = useState();
+  const leasedIdList = [];
+  console.log(landId, landid);
 
   const [ownFarmingCheck, setOwnFarmingCheck] = useState(false);
   const [leasedLandCheck, setLeaseLandCheck] = useState(false);
@@ -661,7 +673,6 @@ const Land = () => {
       setInitial(false);
       setOwnFarmingCheck(false);
       setWasteLandCheck(false);
-
       setTakenLeaseCheck(false);
       setAvailableForLeaseCheck(false);
       setLeaseLandCheck(true);
@@ -670,7 +681,6 @@ const Land = () => {
       setOwnFarmingCheck(false);
       setWasteLandCheck(false);
       setLeaseLandCheck(false);
-
       setAvailableForLeaseCheck(false);
       setTakenLeaseCheck(true);
     } else if (interestedFor == "availableForLease") {
@@ -679,7 +689,6 @@ const Land = () => {
       setWasteLandCheck(false);
       setLeaseLandCheck(false);
       setTakenLeaseCheck(false);
-
       setAvailableForLeaseCheck(true);
     }
   }, [interestedFor]);
@@ -712,68 +721,146 @@ const Land = () => {
     console.log(area, interestedFor, addOns, supervisorID);
 
     const userData = {
-      landDetails: [
-        {
-          farmerId: "JEY0001",
-          area: 102,
-          category: "availableForLease",
-          addons: "None",
-          supervisorId: "",
-        },
-      ],
+      farmerId: "JEY0001",
+      area: 102,
+      category: "availableForLease",
+      addons: "None",
+      supervisorId: "",
     };
 
-    await axios({
-      url: "http://90b9-49-204-114-12.in.ngrok.io/land/create",
+    // await axios({
+    //   url: "http://90b9-49-204-114-12.in.ngrok.io/land/create",
 
-      method: "post",
-      data: {
-        landDetails: [
-          {
-            farmerId: "SWE0007",
-            area: area,
-            category: interestedFor,
-            wasteland: wasteland,
-            addons: addOns,
-            supervisorId: supervisorID,
-          },
-        ],
-      },
-      // body: JSON.stringify(userData),
-      // headers: {
-      //   "content-type": "application/json",
-      // },
-    })
-      .then((response) => {
-        console.log("res", response);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    //   method: "post",
+    //   data: {
+    //     landDetails: [
+    //       {
+    //         farmerId: "SWE0007",
+    //         area: area,
+    //         category: interestedFor,
+    //         wasteland: wasteland,
+    //         addons: addOns,
+    //         supervisorId: supervisorID,
+    //       },
+    //     ],
+    //   },
+    //   // body: JSON.stringify(userData),
+    //   // headers: {
+    //   //   "content-type": "application/json",
+    //   // },
+    // })
+    //   .then((response) => {
+    //     console.log("res", response);
 
-    if (interestedFor == "takenLease") {
-      await axios({
-        url: "http://90b9-49-204-114-12.in.ngrok.io/land/rent",
-        method: "post",
-        data: {
-          rentLandDetails: [
-            {
-              farmerId: "MAH0006",
-              landId: landid,
-              ownerId: supervisorID,
-            },
-          ],
-        },
-      })
-        .then((response) => {
-          console.log("rentresponse", response);
-        })
-        .catch((error) => {
-          console.log("rent error", error);
-        });
-    }
+    const data = [];
+    data.push(farmerLandDetails, userData);
+
+    dispatch(farmeractions.createLand([userData]));
+
+    // landDetails: [
+    //       {
+    //         farmerId: "SWE0007",
+    //         area: area,
+    //         category: interestedFor,
+    //         wasteland: wasteland,
+    //         addons: addOns,
+    //         supervisorId: supervisorID,
+    //       },
+    //     ],
+
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
+
+    // if (interestedFor == "takenLease") {
+    //   await axios({
+    //     url: "http://90b9-49-204-114-12.in.ngrok.io/land/rent",
+    //     method: "post",
+    //     data: {
+    //       rentLandDetails: [
+    //         {
+    //           farmerId: "MAH0006",
+    //           landId: landid,
+    //           ownerId: supervisorID,
+    //         },
+    //       ],
+    //     },
+    //   })
+    //     .then((response) => {
+    //       console.log("rentresponse", response);
+    //     })
+    //     .catch((error) => {
+    //       console.log("rent error", error);
+    //     });
+    // }
+    navigate("/landtable");
   };
+
   if (interestedFor == "takenLease") {
+    // await axios({
+    //   url: "http://90b9-49-204-114-12.in.ngrok.io/land/rent",
+    //   method: "post",
+    //   data: {
+    //     rentLandDetails: [
+    //       {
+    //         farmerId: "MAH0006",
+    //         landId: landid,
+    //         ownerId: supervisorID,
+    //       },
+    //     ],
+    //   },
+    // })
+    //   .then((response) => {
+    //     console.log("rentresponse", response);
+    //   })
+    //   .catch((error) => {
+    //     console.log("rent error", error);
+    //   });
+  } else if (interestedFor == "") {
+    farmerDetails.map((farmer) => {
+      // console.log("landdetails", farmer.landDetails);
+      if (farmer.landDetails == []) {
+        console.log("no land details area available");
+      } else {
+        farmerDetails.map((land) => {
+          // console.log(
+          // "land",
+          land.landDetails.map((cat) => {
+            // console.log("cat", cat.category);
+            if (cat.category == "availableForLease") {
+              // if (!availabelLeaseOwnerIdList.includes(cat.ownerId)) {
+              // console.log("lis");
+              // availabelLeaseOwnerIdList.push(cat.ownerId);
+
+              if (!availableLeaseLandIdList.includes(cat.landId)) {
+                availabelLeaseOwnerIdList.push(cat.ownerId);
+                availableLeaseLandIdList.push(cat.landId);
+                const arr = availableLeaseLandIdList.filter(
+                  (ids) => ids.slice(0, 3) == cat.landId.slice(0, 3)
+                );
+                console.log("arr", arr);
+                availabelLeaseList[cat.ownerId] = arr;
+              }
+              // console.log(
+              //   "avail",
+              //   availabelLeaseOwnerIdList,
+              //   availableLeaseLandIdList,
+              //   availabelLeaseList
+              // );
+              // }
+            }
+            // console.log(
+            //   "availabelLeaseList",
+            //   availabelLeaseOwnerIdList,
+            //   availableLeaseLandIdList
+            // );
+          });
+          // );
+        });
+      }
+    });
+  } else if (interestedFor == "takenLease") {
     console.log("yes");
 
     farmerDetails.map((farmer) => {
@@ -818,48 +905,18 @@ const Land = () => {
         });
       }
     });
-  } else if (interestedFor == "") {
+  } else if (interestedFor == "leasedLand") {
     farmerDetails.map((farmer) => {
-      // console.log("landdetails", farmer.landDetails);
-      if (farmer.landDetails == []) {
-        console.log("no land details area available");
-      } else {
-        farmerDetails.map((land) => {
-          // console.log(
-          // "land",
-          land.landDetails.map((cat) => {
-            // console.log("cat", cat.category);
-            if (cat.category == "availableForLease") {
-              // if (!availabelLeaseOwnerIdList.includes(cat.ownerId)) {
-              // console.log("lis");
-              // availabelLeaseOwnerIdList.push(cat.ownerId);
-
-              if (!availableLeaseLandIdList.includes(cat.landId)) {
-                availabelLeaseOwnerIdList.push(cat.ownerId);
-                availableLeaseLandIdList.push(cat.landId);
-                const arr = availableLeaseLandIdList.filter(
-                  (ids) => ids.slice(0, 3) == cat.landId.slice(0, 3)
-                );
-                console.log("arr", arr);
-                availabelLeaseList[cat.ownerId] = arr;
-              }
-              // console.log(
-              //   "avail",
-              //   availabelLeaseOwnerIdList,
-              //   availableLeaseLandIdList,
-              //   availabelLeaseList
-              // );
-              // }
-            }
-            // console.log(
-            //   "availabelLeaseList",
-            //   availabelLeaseOwnerIdList,
-            //   availableLeaseLandIdList
-            // );
-          });
-          // );
-        });
-      }
+      console.log("leasedland", farmer.landDetails);
+      farmer.landDetails.map((ids) => {
+        console.log("id", ids.ownerId);
+        if (ids.ownerId != "") {
+          if (!leasedIdList.includes(ids.ownerId)) {
+            leasedIdList.push(ids.ownerId);
+          }
+        }
+        console.log("lease", leasedIdList);
+      });
     });
   } else {
     console.log("no");
@@ -881,6 +938,7 @@ const Land = () => {
 
   return (
     <div className={classes.login}>
+      <h1>Add Land</h1>
       {ownFarmingCheck && (
         <form>
           <div>
@@ -1003,7 +1061,7 @@ const Land = () => {
               onChange={(e) => setSupervisorID(e.target.value)}
             >
               <option value="">supervisorId </option>
-              {Object.keys(availabelLeaseList).map((state) => (
+              {availabelLeaseOwnerIdList.map((state) => (
                 <option key={state} value={state}>
                   {state}
                 </option>
@@ -1327,7 +1385,7 @@ const Land = () => {
           </div>
         </form>
       )}
-      <LandTable />
+      {/* <LandTable /> */}
     </div>
   );
 };
