@@ -3,14 +3,15 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialAuthState = {
     isAuthenticated: false,
-    user : []
+    user : [],
+    role : false
 }
 
 const authSlice = createSlice({
     name: 'authentication',
     initialState: initialAuthState,
     reducers: {
-        login(state,action) {
+        login(state) {
             state.isAuthenticated = true;
         },
         logout(state){
@@ -18,6 +19,12 @@ const authSlice = createSlice({
         },
         employee(state,action){
             state.user = action.payload;
+        },
+        admin(state){
+            state.role = true;
+        },
+        staff(state){
+            state.role = false;
         }
         
     }

@@ -1,0 +1,17 @@
+.admin{
+    width: 75%;
+    /* border: solid; */
+    margin: auto;
+}
+.admin h1{
+    width: 25%;
+    margin-left: 40%;
+    margin-top: 80px;
+    color: green;
+}
+.admin-login{
+    width: 100%;
+    /* border: solid; */
+    margin: auto;
+    margin-top: -110px;
+}
