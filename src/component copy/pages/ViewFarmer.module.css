@@ -1,0 +1,63 @@
+.land {
+    width: 100%;
+}
+.land h3 {
+    margin-left: 40%;
+    color: green;
+    font-size: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* .container {
+    margin: auto;
+    width: 80%;
+}
+.container hr {
+    
+    border-color:green;
+    border-width: 0.1px;
+    
+} */
+.land table {
+    border: 1px solid green
+  }
+.land table {
+    width: 100%;
+    border-collapse: collapse;
+    /* border-color: green; */
+  }
+ .land  button {
+    background-color:green;
+    border: none;
+    border-radius: 3px;
+    margin: 5px;
+    width: 6rem;
+    height: 2rem;
+    color: white;
+    font-weight: 700;
+    font-size: medium;
+    
+}
+/* .land thead {
+    background-color: #e3e3e3;
+} */
+.land tr:nth-child(odd){
+    background-color:#f9f9f9;
+    }
+.lsnd tr:hover {
+        background-color:rgb(204, 252, 204);
+    }
+.land tr {
+        text-align: center;
+        height: 2px;
+        padding-top: 5px;
+    padding-right: 5px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    }
+.land th {
+    background-color: green;
+    color: white;
+    text-align: center;
+    border-color: white;
+ }
