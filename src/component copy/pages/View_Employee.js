@@ -17,7 +17,7 @@ const View = () => {
                   "Authorization" : "Bearer "+ localStorage.getItem('token'),
                },
          };
-         axios.get(`http://6610-182-65-110-25.in.ngrok.io/employee/all`,formtoken)
+         axios.get(`https://6e93-49-204-135-131.in.ngrok.io/employee/all`,formtoken)
          .then((response)=>{
           console.log(response.data)
           dispatch(authActions.employee(response.data))

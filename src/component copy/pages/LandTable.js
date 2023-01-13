@@ -171,6 +171,7 @@ const LandTable = () => {
   return (
     <div className={classes.land}>
       <div className={classes.container}>
+        <h1>Land Details</h1>
         <table border="1" className="table">
           <thead>
             <tr className="table-head-row">
