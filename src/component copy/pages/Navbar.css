@@ -1,0 +1,23 @@
+.navbar {
+    width: 75%;
+    height: 5rem;
+    padding: 0;
+    display: flex;
+    padding: 3rem;
+    margin-left: 5rem;
+    /* border: solid; */
+    color: white;
+    font-size: 23px;
+}
+.navlink {
+    width: 25%;
+    margin-left: 30rem;
+    /* border:solid; */
+}
+.navlink button{
+    padding-left: 2rem;
+    font-size: 20px;
+    color: white;
+    background-color: transparent;
+    border: none;
+}
