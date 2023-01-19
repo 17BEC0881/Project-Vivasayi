@@ -17,6 +17,7 @@ img {
     background-size: cover;
     background-repeat: no-repeat;
     height: 100vh;
+    /* filter: blur(0.5px); */
     /* width: 200px; */
 }
 
