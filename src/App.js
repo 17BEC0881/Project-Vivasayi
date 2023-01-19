@@ -17,6 +17,7 @@ import EditLand from "./component copy/pages/EditLand";
 import Scroll from "./component copy/pages/Scroll";
 import SelectLand from "./component copy/pages/SelectLand";
 import LandTable from "./component copy/pages/LandTable";
+import Edit from './components/pages/Edit_Employee';
 
 function App() {
   return (
@@ -39,6 +40,7 @@ function App() {
       <Route path="selectlandtable" element={<Scroll />} />
       <Route path="selectlandpage" element={<SelectLand />} />
       <Route path="landtable" element={<LandTable />} />
+       <Route path='/edit_employee' element={<Edit />} />
     </Routes>
   );
 }
