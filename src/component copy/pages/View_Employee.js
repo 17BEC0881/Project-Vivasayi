@@ -5,11 +5,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import { authActions } from '../../store/auth';
 import { Fragment } from 'react';
 import Layout from '../Layout/Layout';
+import { MdEdit } from 'react-icons/md';
+import { AiTwotoneDelete } from 'react-icons/ai';
+import { useNavigate } from 'react-router-dom';
 
 const View = () => {
  
   const dispatch = useDispatch();
   const user = useSelector(state => state.auth.user);
+  const navigate = useNavigate();
 
   useEffect(() =>{
         const formtoken ={
@@ -17,19 +21,32 @@ const View = () => {
                   "Authorization" : "Bearer "+ localStorage.getItem('token'),
                },
          };
-         axios.get(`https://6e93-49-204-135-131.in.ngrok.io/employee/all`,formtoken)
+         axios.get(`https://66d4-49-204-138-29.in.ngrok.io/employee/all`,formtoken)
          .then((response)=>{
           console.log(response.data)
           dispatch(authActions.employee(response.data))
          })
     },[])
 
-    const editHandler = (event) => {
-
+    const editHandler = (data) => {
+      dispatch(authActions.edit(data))
+      navigate("/edit_employee")
     }
 
-    const deleteHandler = (event) => {
-
+    const deleteHandler = (employee) => {
+        // let output = user.filter((item) => item.slNo !== employee.slNo)
+        // console.log(output)  
+        // dispatch(authActions.delete(output)) 
+        const formtoken ={
+          headers:{
+                "Authorization" : "Bearer "+ localStorage.getItem('token'),
+             },
+         };
+       axios.delete(`https://66d4-49-204-138-29.in.ngrok.io/employee/${employee.userName}`,formtoken)
+       .then((response)=>{
+        console.log(response.data)
+        dispatch(authActions.employee(response.data))
+       })
     }
 
     return (
@@ -57,8 +74,8 @@ const View = () => {
                 <td>{employee.userName}</td>
                 <td>{employee.email}</td>
                 <td>{employee.phoneNumber}</td>
-                <td><button type="button" onClick={editHandler}>Edit</button></td>
-                <td><button type="button" onClick={deleteHandler}>Delete</button></td>
+                <td><MdEdit onClick={ () => editHandler(employee)}/></td>
+                <td><AiTwotoneDelete onClick={ () => deleteHandler(employee)}/></td>
               </tr>
             )
             }

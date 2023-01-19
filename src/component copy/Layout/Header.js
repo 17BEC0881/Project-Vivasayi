@@ -38,7 +38,6 @@ const Header = () => {
   };
   const logoutHandler = (event) => {
     dispatch(authActions.logout());
-
     dispatch(authActions.farmerLogout());
 
     console.log("far", isfarmerLogin);
@@ -62,7 +61,7 @@ const Header = () => {
     navigate("/livestock");
   };
   const addMachineHandler = () => {
-    navigate("/machine");
+    navigate("/machinedetails");
   };
   const addLabourHandler = () => {
     navigate("/labour");
@@ -76,7 +75,7 @@ const Header = () => {
             <ul>
               <GiFarmer style={{ color: "white" }} />
               <NavLink to="/login" className="active">
-                Fafaco
+                FaFaCo
               </NavLink>
             </ul>
           </div>
@@ -100,7 +99,7 @@ const Header = () => {
             {isauth && (
               <nav>
                 <ul className="header-button">
-                  <CgProfile className="icon" /> <button>{username}</button>
+                  <CgProfile className="icon" /> <button>root</button>
                   <button type="submit" onClick={logoutHandler}>
                     Logout
                   </button>
@@ -116,7 +115,7 @@ const Header = () => {
             <ul>
               <GiFarmer style={{ color: "white" }} />
               <NavLink to="/login" className="active">
-                Fafaco
+                FaFaCo
               </NavLink>
             </ul>
           </div>
@@ -135,7 +134,7 @@ const Header = () => {
             {isauth && (
               <nav>
                 <ul className="header-button">
-                  <CgProfile className="icon" /> <button>{username}</button>
+                  <CgProfile className="icon" /> <button>root</button>
                   <button type="submit" onClick={logoutHandler}>
                     Logout
                   </button>
@@ -189,7 +188,7 @@ const Header = () => {
               </ul>
             </div>
           )}
-          {isfarmerLogin && isauth && (role || !role) && isfarmerLogin && (
+          {isauth && (role || !role) && isfarmerLogin && (
             <div className="employee">
               <ul>
                 <li>
@@ -222,11 +221,11 @@ const Header = () => {
                     Add Machine
                   </button>
                 </li>
-                <li>
+                {/* <li>
                   <button type="submit" onClick={addBuySell}>
                     Buy & Sell
                   </button>
-                </li>
+                </li> */}
               </ul>
             </div>
           )}

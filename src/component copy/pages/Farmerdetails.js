@@ -10,7 +10,7 @@ import { Navigate, useNavigate } from "react-router-dom";
 
 const Farmerdetails = () => {
   const navigate = useNavigate("/land");
-  const api = "https://6e93-49-204-135-131.in.ngrok.io";
+  const api = "https://9673-49-205-85-123.in.ngrok.io";
   const dispatch = useDispatch();
   const { create } = useSelector((state) => state.farmer);
   console.log("bool", create);
@@ -286,24 +286,26 @@ const Farmerdetails = () => {
     console.log("data", data);
     dispatch(farmerActions.create_farmer([data]));
 
-    await axios
-      .post(`${api}/farmer/create`, { farmerDetails: data })
-      .then((response) => {
-        console.log(response);
-        dispatch(farmerActions.create_id([response.data.farmerId]));
-        dispatch(authActions.farmerLogin(true));
-        navigate("/land");
-      })
-      .catch((error) => {
-        if (error.response) {
-          console.log(error.response);
-          console.log(error.response.status);
-        } else if (error.request) {
-          console.log("network error");
-        } else {
-          console.log(error);
-        }
-      });
+    // await axios
+    //   .post(`${api}/farmer/create`, { farmerDetails: data })
+    //   .then((response) => {
+    //     console.log(response);
+    //     dispatch(farmerActions.create_id([response.data.farmerId]));
+    //     dispatch(authActions.farmerLogin(true));
+    //     navigate("/land");
+    //   })
+    //   .catch((error) => {
+    //     if (error.response) {
+    //       console.log(error.response);
+    //       console.log(error.response.status);
+    //     } else if (error.request) {
+    //       console.log("network error");
+    //     } else {
+    //       console.log(error);
+    //     }
+    //   });
+    dispatch(authActions.farmerLogin(true));
+    navigate("/land");
   };
 
   return (

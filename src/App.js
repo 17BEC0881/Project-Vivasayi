@@ -1,21 +1,23 @@
-// import logo from './logo.svg';
 import { Route, Routes } from "react-router-dom";
 import Farmerdetails from "./component copy/pages/Farmerdetails";
 import Machinedetails from "./component copy/pages/Machinedetails";
-//import Login from "./component copyt/pages/Login";
 import Start from "./component copy/pages/Start";
 import Land from "./component copy/pages/Land";
-import "./App.css";
-// import EditFarmerdetails from "./component copy/pages/Editfarmerdetails";
 import ViewFarmer from "./component copy/pages/ViewFarmer";
-//import Layout from "./component copy/Layout/Layout";
 import Add from "./component copy/pages/Add_Employee";
 import CropForm from "./component copy/pages/CropForm";
-// import Home from "./component copy/Layout/home";
 import Signup from "./component copy/pages/Signup";
 import Admin from "./component copy/pages/Admin";
 import Employee from "./component copy/pages/Employee";
 import View from "./component copy/pages/View_Employee";
+import Livestock from "./component copy/pages/Livestock";
+import Garden from "./component copy/pages/Garden";
+import LabourWorkForm from "./component copy/pages/LabourWorkForm";
+import EditLand from "./component copy/pages/EditLand";
+import Scroll from "./component copy/pages/Scroll";
+import SelectLand from "./component copy/pages/SelectLand";
+import LandTable from "./component copy/pages/LandTable";
+import Edit from './components/pages/Edit_Employee';
 
 function App() {
   return (
@@ -24,7 +26,6 @@ function App() {
       <Route path="/admin" element={<Admin />} />
       <Route path="/employee" element={<Employee />} />
       <Route path="/signup" element={<Signup />} />
-      {/* <Route path="/home" element={<Home />} /> */}
       <Route path="/add_employee" element={<Add />} />
       <Route path="/view_employee" element={<View />} />
       <Route path="/farmerdetails" element={<Farmerdetails />} />
@@ -32,6 +33,14 @@ function App() {
       <Route path="/machinedetails" element={<Machinedetails />} />
       <Route path="/viewfarmer" element={<ViewFarmer />} />
       <Route path="/cropform" element={<CropForm />} />
+      <Route path="/livestock" element={<Livestock />} />
+      <Route path="/garden" element={<Garden />} />
+      <Route path="/labour" element={<LabourWorkForm />} />
+      <Route path="/editland" element={<EditLand />} />
+      <Route path="selectlandtable" element={<Scroll />} />
+      <Route path="selectlandpage" element={<SelectLand />} />
+      <Route path="landtable" element={<LandTable />} />
+       <Route path='/edit_employee' element={<Edit />} />
     </Routes>
   );
 }

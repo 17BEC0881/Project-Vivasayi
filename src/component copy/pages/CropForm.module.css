@@ -1,5 +1,6 @@
 .div {
     width: 100%;
+    margin-top: -60%;
    
 }
 
@@ -8,7 +9,7 @@
    
     margin:auto;
     /* margin-top:15%; */
-    margin-top:5%; 
+    /* margin-top:5%;  */
  
 }
 .crop_form input{
@@ -20,9 +21,9 @@
     box-sizing: border-box;
     border: 1px solid green;
 }
-.crop-form select{
-    display: block;
-    width: 40%;
+.drop select{
+    /* display: block; */
+    width: 70%;
     padding: 5px;
     margin: 5px 0px 10px 250px; 
     /* color: black; */
@@ -31,7 +32,8 @@
     border-radius: 6px;
  
 }
-.div button{
+
+.btn {
     width: 42%;
     padding: 8px 10px;
     margin: 8px 0;
@@ -48,8 +50,20 @@
   font-family: Arial, Helvetica, sans-serif;
 
 }
+.crop_form select {
+
+    font: 13px open_sansregular;
+  font-family: Arial, Helvetica, sans-serif;
+  width: 100%;
+  padding: 8px 10px;
+  margin: 8px 0;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  border: 1px solid green;
+}
 .check{
-    margin-left: 29%;
+    margin-left: 31%;
     margin-top: 4px;
     margin-right:40%;
     font: 13px  open_sansregular;
@@ -59,11 +73,88 @@
 
 
 .div h1{
-    font: 20px  open_sansregular;
-    font-family: Arial, Helvetica, sans-serif;
-    color: rgb(45, 226, 45);
-    font-size: larger;
-  margin-left: 50%;
-  margin-top: 50px;
+    
+        text-align: center;
+        color: green;
+        /* font-size: 20px; */
+    
 
+} 
+/* .btn {
+    width: 2%;
+    padding: 8px 10px;
+    margin: 8px 0;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    background-color: green;
+    color: white;
+    margin-left: 29%;
+} */
+.btn1{
+    width: 20%;
+    padding: 8px 8px;
+    margin: 9px 0;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    background-color: green;
+    margin-left: 29%;
+}
+.btn2{
+    width: 21%;
+    padding: 8px 10px;
+    margin: 8px 0;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    background-color: green;
+    margin-left: 1%;
+    
+}
+.crop table {
+    width: 85%;
+    border-collapse: collapse;
+    margin-left: 10%;
+    border: 2px solid green
+
+}
+/* .crop button {
+    background-color:green;
+    border: none;
+    border-radius: 3px;
+    margin: 5px;
+    width: 6rem;
+    height: 2rem;
+    color: white;
+    font-weight: 700;
+    font-size: medium;
+} */
+.tab tr:nth-child(odd){
+    background-color:#f9f9f9;
+    }
+.tab tr:hover {
+        background-color:rgb(204, 252, 204);
+    }
+.tab tr {
+        text-align: center;
+        height: 2px;
+        padding-top: 5px;
+    padding-right: 5px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    font-size: small;
+    }
+.tab th {
+    background-color: green;
+    color: white;
+    text-align: center;
+    border-color: white;
+ }
+ .tab {
+    width: 70%;
+    margin-left: 15%;
+    border: 2px solid green
+
+   
 }

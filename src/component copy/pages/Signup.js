@@ -36,7 +36,7 @@ const Signup = () => {
       };
       axios
         .post(
-          `https://6e93-49-204-135-131.in.ngrok.io/employee/signup`,
+          `https://0912-122-164-81-58.in.ngrok.io/employee/signup`,
           credentials
         )
         .then((response) => {

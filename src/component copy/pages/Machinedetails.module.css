@@ -3,6 +3,7 @@
 }
 .box {
     width: 100%;
+    margin-top: -65%;
     /* border: solid; */
 }
 .box form {
@@ -42,7 +43,7 @@
     outline-width: 0;
 }
 .box form button {
-    width: 50%;
+    width: 100%;
     padding: 8px 10px;
     margin: 8px 0;
     border: 2px solid #ccc;
@@ -50,11 +51,13 @@
     box-sizing: border-box;
     background-color: green;
 }
-.box form h4 {
+.box form h1 {
     /* margin: 0px 180px 5px 180px; */
-    color: black;
+    /* color: black;
     font-size: 16px;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: Arial, Helvetica, sans-serif; */
+    text-align: center;
+    color: green;
 }
 .box div {
     width: 100%;
