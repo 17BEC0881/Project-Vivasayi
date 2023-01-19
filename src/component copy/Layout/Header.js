@@ -85,13 +85,8 @@ const Header = () => {
               <nav>
                 <ul>
                   <li>
-                    <NavLink to="/signup" className="active">
-                      Sign Up
-                    </NavLink>
-                  </li>
-                  <li>
-                    <NavLink to="/employee" className="active">
-                      Login
+                    <NavLink to="/" className="active">
+                      Home
                     </NavLink>
                   </li>
                 </ul>

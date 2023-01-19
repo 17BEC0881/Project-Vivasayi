@@ -11,13 +11,14 @@ const View = () => {
   const dispatch = useDispatch();
   const user = useSelector(state => state.auth.user);
 
+
   useEffect(() =>{
         const formtoken ={
             headers:{
                   "Authorization" : "Bearer "+ localStorage.getItem('token'),
                },
          };
-         axios.get(`https://6e93-49-204-135-131.in.ngrok.io/employee/all`,formtoken)
+         axios.get(`https://66d4-49-204-138-29.in.ngrok.io/employee/all`,formtoken)
          .then((response)=>{
           console.log(response.data)
           dispatch(authActions.employee(response.data))
@@ -28,8 +29,20 @@ const View = () => {
 
     }
 
-    const deleteHandler = (event) => {
-
+    const deleteHandler = (employee) => {
+        // let output = user.filter((item) => item.slNo !== employee.slNo)
+        // console.log(output)  
+        // dispatch(authActions.delete(output)) 
+        const formtoken ={
+          headers:{
+                "Authorization" : "Bearer "+ localStorage.getItem('token'),
+             },
+         };
+       axios.delete(`https://66d4-49-204-138-29.in.ngrok.io/employee/${employee.userName}`,formtoken)
+       .then((response)=>{
+        console.log(response.data)
+        dispatch(authActions.employee(response.data))
+       })
     }
 
     return (
@@ -57,8 +70,8 @@ const View = () => {
                 <td>{employee.userName}</td>
                 <td>{employee.email}</td>
                 <td>{employee.phoneNumber}</td>
-                <td><button type="button" onClick={editHandler}>Edit</button></td>
-                <td><button type="button" onClick={deleteHandler}>Delete</button></td>
+                <td><button type="button" onClick={ () => editHandler(employee)}>Edit</button></td>
+                <td><button type="button" onClick={ () => deleteHandler(employee)}>Delete</button></td>
               </tr>
             )
             }
