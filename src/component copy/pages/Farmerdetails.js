@@ -124,7 +124,6 @@ const Farmerdetails = () => {
         if (response) {
           setState(response.data);
         }
-        navigate("/viewfarmer");
       })
       .catch((error) => {
         if (error.response) {
