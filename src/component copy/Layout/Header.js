@@ -99,7 +99,7 @@ const Header = () => {
             {isauth && (
               <nav>
                 <ul className="header-button">
-                  <CgProfile className="icon" /> <button>root</button>
+                  <CgProfile className="icon" /> {username}
                   <button type="submit" onClick={logoutHandler}>
                     Logout
                   </button>
@@ -134,7 +134,8 @@ const Header = () => {
             {isauth && (
               <nav>
                 <ul className="header-button">
-                  <CgProfile className="icon" /> <button>root</button>
+                  <CgProfile className="icon" />
+                  {username}
                   <button type="submit" onClick={logoutHandler}>
                     Logout
                   </button>

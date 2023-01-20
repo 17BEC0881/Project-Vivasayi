@@ -17,20 +17,49 @@ const SelectLand = () => {
   const [area, setArea] = useState(selected[0].area);
   const [interestedFor, setInterestedFor] = useState(selected[0].category);
   const [addOns, setAddOns] = useState("None");
-  const [supervisorID, setSupervisorID] = useState(selected[0].farmerid);
+  const [supervisorID, setSupervisorID] = useState(selected[0].ownerid);
   const [landId, setLandId] = useState(selected[0].landid);
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    console.log(area, interestedFor, addOns, supervisorID);
+    console.log(area, interestedFor, addOns, supervisorID, selected);
 
-    const userData = {
-      farmerId: "JEY0002",
-      area: area,
-      category: interestedFor,
-      addons: addOns,
-      supervisorId: supervisorID,
-    };
+    // const userData = {
+    //   farmerId: "JEY0002",
+    //   area: area,
+    //   category: interestedFor,
+    //   addons: addOns,
+    //   supervisorId: supervisorID,
+    // };
+
+    await axios({
+      url: "https://66d4-49-204-138-29.in.ngrok.io/land/rent",
+      method: "post",
+      data: {
+        rentLandDetails: [
+          {
+            farmerId: "ABI0021",
+            // farmerId: selected[0].farmerid,
+            landId: selected[0].landid,
+            ownerId: selected[0].ownerid,
+          },
+        ],
+      },
+    })
+      .then((response) => {
+        console.log("rentpost", response);
+
+        const data = {
+          farmerId: "ABI0021",
+          // farmerId: selected[0].farmerid,
+          landId: selected[0].landid,
+          ownerId: selected[0].ownerid,
+        };
+        dispatch(landActions.createLand(data));
+      })
+      .catch((error) => {
+        console.log("renterror", error);
+      });
 
     //post format => const landDetails: [
     //     {
@@ -42,9 +71,16 @@ const SelectLand = () => {
     //       supervisorId: supervisorID,
     //     },
     //   ]
-    dispatch(landActions.createLand(userData));
 
-    navigate("/cropform");
+    // const data = {
+    //   farmerId: "ABI0021",
+    //   // farmerId: selected[0].farmerid,
+    //   landId: selected[0].landid,
+    //   ownerId: selected[0].ownerid,
+    // };
+    // dispatch(landActions.createLand(data));
+
+    navigate("/landtable");
   };
 
   return (

@@ -10,7 +10,7 @@ import { Navigate, useNavigate } from "react-router-dom";
 
 const Farmerdetails = () => {
   const navigate = useNavigate("/land");
-  const api = "https://9673-49-205-85-123.in.ngrok.io";
+  const api = "https://a77b-49-204-112-10.in.ngrok.io";
   const dispatch = useDispatch();
   const { create } = useSelector((state) => state.farmer);
   console.log("bool", create);
@@ -124,6 +124,7 @@ const Farmerdetails = () => {
         if (response) {
           setState(response.data);
         }
+        navigate("/viewfarmer");
       })
       .catch((error) => {
         if (error.response) {

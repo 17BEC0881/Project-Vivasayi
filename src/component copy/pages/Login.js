@@ -28,22 +28,22 @@ const Login = () => {
 
   const submitHandler = (event) => {
     event.preventDefault();
-    // axios
-    //   .post(`https://0912-122-164-81-58.in.ngrok.io/employee/login`, data)
-    //   .then((response) => {
-    //     response = response.data;
-    //     //console.log(response)
-    //     let token = response["access"];
-    //     //console.log(token)
-    //     localStorage.setItem("token", token);
-    //     localStorage.setItem("username", name);
-    //     dispatch(authActions.login(token));
-    //     navigate("/add_employee");
-    //   });
-    //setName("")
-    //setPassword("")
-    dispatch(authActions.login());
-    navigate("/add_employee");
+    axios
+      .post(`https://a77b-49-204-112-10.in.ngrok.io/employee/login`, data)
+      .then((response) => {
+        response = response.data;
+        //console.log(response)
+        let token = response["access"];
+        //console.log(token)
+        localStorage.setItem("token", token);
+        localStorage.setItem("username", name);
+        dispatch(authActions.login(token));
+        navigate("/add_employee");
+      });
+    setName("");
+    setPassword("");
+    // dispatch(authActions.login());
+    // navigate("/add_employee");
   };
 
   return (
