@@ -36,3 +36,11 @@
     border:2px solid green;
     outline-width: 0;
  }
+  .error{
+    color:red;
+    text-align: left;
+    font-size: 12px;
+}
+
+
+ 

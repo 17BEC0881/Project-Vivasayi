@@ -83,6 +83,9 @@ const Header = () => {
             {!isauth && (
               <nav>
                 <ul>
+                <li>
+                <NavLink to='/' className='active'>Home</NavLink>
+                </li>
                   <li>
                     <NavLink to="/signup" className="active">
                       Sign Up

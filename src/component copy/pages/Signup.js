@@ -57,6 +57,7 @@ const Signup = () => {
       <Layout />
       <div className="signup">
         <form className="signup-form">
+          <h1>SIGN UP</h1>
           <input
             type="text"
             placeholder="User Name"

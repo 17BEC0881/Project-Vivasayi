@@ -8,16 +8,21 @@ import { authActions } from "../../store/auth";
 const Login = () => {
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
+  const [errorMessage, seterrorMessage] =  useState(false);
+    const [nameclicked, setNameClicked] = useState(false);
+    const [passclicked, setPassClicked] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const usernameChangeHandler = (event) => {
     event.preventDefault();
+    setNameClicked(true)
     setName(event.target.value);
   };
 
   const passwordChangeHandler = (event) => {
     event.preventDefault();
+    setPassClicked(true)
     setPassword(event.target.value);
   };
 
@@ -39,9 +44,14 @@ const Login = () => {
         localStorage.setItem("username", name);
         dispatch(authActions.login(token));
         navigate("/add_employee");
-      });
-    setName("");
-    setPassword("");
+      }).catch((error) => {
+            const Error =  error.response.data
+            console.log(Error)
+            seterrorMessage(Error)
+            return Error;  
+        })
+    //setName("");
+    //setPassword("");
     // dispatch(authActions.login());
     // navigate("/add_employee");
   };
@@ -56,6 +66,7 @@ const Login = () => {
           onChange={usernameChangeHandler}
           required
         />
+        {!nameclicked && errorMessage && <div className='error'>{errorMessage.username}</div>}
         <input
           type="password"
           placeholder="Password"
@@ -63,9 +74,11 @@ const Login = () => {
           onChange={passwordChangeHandler}
           required
         />
+        {!passclicked && errorMessage && <div className='error'>{errorMessage.password}</div>}
         <button type="button" onClick={submitHandler}>
           SIGN IN
         </button>
+        {errorMessage && <div className='error'>{errorMessage.detail}</div>}
       </form>
     </div>
   );
