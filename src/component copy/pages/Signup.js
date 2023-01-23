@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./Signup.css";
 import axios from "axios";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Layout from "../Layout/Layout";
 import { Fragment } from "react";
 
@@ -9,6 +9,7 @@ const Signup = () => {
   const [name, setName] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const navigate = useNavigate();
 
   const usernameChangeHandler = (event) => {
     event.preventDefault();
@@ -41,7 +42,7 @@ const Signup = () => {
         )
         .then((response) => {
           console.log(response);
-          Navigate("/employee");
+          navigate("/employee");
         })
         .catch((error) => {
           const Error = error.response;
