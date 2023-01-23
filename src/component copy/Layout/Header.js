@@ -69,85 +69,55 @@ const Header = () => {
 
   return (
     <Fragment>
-      {!role && (
-        <header className="header">
-          <div className="header-front">
-            <ul>
-              <GiFarmer style={{ color: "white" }} />
-              <NavLink to="/login" className="active">
-                FaFaCo
-              </NavLink>
-            </ul>
-          </div>
-          <div className="header-back">
-            {!isauth && (
-              <nav>
-                <ul>
-                <li>
-                <NavLink to='/' className='active'>Home</NavLink>
-                </li>
-                  <li>
-                    <NavLink to="/signup" className="active">
-                      Sign Up
-                    </NavLink>
-                  </li>
-                  <li>
-                    <NavLink to="/employee" className="active">
-                      Login
-                    </NavLink>
-                  </li>
-                </ul>
-              </nav>
-            )}
-            {isauth && (
-              <nav>
-                <ul className="header-button">
-                  <CgProfile className="icon" /> {username}
-                  <button type="submit" onClick={logoutHandler}>
-                    Logout
-                  </button>
-                </ul>
-              </nav>
-            )}
-          </div>
-        </header>
-      )}
-      {role && (
-        <header className="header">
-          <div className="header-front">
-            <ul>
-              <GiFarmer style={{ color: "white" }} />
-              <NavLink to="/login" className="active">
-                FaFaCo
-              </NavLink>
-            </ul>
-          </div>
-          <div className="header-back">
-            {!isauth && (
-              <nav>
-                <ul>
-                  <li>
-                    <NavLink to="/admin" className="active">
-                      Login
-                    </NavLink>
-                  </li>
-                </ul>
-              </nav>
-            )}
-            {isauth && (
-              <nav>
-                <ul className="header-button">
-                  <CgProfile className="icon" />
-                  {username}
-                  <button type="submit" onClick={logoutHandler}>
-                    Logout
-                  </button>
-                </ul>
-              </nav>
-            )}
-          </div>
-        </header>
-      )}
+      {!role && <header className='header'>
+        <div className='header-front'>
+          <ul>
+           <GiFarmer style={{color: "white"}}/>
+           <NavLink to='/login' className='active'>Fafaco</NavLink>
+           </ul>
+        </div>
+        <div className='header-back'>
+        {!isauth && (
+         <nav>
+          <ul>
+            <li><NavLink to='/' className='active'>Home</NavLink></li>
+            <li><NavLink to='/signup' className='active'>Sign Up</NavLink></li>
+          </ul>
+         </nav>
+        )}
+        {isauth && (
+         <nav>
+          <ul className='header-button'>
+          <CgProfile className='icon'/> <button>{username}</button>
+          <button type="submit" onClick={logoutHandler}>Logout</button>
+          </ul>
+          </nav>
+        )}</div>
+      </header> }
+      {role && <header className='header'>
+        <div className='header-front'>
+          <ul>
+           <GiFarmer style={{color: "white"}}/>
+           <NavLink to='/login' className='active'>Fafaco</NavLink>
+           </ul>
+        </div>
+        <div className='header-back'>
+        {!isauth && (
+         <nav>
+          <ul>
+            <li><NavLink to='/' className='active'>Home</NavLink></li>
+          </ul>
+         </nav>
+        )}
+        {isauth && (
+         <nav>
+          <ul className='header-button'>
+          <CgProfile className='icon'/> <button>{username}</button>
+          <button type="submit" onClick={logoutHandler}>Logout</button>
+          </ul>
+          </nav>
+        )}</div>
+      </header> }
       <div>
         <div className="home1">
           {!isfarmerLogin && isauth && role && (
