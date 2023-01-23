@@ -4,6 +4,7 @@ import axios from 'axios';
 import { Fragment } from 'react';
 import Layout from '../Layout/Layout';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 const Edit = () => {
 
@@ -13,7 +14,7 @@ const Edit = () => {
    const [username, setUsername] = useState(data["userName"]);
    const [phoneNumber, setPhoneNumber] = useState(data["phoneNumber"]);
    const [email, setEmail] = useState(data["email"]);
-   const slNo = data["slNo"]
+   const navigate = useNavigate();
 
    const firstnameChangeHandler = (event) => {
       setFirstname(event.target.value)
@@ -51,19 +52,16 @@ const Edit = () => {
                 "Authorization" : "Bearer "+ localStorage.getItem('token')
             },
         };
-            axios.put(`https://66d4-49-204-138-29.in.ngrok.io/employee/${editDetails["username"]}`,editDetails,admintoken)
+            axios.put(`https://34b9-49-204-116-70.in.ngrok.io/employee/${editDetails["username"]}`,editDetails,admintoken)
             .then((response) => {
                 console.log(response)
+                alert("employee details edited succussfully!");
+                navigate("/view_employee");
             })
             .catch((error) => {
                 const Error =  error.response
                 console.log(Error)
             })
-            setFirstname("")
-            setLastname("")
-            setUsername("")
-            setPhoneNumber("")
-            setEmail("")
     }
   
    return(
@@ -71,7 +69,7 @@ const Edit = () => {
     <Layout />
      <div className='Edit'>
         <form className='Edit-form'>
-        <h1>Add Employee</h1>
+        <h1>Edit Employee Details</h1>
         <div className='Edit-name'>
         <input 
             type = "text" 
