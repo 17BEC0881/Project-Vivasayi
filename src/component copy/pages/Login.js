@@ -34,7 +34,7 @@ const Login = () => {
   const submitHandler = (event) => {
     event.preventDefault();
     axios
-      .post(`https://a77b-49-204-112-10.in.ngrok.io/employee/login`, data)
+      .post(`https://34b9-49-204-116-70.in.ngrok.io/employee/login`, data)
       .then((response) => {
         response = response.data;
         //console.log(response)

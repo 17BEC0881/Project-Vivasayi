@@ -50,7 +50,7 @@ const EditLivestock=()=>{
             let datacopy=[...dataa];
             datacopy[location.state.index]=data;
             dispatch(livestckk([...datacopy]));
-            axios.put("https://a77b-49-204-112-10.in.ngrok.io/livestock/",{
+            axios.put("https://34b9-49-204-116-70.in.ngrok.io/livestock/",{
                 livestockDetails:[...datacopy]
             }).then((res)=>{
                 if(res.status===200){
@@ -72,13 +72,18 @@ const EditLivestock=()=>{
         <Layout>
             <div className={classes.login}>
                 <form>
-                    <input type="text" placeholder="farmer id" value={farmerid} onChange={(e)=>setFarmerid(e.target.value)}></input>
-                    <input type="text" placeholder="Breed" value={breed} onChange={(e)=>setBreed(e.target.value)}></input>
-                    <input type="number" placeholder="Count" value={count} onChange={(e)=>setCount(e.target.value)}></input>
-                    <input type="text" placeholder="Name" value={name} onChange={(e)=>setName(e.target.value)}></input>
-                    <input type="text" placeholder="Place" value={place} onChange={(e)=>setPlace(e.target.value)}></input>
-                    <input type="text" placeholder="Season" value={season} onChange={(e)=>setSeason(e.target.value)}></input>
-                    <input type="text" placeholder="Type" value={type} onChange={(e)=>setType(e.target.value)}></input>
+                    <label>BREED:</label>
+                    <input type="text" placeholder="Breed" value={breed} onChange={(e)=>setBreed(e.target.value)} required></input>
+                    <label>COUNT:</label>
+                    <input type="number" placeholder="Count" value={count} onChange={(e)=>setCount(e.target.value)} required></input>
+                    <label>NAME:</label>
+                    <input type="text" placeholder="Name" value={name} onChange={(e)=>setName(e.target.value)} required></input>
+                    <label>PLACE:</label>
+                    <input type="text" placeholder="Place" value={place} onChange={(e)=>setPlace(e.target.value)} required></input>
+                    <label>SEASON:</label>
+                    <input type="text" placeholder="Season" value={season} onChange={(e)=>setSeason(e.target.value)} required></input>
+                    <label>TYPE:</label>
+                    <input type="text" placeholder="Type" value={type} onChange={(e)=>setType(e.target.value)} required></input>
                     <button className="login-form button" type="submit" onClick={editHandle}>Submit</button>
                 </form>
             </div>

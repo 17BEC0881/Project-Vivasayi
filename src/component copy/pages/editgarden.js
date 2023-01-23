@@ -66,7 +66,7 @@ const Editgarden=()=>{
       const datacopy=[...dataa]
       datacopy[location.state.index]=data;
       dispatch(Gardenn([...datacopy]));
-      axios.put("https://a77b-49-204-112-10.in.ngrok.io/garden/",{
+      axios.put("https://34b9-49-204-116-70.in.ngrok.io/garden/",{
         gardenDetails:[...datacopy]
       }).then((res)=>{
         if(res.status===200){
@@ -93,18 +93,25 @@ const Editgarden=()=>{
       <div className={classes.login}>
       <h3 className="h3"> Gardenedit details</h3>
         <form>
-          <input type="text" placeholder="Farmer id" value={farmerId}  onChange={(e)=>setFarmerid(e.target.value)}></input>
-          <input type="number" placeholder="Area" value={area} onChange={(e)=>setArea(e.target.value)}></input>
-          <input type="text" placeholder="Type" value={type} onChange={(e)=>setType(e.target.value)}></input>
-          <input type="text" placeholder="Name" value={name} onChange={(e)=>setName(e.target.value)}></input>
-          <input type="text" placeholder="Variety" value={variety} onChange={(e)=>setVariety(e.target.value)}></input>
-          <input type="text" placeholder="Brand" value={brand} onChange={(e)=>setBrand(e.target.value)}></input>
-          <input type="number" placeholder="Count" value={count} onChange={(e)=>setCount(e.target.value)}></input>
+          <label>AREA:</label>
+          <input type="number" placeholder="Area" value={area} onChange={(e)=>setArea(e.target.value)} required></input>
+          <label>TYPE:</label>
+          <input type="text" placeholder="Type" value={type} onChange={(e)=>setType(e.target.value)} required></input>
+          <label>NAME:</label>
+          <input type="text" placeholder="Name" value={name} onChange={(e)=>setName(e.target.value)}required></input>
+          <label>VARIETY:</label>
+          <input type="text" placeholder="Variety" value={variety} onChange={(e)=>setVariety(e.target.value)} required></input>
+          <label>BRAND:</label>
+          <input type="text" placeholder="Brand" value={brand} onChange={(e)=>setBrand(e.target.value)} required></input>
+          <label>COUNT:</label>
+          <input type="number" placeholder="Count" value={count} onChange={(e)=>setCount(e.target.value)} required></input>
           <label>Organic: </label>
           <input type="checkbox" value={organic} onChange={(e)=>setOrganic(e.target.value)}></input>true
           <input type="checkbox" value={organic} onChange={(e)=>setOrganic(e.target.value)}></input>false
-          <input type="number" placeholder="Age" value={age} onChange={(e)=>setAge(e.target.value)}></input>
-          <input type="text" placeholder="Selling period" value={sellingPeriod} onChange={(e)=>setSelling(e.target.value)}></input>
+          <label>AGE:</label>
+          <input type="number" placeholder="Age" value={age} onChange={(e)=>setAge(e.target.value)} required></input>
+          <label>SELLING PERIOD:</label>
+          <input type="text" placeholder="Selling period" value={sellingPeriod} onChange={(e)=>setSelling(e.target.value)} required></input>
           <button className="login-form button"  type="submit" onClick={submitHandle}>submit</button>
         </form >
       </div>
