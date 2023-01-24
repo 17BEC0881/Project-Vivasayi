@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { farmerActions } from "../../store/reducer";
