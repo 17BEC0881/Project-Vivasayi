@@ -98,9 +98,7 @@ const Garden=()=>{
       <div className={classes.login}>
         <form>
           <h1 className="login h1">Garden form</h1>
-          <label>Area</label>
-          <input type="number" placeholder="Area" required value={area} onChange={(e)=>setArea(e.target.value)} ></input>
-          {areaError? <span className="error">{areaError}</span>:null}<br/>
+          
           <label>Type</label>
           <input type="text" placeholder="Type" value={type} onChange={(e)=>setType(e.target.value)} required></input>
           {typeError?<span className="error">{typeError}</span>:null}<br/>
@@ -113,6 +111,9 @@ const Garden=()=>{
           <label>Brand</label>
           <input type="text" placeholder="Brand" value={brand} onChange={(e)=>setBrand(e.target.value)} required></input>
           {brandError?<span className="error">{brandError}</span>:null}<br/>
+          <label>Area</label>
+          <input type="number" placeholder="Area" required value={area} onChange={(e)=>setArea(e.target.value)} ></input>
+          {areaError? <span className="error">{areaError}</span>:null}<br/>
           <label>Count</label>
           <input type="number" placeholder="Count" value={count} onChange={(e)=>setCount(e.target.value)} required></input>
           {countError?<span className="error">{countError}</span>:null}<br/>

@@ -96,24 +96,27 @@ const EditLivestock=()=>{
             <div className={classes.login}>
                 <form>
                     <h1 className="login h1">Edit livestock form</h1>
-                    <label>Breed</label>
-                    <input type="text" placeholder="Breed" value={breed} onChange={(e)=>setBreed(e.target.value)} required></input>
-                    {breedError?<span className="error">{breedError}</span>:null}<br/>
-                    <label>Count</label>
-                    <input type="number" placeholder="Count" value={count} onChange={(e)=>setCount(e.target.value)} required></input>
-                    {countError?<span className="error">{countError}</span>:null}<br/>
-                    <label>Name:</label>
-                    <input type="text" placeholder="Name" value={name} onChange={(e)=>setName(e.target.value)} required></input>
-                    {nameError?<span className="error">{nameError}</span>:null}<br/>
                     <label>Place:</label>
                     <input type="text" placeholder="Place" value={place} onChange={(e)=>setPlace(e.target.value)} required></input>
                     {placeError?<span className="error">{placeError}</span>:null}<br/>
-                    <label>Season</label>
-                    <input type="text" placeholder="Season" value={season} onChange={(e)=>setSeason(e.target.value)} required></input>
-                    {seasonError?<span className="error">{seasonError}</span>:null}<br/>
                     <label>Type</label>
                     <input type="text" placeholder="Type" value={type} onChange={(e)=>setType(e.target.value)} required></input>
                     {typeError?<span className="error">{typeError}</span>:null}<br/>
+                    <label>Breed</label>
+                    <input type="text" placeholder="Breed" value={breed} onChange={(e)=>setBreed(e.target.value)} required></input>
+                    {breedError?<span className="error">{breedError}</span>:null}<br/>
+                    <label>Name:</label>
+                    <input type="text" placeholder="Name" value={name} onChange={(e)=>setName(e.target.value)} required></input>
+                    {nameError?<span className="error">{nameError}</span>:null}<br/>
+                    <label>Count</label>
+                    <input type="number" placeholder="Count" value={count} onChange={(e)=>setCount(e.target.value)} required></input>
+                    {countError?<span className="error">{countError}</span>:null}<br/>
+                    
+                    
+                    <label>Season</label>
+                    <input type="text" placeholder="Season" value={season} onChange={(e)=>setSeason(e.target.value)} required></input>
+                    {seasonError?<span className="error">{seasonError}</span>:null}<br/>
+                   
                     <button className="login-form button" type="submit" onClick={editHandle}>Submit</button>
                 </form>
             </div>
