@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import classes from "./Farmerdetails.module.css";
 import { useState } from "react";
 import { farmerActions } from "../../store/reducer";
