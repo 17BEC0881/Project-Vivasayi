@@ -14,15 +14,14 @@ import LabourWorkForm from "./component copy/pages/LabourWorkForm";
 //import Scroll from "./component copy/pages/Scroll";
 import SelectLand from "./component copy/pages/SelectLand";
 import LandTable from "./component copy/pages/LandTable";
-import Garden from "./component copy/pages/Garden";
+
 import Edit from "./component copy/pages/Edit_Employee";
-import Livestocktable from "./component copy/pages/livestocktable";
-import Gardentable from "./component copy/pages/gardentable";
-import Editgarden from "./component copy/pages/editgarden";
-import EditLivestock from "./component copy/pages/editlivestock";
+import Garden from "./component copy/pages/Garden";
 import Livestock from "./component copy/pages/Livestock";
-
-
+import EditLivestock from "./component copy/pages/Editlivestocktable";
+import Editgarden  from "./component copy/pages/Editgarden.js";
+import Livestocktable   from "./component copy/pages/Livestocktable.js";
+import Gardentable  from "./component copy/pages/Gardentable.js"
 function App() {
   return (
     <Routes>
@@ -40,10 +39,10 @@ function App() {
       <Route path="/cropform" element={<CropForm />} />
       <Route path="/labour" element={<LabourWorkForm />} />
       <Route path="/garden" element={<Garden/>}/>
-      <Route path="/livestock" element={<Livestock/>}/>
-      <Route path="/livestocktable" element={<Livestocktable/>}/>
       <Route path="/gardentable" element={<Gardentable/>}/>
       <Route path="/editgarden" element={<Editgarden/>}/>
+      <Route path="/livestock" element={<Livestock/>}/>
+      <Route path="/livestocktable" element={<Livestocktable/>}/>
       <Route path="/editlivestock" element={<EditLivestock/>}/>
       {/* <Route path="selectlandtable" element={<Scroll />} /> */}
       <Route path="selectlandpage" element={<SelectLand />} />

@@ -18,7 +18,7 @@ const Livestocktable=()=>{
         const dele=liv.filter((x,index,arr)=>index!==i);
         console.log(dele);
         dispatch(livestckk([...dele]));
-        axios.put("https://a77b-49-204-112-10.in.ngrok.io/livestock/",{
+        axios.put("https://a8b2-49-204-136-220.in.ngrok.io/livestock/",{
             livestockDetails:[...dele]
         }).catch((error) => {
             if (error.response) {
@@ -26,7 +26,6 @@ const Livestocktable=()=>{
               console.log(error.response.status);
             } else if (error.request) {
               console.log("network error");
-              alert("network error");
             } else {
               console.log(error);
             }
@@ -58,7 +57,7 @@ const Livestocktable=()=>{
     return(
         <Layout>
             <div className="garden">
-            <h1 className="login h1">Livestock table</h1>
+                <h1 className="login h1">Livestock table</h1>
                 <table className="garden table">
                     <thead>
                         <tr className="garden tr">

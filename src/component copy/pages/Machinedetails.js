@@ -253,4 +253,4 @@ const Machinedetails = () => {
 };
 
 export default Machinedetails;
->>>>>>> 868a9798374c07f6722d15e57ea63f870bfec5da
+

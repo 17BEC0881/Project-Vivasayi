@@ -12,6 +12,7 @@ const store = configureStore({
     land: landReducer,
     crop: cropDetailsReducer,
     labour: labourWorkReducer,
+    user: formReducer,
     
     
 

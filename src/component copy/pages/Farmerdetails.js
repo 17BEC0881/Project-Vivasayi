@@ -11,7 +11,7 @@ import { CgAsterisk } from 'react-icons/cg';
 
 const Farmerdetails = () => {
   const navigate = useNavigate("/land");
-  const api = "https://34b9-49-204-116-70.in.ngrok.io";
+  const api = "https://a8b2-49-204-136-220.in.ngrok.io";
   const dispatch = useDispatch();
   const { create } = useSelector((state) => state.farmer);
   // console.log("bool", create);
