@@ -35,37 +35,8 @@ const Add = () => {
    const emailChangeHandler = (event) => {
       event.preventDefault()
       setEmail(event.target.value)
-    }
-
-<<<<<<< HEAD
-  const registerHandler = (event) => {
-    event.preventDefault();
-    const admintoken = {
-      headers: {
-        Authorization: "Bearer " + localStorage.getItem("token"),
-      },
-    };
-    axios
-      .post(
-        `https://a8b2-49-204-136-220.in.ngrok.io/employee/create`,
-        details,
-        admintoken
-      )
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => {
-        const Error = error.response;
-        console.log(Error);
-      });
-    //console.log(admintoken)
-    setFirstname("");
-    setLastname("");
-    setUsername("");
-    setPhoneNumber("");
-    setEmail("");
-  };
-=======
+   }
+   
     const details = {
         first_name : firstname,
         last_name : lastname,
@@ -73,7 +44,6 @@ const Add = () => {
         email : email,
         contact_number : phoneNumber
     }
->>>>>>> 757126afdc33fa9e7f82d5dca38ba973ff27d2be
 
     const registerHandler = (event) => {
         event.preventDefault()
