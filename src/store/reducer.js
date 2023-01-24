@@ -30,3 +30,4 @@ export const FarmerDetails = createSlice({
 export const farmerActions = FarmerDetails.actions;
 
 export default FarmerDetails.reducer;
+

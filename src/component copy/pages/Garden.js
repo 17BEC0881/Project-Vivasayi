@@ -12,7 +12,6 @@ const Garden=()=>{
   console.log(farmerid);
   const dataa=useSelector((state)=>state.user.garden);
   const navigate=useNavigate();
-  
   const [area, setArea]=useState();
   const[type, setType]=useState();
   const [name, setName]=useState();
@@ -22,7 +21,8 @@ const Garden=()=>{
   const [organic, setOrganic]=useState();
   const [age, setAge]=useState();
   const [sellingPeriod, setSelling]=useState();
-  const[list, setList]=useState();
+  
+  
   const submitHandle=(e)=>{
       e.preventDefault();
       let data={
@@ -38,7 +38,7 @@ const Garden=()=>{
         "sellingPeriod":sellingPeriod
       };
       
-      axios.post("https://a77b-49-204-112-10.in.ngrok.io/garden/create",{
+      axios.post("https://34b9-49-204-116-70.in.ngrok.io/garden/create",{
         gardenDetails: [data]
       }).then(res=>{
         if(res.status===200){
@@ -67,24 +67,25 @@ const Garden=()=>{
       <div className={classes.login}>
         <form>
           <label>AREA:</label>
-          <input type="number" placeholder="Area" value={area} onChange={(e)=>setArea(e.target.value)}></input>
+          <input type="number" placeholder="Area" required value={area} onChange={(e)=>setArea(e.target.value)} ></input>
+          <br/>
           <label>TYPE:</label>
-          <input type="text" placeholder="Type" value={type} onChange={(e)=>setType(e.target.value)}></input>
+          <input type="text" placeholder="Type" value={type} onChange={(e)=>setType(e.target.value)} required></input>
           <label>NAME:</label>
-          <input type="text" placeholder="Name" value={name} onChange={(e)=>setName(e.target.value)}></input>
+          <input type="text" placeholder="Name" value={name} onChange={(e)=>setName(e.target.value)} required></input>
           <label>VARIETY:</label>
-          <input type="text" placeholder="Variety" value={variety} onChange={(e)=>setVariety(e.target.value)}></input>
+          <input type="text" placeholder="Variety" value={variety} onChange={(e)=>setVariety(e.target.value)} required></input>
           <label>BRAND:</label>
-          <input type="text" placeholder="Brand" value={brand} onChange={(e)=>setBrand(e.target.value)}></input>
+          <input type="text" placeholder="Brand" value={brand} onChange={(e)=>setBrand(e.target.value)} required></input>
           <label>COUNT:</label>
-          <input type="number" placeholder="Count" value={count} onChange={(e)=>setCount(e.target.value)}></input>
+          <input type="number" placeholder="Count" value={count} onChange={(e)=>setCount(e.target.value)} required></input>
           <label>Organic: </label>
           <input type="checkbox" value={organic} onChange={(e)=>setOrganic(e.target.value)}></input>true
           <input type="checkbox" value={organic} onChange={(e)=>setOrganic(e.target.value)}></input>false<br></br>
           <label>AGE:</label>
-          <input type="number" placeholder="Age" value={age} onChange={(e)=>setAge(e.target.value)}></input>
+          <input type="number" placeholder="Age" value={age} onChange={(e)=>setAge(e.target.value)} required></input>
           <label>SELLING PERIOD:</label>
-          <input type="text" placeholder="Selling period" value={sellingPeriod} onChange={(e)=>setSelling(e.target.value)}></input>
+          <input type="text" placeholder="Selling period" value={sellingPeriod} onChange={(e)=>setSelling(e.target.value)} required></input>
           <button className="login button"  type="submit" onClick={submitHandle}>submit</button>
         </form >
       </div>
