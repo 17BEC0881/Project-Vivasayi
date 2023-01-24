@@ -4,14 +4,14 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { authActions } from "../../store/auth";
-import data from "./address.json";
+import server from "./address.json";
 
 const Login = () => {
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, seterrorMessage] =  useState(false);
-    const [nameclicked, setNameClicked] = useState(false);
-    const [passclicked, setPassClicked] = useState(false);
+  const [nameclicked, setNameClicked] = useState(false);
+  const [passclicked, setPassClicked] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -34,12 +34,7 @@ const Login = () => {
 
   const submitHandler = (event) => {
     event.preventDefault();
-    axios
-<<<<<<< HEAD
-      .post(`${data.address}/employee/login`, data)
-=======
-      .post(`https://34b9-49-204-116-70.in.ngrok.io/employee/login`, data)
->>>>>>> 757126afdc33fa9e7f82d5dca38ba973ff27d2be
+    axios.post(`${server.address}/employee/login`, data)
       .then((response) => {
         if(response.status === 200 || response.status === 201){
         response = response.data;
