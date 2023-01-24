@@ -14,7 +14,7 @@ const Header = () => {
   const isauth = useSelector((state) => state.auth.isAuthenticated);
   const role = useSelector((state) => state.auth.role);
   const isfarmerLogin = useSelector((state) => state.auth.isLogin);
-  console.log("farmer", isfarmerLogin);
+  //console.log("farmer", isfarmerLogin);
   const username = localStorage.getItem("username");
 
   const addEmployeeHandler = (event) => {
@@ -40,7 +40,7 @@ const Header = () => {
     dispatch(authActions.logout());
     dispatch(authActions.farmerLogout());
 
-    console.log("far", isfarmerLogin);
+    //console.log("far", isfarmerLogin);
     localStorage.clear();
     navigate("/");
   };

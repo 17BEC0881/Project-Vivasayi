@@ -4,6 +4,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { authActions } from "../../store/auth";
+import data from "./address.json";
 
 const Login = () => {
   const [name, setName] = useState("");
@@ -34,8 +35,9 @@ const Login = () => {
   const submitHandler = (event) => {
     event.preventDefault();
     axios
-      .post(`https://a77b-49-204-112-10.in.ngrok.io/employee/login`, data)
+      .post(`${data.address}/employee/login`, data)
       .then((response) => {
+        if(response.status === 200 || response.status === 201){
         response = response.data;
         //console.log(response)
         let token = response["access"];
@@ -43,8 +45,12 @@ const Login = () => {
         localStorage.setItem("token", token);
         localStorage.setItem("username", name);
         dispatch(authActions.login(token));
-        navigate("/add_employee");
-      }).catch((error) => {
+        if (name === 'admin' && password === 'admin'){
+          navigate("/add_employee");
+        }else{
+          navigate("/farmerdetails");
+        } 
+      }}).catch((error) => {
             const Error =  error.response.data
             console.log(Error)
             seterrorMessage(Error)

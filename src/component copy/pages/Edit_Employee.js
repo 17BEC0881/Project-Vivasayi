@@ -52,7 +52,7 @@ const Edit = () => {
                 "Authorization" : "Bearer "+ localStorage.getItem('token')
             },
         };
-            axios.put(`https://34b9-49-204-116-70.in.ngrok.io/employee/${editDetails["username"]}`,editDetails,admintoken)
+            axios.put(`https://a8b2-49-204-136-220.in.ngrok.io/employee/${editDetails["username"]}`,editDetails,admintoken)
             .then((response) => {
                 console.log(response)
                 alert("employee details edited succussfully!");
@@ -76,13 +76,15 @@ const Edit = () => {
             placeholder="First Name*"  
             value = {firstname}
             onChange = {firstnameChangeHandler} 
-            required />
+            required 
+            disabled/>
         <input 
             type = "text" 
             placeholder="Last Name*" 
             value = {lastname} 
             onChange = {lastnameChangeHandler} 
-            required />
+            required 
+            disabled/>
         </div>
         <div className='Edit-details'>
         <input 
@@ -90,7 +92,8 @@ const Edit = () => {
             placeholder="User Name*" 
             value = {username} 
             onChange = {usernameChangeHandler} 
-            required />
+            required 
+            disabled/>
         <input 
             type = "number" 
             placeholder="Phone Number*" 

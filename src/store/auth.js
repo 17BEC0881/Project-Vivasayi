@@ -5,6 +5,7 @@ const initialAuthState = {
   user: [],
   role: false,
   isLogin: false,
+  data : {}
 };
 
 const authSlice = createSlice({
@@ -32,6 +33,9 @@ const authSlice = createSlice({
     farmerLogout(state) {
       state.isLogin = false;
     },
+    edit(state,action){
+      state.data = action.payload;
+    }
   },
 });
 export const authActions = authSlice.actions;
