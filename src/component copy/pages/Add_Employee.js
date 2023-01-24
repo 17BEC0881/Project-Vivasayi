@@ -35,13 +35,8 @@ const Add = () => {
    const emailChangeHandler = (event) => {
       event.preventDefault()
       setEmail(event.target.value)
-<<<<<<< HEAD
     }
 
-=======
-   }
-   
->>>>>>> 868a9798374c07f6722d15e57ea63f870bfec5da
     const details = {
         first_name : firstname,
         last_name : lastname,
