@@ -14,7 +14,7 @@ const Header = () => {
   const isauth = useSelector((state) => state.auth.isAuthenticated);
   const role = useSelector((state) => state.auth.role);
   const isfarmerLogin = useSelector((state) => state.auth.isLogin);
-  console.log("farmer", isfarmerLogin);
+  //console.log("farmer", isfarmerLogin);
   const username = localStorage.getItem("username");
 
   const addEmployeeHandler = (event) => {
@@ -40,7 +40,7 @@ const Header = () => {
     dispatch(authActions.logout());
     dispatch(authActions.farmerLogout());
 
-    console.log("far", isfarmerLogin);
+    //console.log("far", isfarmerLogin);
     localStorage.clear();
     navigate("/");
   };
@@ -69,81 +69,55 @@ const Header = () => {
 
   return (
     <Fragment>
-      {!role && (
-        <header className="header">
-          <div className="header-front">
-            <ul>
-              <GiFarmer style={{ color: "white" }} />
-              <NavLink to="/login" className="active">
-                FaFaCo
-              </NavLink>
-            </ul>
-          </div>
-          <div className="header-back">
-            {!isauth && (
-              <nav>
-                <ul>
-                  <li>
-                    <NavLink to="/signup" className="active">
-                      Sign Up
-                    </NavLink>
-                  </li>
-                  <li>
-                    <NavLink to="/employee" className="active">
-                      Login
-                    </NavLink>
-                  </li>
-                </ul>
-              </nav>
-            )}
-            {isauth && (
-              <nav>
-                <ul className="header-button">
-                  <CgProfile className="icon" /> <button>root</button>
-                  <button type="submit" onClick={logoutHandler}>
-                    Logout
-                  </button>
-                </ul>
-              </nav>
-            )}
-          </div>
-        </header>
-      )}
-      {role && (
-        <header className="header">
-          <div className="header-front">
-            <ul>
-              <GiFarmer style={{ color: "white" }} />
-              <NavLink to="/login" className="active">
-                FaFaCo
-              </NavLink>
-            </ul>
-          </div>
-          <div className="header-back">
-            {!isauth && (
-              <nav>
-                <ul>
-                  <li>
-                    <NavLink to="/admin" className="active">
-                      Login
-                    </NavLink>
-                  </li>
-                </ul>
-              </nav>
-            )}
-            {isauth && (
-              <nav>
-                <ul className="header-button">
-                  <CgProfile className="icon" /> <button>root</button>
-                  <button type="submit" onClick={logoutHandler}>
-                    Logout
-                  </button>
-                </ul>
-              </nav>
-            )}
-          </div>
-        </header>
-      )}
+      {!role && <header className='header'>
+        <div className='header-front'>
+          <ul>
+           <GiFarmer style={{color: "white"}}/>
+           <NavLink to='/login' className='active'>Fafaco</NavLink>
+           </ul>
+        </div>
+        <div className='header-back'>
+        {!isauth && (
+         <nav>
+          <ul>
+            <li><NavLink to='/' className='active'>Home</NavLink></li>
+            <li><NavLink to='/signup' className='active'>Sign Up</NavLink></li>
+          </ul>
+         </nav>
+        )}
+        {isauth && (
+         <nav>
+          <ul className='header-button'>
+          <CgProfile className='icon'/> <button>{username}</button>
+          <button type="submit" onClick={logoutHandler}>Logout</button>
+          </ul>
+          </nav>
+        )}</div>
+      </header> }
+      {role && <header className='header'>
+        <div className='header-front'>
+          <ul>
+           <GiFarmer style={{color: "white"}}/>
+           <NavLink to='/login' className='active'>Fafaco</NavLink>
+           </ul>
+        </div>
+        <div className='header-back'>
+        {!isauth && (
+         <nav>
+          <ul>
+            <li><NavLink to='/' className='active'>Home</NavLink></li>
+          </ul>
+         </nav>
+        )}
+        {isauth && (
+         <nav>
+          <ul className='header-button'>
+          <CgProfile className='icon'/> <button>{username}</button>
+          <button type="submit" onClick={logoutHandler}>Logout</button>
+          </ul>
+          </nav>
+        )}</div>
+      </header> }
       <div>
         <div className="home1">
           {!isfarmerLogin && isauth && role && (

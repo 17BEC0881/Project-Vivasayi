@@ -9,6 +9,7 @@ import { landActions } from "../../store/landStore";
 import { useSelector } from "react-redux";
 import { Action } from "@remix-run/router";
 import Layout from "../Layout/Layout";
+import { GiDivingDagger } from "react-icons/gi";
 // import AvailableLeaseTable from "./AvailableLeaseTable";
 
 const Land = () => {
@@ -640,10 +641,7 @@ const Land = () => {
   // console.log(landId, landid);
   //check
   const [ownFarmingCheck, setOwnFarmingCheck] = useState(false);
-  const [leasedLandCheck, setLeaseLandCheck] = useState(false);
   const [takenLeaseCheck, setTakenLeaseCheck] = useState(false);
-  const [wasteLandCheck, setWasteLandCheck] = useState(false);
-  const [availableForLeaseCheck, setAvailableForLeaseCheck] = useState(false);
   const [initial, setInitial] = useState(false);
 
   // useEffect(() => {
@@ -667,45 +665,19 @@ const Land = () => {
     if (interestedFor == "") {
       setInitial(true);
       setOwnFarmingCheck(false);
-      setWasteLandCheck(false);
-      setLeaseLandCheck(false);
       setTakenLeaseCheck(false);
-      setAvailableForLeaseCheck(false);
-    } else if (interestedFor == "ownFarming") {
+    } else if (
+      interestedFor === "ownFarming" ||
+      interestedFor === "availableForLease" ||
+      interestedFor === "wasteLand"
+    ) {
       setInitial(false);
       setOwnFarmingCheck(true);
-      setWasteLandCheck(false);
-      setLeaseLandCheck(false);
       setTakenLeaseCheck(false);
-      setAvailableForLeaseCheck(false);
-    } else if (interestedFor == "wasteLand") {
+    } else if (interestedFor === "takenLease") {
       setInitial(false);
       setOwnFarmingCheck(false);
-      setWasteLandCheck(true);
-      setLeaseLandCheck(false);
-      setTakenLeaseCheck(false);
-      setAvailableForLeaseCheck(false);
-    } else if (interestedFor == "leasedLand") {
-      setInitial(false);
-      setOwnFarmingCheck(false);
-      setWasteLandCheck(false);
-      setTakenLeaseCheck(false);
-      setAvailableForLeaseCheck(false);
-      setLeaseLandCheck(true);
-    } else if (interestedFor == "takenLease") {
-      setInitial(false);
-      setOwnFarmingCheck(false);
-      setWasteLandCheck(false);
-      setLeaseLandCheck(false);
-      setAvailableForLeaseCheck(false);
       setTakenLeaseCheck(true);
-    } else if (interestedFor == "availableForLease") {
-      setInitial(false);
-      setOwnFarmingCheck(false);
-      setWasteLandCheck(false);
-      setLeaseLandCheck(false);
-      setTakenLeaseCheck(false);
-      setAvailableForLeaseCheck(true);
     }
   }, [interestedFor]);
 
@@ -751,6 +723,7 @@ const Land = () => {
       .catch((error) => {
         console.log("err", error);
       });
+    //without using api
   };
 
   useEffect(() => {
@@ -836,82 +809,6 @@ const Land = () => {
               >
                 <option value="choose"> category </option>
                 <option value="ownFarming"> ownFarming </option>
-                <option value="leasedLand"> leasedLand </option>
-                <option value="wasteLand"> wasteLand </option>
-                <option value="takenLease"> takenLease </option>
-                <option value="availableForLease"> availableForLease </option>
-              </select>
-            </div>
-            <div>
-              <input
-                placeholder="Area"
-                value={area}
-                onChange={(e) => setArea(e.target.value)}
-                type="number"
-              />
-            </div>
-
-            <div>
-              <select
-                name="states"
-                id="states"
-                onChange={(e) => setAddOns(e.target.value)}
-              >
-                <option value="">addOn </option>
-                {farmingList.map((state) => (
-                  <option key={state} value={state}>
-                    {state}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            <div className={classes.submit}>
-              <select
-                disabled
-                name="states"
-                id="states"
-                onChange={(e) => setSupervisorID(e.target.value)}
-              >
-                <option value="">supervisorId </option>
-                {Object.keys(availableLeaseList).map((state) => (
-                  <option key={state} value={state}>
-                    {state}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <div className={classes.next}>
-              <select
-                disabled
-                name="states"
-                id="states"
-                onChange={(e) => setLandid(e.target.value)}
-              >
-                <option value="">land Id </option>
-                {list.map((state) => (
-                  <option key={state} value={state}>
-                    {state}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <div>
-              <button onClick={submitHandler}>submit</button>
-            </div>
-          </form>
-        )}
-        {leasedLandCheck && (
-          <form>
-            <div>
-              <select
-                placeholder="category"
-                value={interestedFor}
-                onChange={(e) => setInterestedFor(e.target.value)}
-              >
-                <option value="choose"> category </option>
-                <option value="ownFarming"> ownFarming </option>
-                <option value="leasedLand"> leasedLand </option>
                 <option value="wasteLand"> wasteLand </option>
                 <option value="takenLease"> takenLease </option>
                 <option value="availableForLease"> availableForLease </option>
@@ -942,114 +839,25 @@ const Land = () => {
             </div>
 
             <div>
-              <select
-                name="states"
-                id="states"
+              <input
+                placeholder="supervisorID"
+                value={supervisorID}
                 onChange={(e) => setSupervisorID(e.target.value)}
-              >
-                <option value="">supervisorId </option>
-                {availabelLeaseOwnerIdList.map((state) => (
-                  <option key={state} value={state}>
-                    {state}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <div>
-              <select
-                disabled
-                name="states"
-                id="states"
-                onChange={(e) => setLandid(e.target.value)}
-              >
-                <option value="">land Id </option>
-                {list.map((state) => (
-                  <option key={state} value={state}>
-                    {state}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <div>
-              <button onClick={submitHandler}>submit</button>
-            </div>
-          </form>
-        )}
-        {wasteLandCheck && (
-          <form>
-            <div>
-              <select
-                placeholder="category"
-                value={interestedFor}
-                onChange={(e) => setInterestedFor(e.target.value)}
-              >
-                <option value="choose"> category </option>
-                <option value="ownFarming"> ownFarming </option>
-                <option value="leasedLand"> leasedLand </option>
-                <option value="wasteLand"> wasteLand </option>
-                <option value="takenLease"> takenLease </option>
-                <option value="availableForLease"> availableForLease </option>
-              </select>
+              />
             </div>
             <div>
               <input
-                placeholder="Area"
-                value={area}
-                onChange={(e) => setArea(e.target.value)}
-                type="number"
-              />
-            </div>
-
-            <div>
-              <select
-                name="states"
-                id="states"
-                onChange={(e) => setAddOns(e.target.value)}
-              >
-                <option value="">addOn </option>
-                {farmingList.map((state) => (
-                  <option key={state} value={state}>
-                    {state}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            <div>
-              <select
-                disabled
-                name="states"
-                id="states"
-                onChange={(e) => setSupervisorID(e.target.value)}
-              >
-                <option value="">supervisorId </option>
-                {Object.keys(availableLeaseList).map((state) => (
-                  <option key={state} value={state}>
-                    {state}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <div>
-              <select
-                disabled
-                name="states"
-                id="states"
+                placeholder="landID"
+                value={landId}
                 onChange={(e) => setLandId(e.target.value)}
-              >
-                <option value="">land Id </option>
-                {list.map((state) => (
-                  <option key={state} value={state}>
-                    {state}
-                  </option>
-                ))}
-              </select>
+              />
             </div>
             <div>
               <button onClick={submitHandler}>submit</button>
             </div>
           </form>
         )}
+
         {takenLeaseCheck && (
           <form>
             <div>
@@ -1069,7 +877,9 @@ const Land = () => {
               </div>
 
               <div>
-                <button onClick={landHandler}>select land</button>
+                <button type="button" onClick={landHandler}>
+                  select land
+                </button>
               </div>
 
               <div>
@@ -1146,81 +956,6 @@ const Land = () => {
             </div>
           </form>
         )}
-        {availableForLeaseCheck && (
-          <form>
-            <div>
-              <select
-                placeholder="category"
-                value={interestedFor}
-                onChange={(e) => setInterestedFor(e.target.value)}
-              >
-                <option value="choose"> category </option>
-                <option value="ownFarming"> ownFarming </option>
-                {/* <option value="leasedLand"> leasedLand </option> */}
-                <option value="wasteLand"> wasteLand </option>
-                <option value="takenLease"> takenLease </option>
-                <option value="availableForLease"> availableForLease </option>
-              </select>
-            </div>
-            <div>
-              <input
-                placeholder="Area"
-                value={area}
-                onChange={(e) => setArea(e.target.value)}
-                type="number"
-              />
-            </div>
-
-            <div>
-              <select
-                name="states"
-                id="states"
-                onChange={(e) => setAddOns(e.target.value)}
-              >
-                <option value="">addOn </option>
-                {farmingList.map((state) => (
-                  <option key={state} value={state}>
-                    {state}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            <div>
-              <select
-                disabled
-                name="states"
-                id="states"
-                onChange={(e) => setSupervisorID(e.target.value)}
-              >
-                <option value="">supervisorId </option>
-                {Object.keys(availableLeaseList).map((state) => (
-                  <option key={state} value={state}>
-                    {state}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <div>
-              <select
-                disabled
-                name="states"
-                id="states"
-                onChange={(e) => setLandid(e.target.value)}
-              >
-                <option value="">land Id </option>
-                {list.map((state) => (
-                  <option key={state} value={state}>
-                    {state}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <div>
-              <button onClick={submitHandler}>submit</button>
-            </div>
-          </form>
-        )}
         {initial && (
           <form>
             <div>
@@ -1231,7 +966,6 @@ const Land = () => {
               >
                 <option value="choose"> category </option>
                 <option value="ownFarming"> ownFarming </option>
-                {/* <option value="leasedLand"> leasedLand </option> */}
                 <option value="wasteLand"> wasteLand </option>
                 <option value="takenLease"> takenLease </option>
                 <option value="availableForLease"> availableForLease </option>
@@ -1262,45 +996,26 @@ const Land = () => {
             </div>
 
             <div>
-              <select
-                name="states"
-                id="states"
+              <input
+                placeholder="supervisorID"
+                value={supervisorID}
                 onChange={(e) => setSupervisorID(e.target.value)}
-              >
-                <option value="">supervisorId </option>
-                {Object.keys(availableLeaseList).map((state) => (
-                  <option key={state} value={state}>
-                    {state}
-                  </option>
-                ))}
-              </select>
+              />
             </div>
             <div>
-              <select
-                name="states"
-                id="states"
-                onChange={(e) => setLandid(e.target.value)}
-              >
-                <option value="">land Id </option>
-                {list.map((state) => (
-                  <option key={state} value={state}>
-                    {state}
-                  </option>
-                ))}
-              </select>
+              <input
+                placeholder="landID"
+                value={landId}
+                onChange={(e) => setLandId(e.target.value)}
+              />
             </div>
             <div>
               <button style={{ float: "left" }} onClick={submitHandler}>
                 submit
               </button>
-              <button style={{ float: "right" }} onClick={submitHandler}>
-                save & next
-              </button>
             </div>
           </form>
         )}
-
-        {/* <LandTable /> */}
       </div>
     </Layout>
   );

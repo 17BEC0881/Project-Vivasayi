@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./Signup.css";
 import axios from "axios";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Layout from "../Layout/Layout";
 import { Fragment } from "react";
 
@@ -9,6 +9,7 @@ const Signup = () => {
   const [name, setName] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const navigate = useNavigate();
 
   const usernameChangeHandler = (event) => {
     event.preventDefault();
@@ -36,12 +37,12 @@ const Signup = () => {
       };
       axios
         .post(
-          `https://0912-122-164-81-58.in.ngrok.io/employee/signup`,
+          `https://a8b2-49-204-136-220.in.ngrok.io/employee/signup`,
           credentials
         )
         .then((response) => {
           console.log(response);
-          Navigate("/employee");
+          navigate("/employee");
         })
         .catch((error) => {
           const Error = error.response;
@@ -57,6 +58,7 @@ const Signup = () => {
       <Layout />
       <div className="signup">
         <form className="signup-form">
+          <h1>SIGN UP</h1>
           <input
             type="text"
             placeholder="User Name"

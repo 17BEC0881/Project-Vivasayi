@@ -21,7 +21,7 @@ const View = () => {
                   "Authorization" : "Bearer "+ localStorage.getItem('token'),
                },
          };
-         axios.get(`https://66d4-49-204-138-29.in.ngrok.io/employee/all`,formtoken)
+         axios.get(`https://34b9-49-204-116-70.in.ngrok.io/employee/all`,formtoken)
          .then((response)=>{
           console.log(response.data)
           dispatch(authActions.employee(response.data))
@@ -37,12 +37,13 @@ const View = () => {
         // let output = user.filter((item) => item.slNo !== employee.slNo)
         // console.log(output)  
         // dispatch(authActions.delete(output)) 
+        alert("Are you sure want to delete?");
         const formtoken ={
           headers:{
                 "Authorization" : "Bearer "+ localStorage.getItem('token'),
              },
          };
-       axios.delete(`https://66d4-49-204-138-29.in.ngrok.io/employee/${employee.userName}`,formtoken)
+       axios.delete(`https://a8b2-49-204-136-220.in.ngrok.io/employee/${employee.userName}`,formtoken)
        .then((response)=>{
         console.log(response.data)
         dispatch(authActions.employee(response.data))

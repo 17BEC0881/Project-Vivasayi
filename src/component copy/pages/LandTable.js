@@ -1,5 +1,5 @@
 import axios from "axios";
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { Navigate, useNavigate } from "react-router-dom";
@@ -66,6 +66,7 @@ const LandTable = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { landData } = useSelector((state) => state.land);
+  const [editLand, setEditLand] = useState([]);
   var farmers = [];
   var land = [];
   farmerDetails.map((farmer) => (land = farmer.landDetails));
@@ -88,7 +89,15 @@ const LandTable = () => {
     });
   };
 
-  const editHandler = () => {};
+  const editHandler = (ind) => {
+    navigate("/editland");
+    // landData.map((land, landind) => {
+    //   if (ind === landind) {
+    //   } else {
+    //     setEditLand([...editLand, land]);
+    //   }
+    // });
+  };
   const detailsHandler = () => {
     navigate("/cropform");
   };
@@ -140,7 +149,7 @@ const LandTable = () => {
             )}
           </tbody> */}
           <tbody>
-            {landData.map((land) => (
+            {landData.map((land, ind) => (
               <tr key={land.landId}>
                 <td> {land.landId} </td>
                 <td>{land.ownerId}</td>
@@ -151,10 +160,12 @@ const LandTable = () => {
                 <td>{farmer.farmerDetails.phoneNumber}</td> */}
                 <td>{land.supervisorId}</td>
                 <div className="remove-button">
-                  <button onClick={() => removeHandler()}>Edit</button>
+                  {/* <button onClick={removeHandler(land.landId)}>Edit</button> */}
+                  <button onClick={removeHandler(ind)}>Edit</button>
                 </div>
                 <div className="remove-button">
-                  <button onClick={() => editHandler()}>Remove</button>
+                  {/* <button onClick={editHandler(land.landId)}>Remove</button> */}
+                  <button onClick={editHandler(ind)}>Remove</button>
                 </div>
               </tr>
             ))}

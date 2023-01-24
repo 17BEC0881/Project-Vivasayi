@@ -50,6 +50,7 @@
     border-radius: 4px;
     box-sizing: border-box;
     background-color: green;
+    color: white;
 }
 .box form h1 {
     /* margin: 0px 180px 5px 180px; */

@@ -27,7 +27,7 @@ const CropEditTable =()=> {
       //     event.preventDefault()
  
       axios
-        .get('https://66d4-49-204-138-29.in.ngrok.io/farmer/all')
+        .get('https://34b9-49-204-116-70.in.ngrok.io/farmer/all')
         .then((response) => {
           console.log(response);
           dispatch(cropActions.create_crop(response.data))
