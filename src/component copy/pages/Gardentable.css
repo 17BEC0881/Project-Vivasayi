@@ -46,3 +46,8 @@
     text-align: center;
     border-color: white;
  }
+ .login h1{
+    text-align: center;
+    color: green;
+    /* font-size: 20px; */
+}

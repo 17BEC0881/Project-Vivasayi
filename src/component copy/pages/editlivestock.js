@@ -16,6 +16,12 @@ const EditLivestock=()=>{
     const [place, setPlace]=useState();
     const [season, setSeason]=useState();
     const [type, setType]=useState();
+    const [breedError, setBreedError]=useState();
+    const[countError,setCountError]=useState();
+    const [nameError, setnameError]=useState();
+    const [placeError, setPlaceError]=useState();
+    const [seasonError, setSeasonError]=useState();
+    const[typeError, setTypeError]=useState();
     
     const location=useLocation();
     console.log(location);
@@ -50,7 +56,7 @@ const EditLivestock=()=>{
             let datacopy=[...dataa];
             datacopy[location.state.index]=data;
             dispatch(livestckk([...datacopy]));
-            axios.put("https://34b9-49-204-116-70.in.ngrok.io/livestock/",{
+            axios.put("https://a8b2-49-204-136-220.in.ngrok.io/livestock/",{
                 livestockDetails:[...datacopy]
             }).then((res)=>{
                 if(res.status===200){
@@ -60,9 +66,26 @@ const EditLivestock=()=>{
             ).catch((error) => {
                 if (error.response) {
                   console.log(error.response);
+                  if(error.response.data){
+                    setBreedError(error.response.data.breed);
+                    setCountError(error.response.data.count);
+                    setnameError(error.response.data.name);
+                    setPlaceError(error.response.data.place);
+                    setSeasonError(error.response.data.season);
+                    setTypeError(error.response.data.type);
+                  }
+                  else{
+                    setBreedError(null);
+                    setCountError(null);
+                    setnameError(null);
+                    setPlaceError(null);
+                    setSeasonError(null);
+                    setTypeError(null);
+                  }
                   console.log(error.response.status);
                 } else if (error.request) {
                   console.log("network error");
+                  alert("network error");
                 } else {
                   console.log(error);
                 }
@@ -72,18 +95,25 @@ const EditLivestock=()=>{
         <Layout>
             <div className={classes.login}>
                 <form>
-                    <label>BREED:</label>
+                    <h1 className="login h1">Edit livestock form</h1>
+                    <label>Breed</label>
                     <input type="text" placeholder="Breed" value={breed} onChange={(e)=>setBreed(e.target.value)} required></input>
-                    <label>COUNT:</label>
+                    {breedError?<span className="error">{breedError}</span>:null}<br/>
+                    <label>Count</label>
                     <input type="number" placeholder="Count" value={count} onChange={(e)=>setCount(e.target.value)} required></input>
-                    <label>NAME:</label>
+                    {countError?<span className="error">{countError}</span>:null}<br/>
+                    <label>Name:</label>
                     <input type="text" placeholder="Name" value={name} onChange={(e)=>setName(e.target.value)} required></input>
-                    <label>PLACE:</label>
+                    {nameError?<span className="error">{nameError}</span>:null}<br/>
+                    <label>Place:</label>
                     <input type="text" placeholder="Place" value={place} onChange={(e)=>setPlace(e.target.value)} required></input>
-                    <label>SEASON:</label>
+                    {placeError?<span className="error">{placeError}</span>:null}<br/>
+                    <label>Season</label>
                     <input type="text" placeholder="Season" value={season} onChange={(e)=>setSeason(e.target.value)} required></input>
-                    <label>TYPE:</label>
+                    {seasonError?<span className="error">{seasonError}</span>:null}<br/>
+                    <label>Type</label>
                     <input type="text" placeholder="Type" value={type} onChange={(e)=>setType(e.target.value)} required></input>
+                    {typeError?<span className="error">{typeError}</span>:null}<br/>
                     <button className="login-form button" type="submit" onClick={editHandle}>Submit</button>
                 </form>
             </div>

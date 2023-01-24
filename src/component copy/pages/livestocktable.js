@@ -26,6 +26,7 @@ const Livestocktable=()=>{
               console.log(error.response.status);
             } else if (error.request) {
               console.log("network error");
+              alert("network error");
             } else {
               console.log(error);
             }
@@ -57,6 +58,7 @@ const Livestocktable=()=>{
     return(
         <Layout>
             <div className="garden">
+            <h1 className="login h1">Livestock table</h1>
                 <table className="garden table">
                     <thead>
                         <tr className="garden tr">

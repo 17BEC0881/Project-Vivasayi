@@ -29,6 +29,7 @@ const Gardentable=()=>{
               console.log(error.response.status);
             } else if (error.request) {
               console.log("network error");
+              alert("network error");
             } else {
               console.log(error);
             }
@@ -60,7 +61,7 @@ const Gardentable=()=>{
     return(
         <Layout>
             <div className="garden">
-                <h1>table</h1>
+            <h1 className="login h1">Garden table </h1>
             
                 <table className="garden table">
                     <thead>

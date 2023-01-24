@@ -21,7 +21,15 @@ const Editgarden=()=>{
   const [organic, setOrganic]=useState();
   const [age, setAge]=useState();
   const [sellingPeriod, setSelling]=useState();
-  
+  const [areaError, setAreaError]=useState();
+  const[typeError, setTypeError]=useState();
+  const [nameError, setnameError]=useState();
+  const [varietyError, setVarietyError]=useState();
+  const [brandError,setBrandError]=useState();
+  const[countError,setCountError]=useState();
+  const[ageError,setageError]=useState();
+  const [sellingError, setSellingError]=useState();
+  const [organicError,setOrganicError]=useState();
   let data={
     "farmerId":farmerId,
     "area":area,
@@ -30,7 +38,7 @@ const Editgarden=()=>{
     "variety":variety,
     "brand":brand,
     "count":count,
-    "organic": "TRUE",
+    "organic": organic,
     "age":age,
     "sellingPeriod":sellingPeriod
   };
@@ -50,6 +58,7 @@ const Editgarden=()=>{
     setOrganic(location.state.input.organic);
     setAge(location.state.input.age);
     setSelling(location.state.input.sellingPeriod);
+
     }
 
   useEffect(()=>{
@@ -66,7 +75,7 @@ const Editgarden=()=>{
       const datacopy=[...dataa]
       datacopy[location.state.index]=data;
       dispatch(Gardenn([...datacopy]));
-      axios.put("https://34b9-49-204-116-70.in.ngrok.io/garden/",{
+      axios.put("https://a8b2-49-204-136-220.in.ngrok.io/garden/",{
         gardenDetails:[...datacopy]
       }).then((res)=>{
         if(res.status===200){
@@ -77,9 +86,32 @@ const Editgarden=()=>{
     ).catch((error) => {
       if (error.response) {
         console.log(error.response);
+        if(error.response.data){
+          setAreaError(error.response.data.area);
+          setTypeError(error.response.data.type);
+          setnameError(error.response.data.name);
+          setVarietyError(error.response.data.variety);
+          setBrandError(error.response.data.brand);
+          setCountError(error.response.data.count);
+          setageError(error.response.data.age);
+          setSellingError(error.response.data.sellingPeriod);
+          setOrganicError(error.response.data.organic);
+
+        }else{
+          setAreaError(null);
+          setTypeError(null);
+          setnameError(null);
+          setVarietyError(null);
+          setBrandError(null);
+          setCountError(null);
+          setageError(null);
+          setSellingError(null);
+          setOrganicError(null);
+        }
         console.log(error.response.status);
       } else if (error.request) {
         console.log("network error");
+        alert("network error");
       } else {
         console.log(error);
       }
@@ -91,27 +123,36 @@ const Editgarden=()=>{
   return(
     <Layout>
       <div className={classes.login}>
-      <h3 className="h3"> Gardenedit details</h3>
+      
         <form>
-          <label>AREA:</label>
+          <h1 className="login h1">Edit garden form</h1>
+          <label>Area</label>
           <input type="number" placeholder="Area" value={area} onChange={(e)=>setArea(e.target.value)} required></input>
-          <label>TYPE:</label>
+          {areaError? <span className="error">{areaError}</span>:null}<br/>
+          <label>Type</label>
           <input type="text" placeholder="Type" value={type} onChange={(e)=>setType(e.target.value)} required></input>
-          <label>NAME:</label>
+          {typeError?<span className="error">{typeError}</span>:null}<br/>
+          <label>Name</label>
           <input type="text" placeholder="Name" value={name} onChange={(e)=>setName(e.target.value)}required></input>
-          <label>VARIETY:</label>
+          {nameError?<span className="error">{nameError}</span>:null}<br/>
+          <label>Variety</label>
           <input type="text" placeholder="Variety" value={variety} onChange={(e)=>setVariety(e.target.value)} required></input>
-          <label>BRAND:</label>
+          {varietyError?<span className="error">{varietyError}</span>:null}<br/>
+          <label>Brand</label>
           <input type="text" placeholder="Brand" value={brand} onChange={(e)=>setBrand(e.target.value)} required></input>
-          <label>COUNT:</label>
+          {brandError?<span className="error">{brandError}</span>:null}<br/>
+          <label>Count</label>
           <input type="number" placeholder="Count" value={count} onChange={(e)=>setCount(e.target.value)} required></input>
-          <label>Organic: </label>
-          <input type="checkbox" value={organic} onChange={(e)=>setOrganic(e.target.value)}></input>true
-          <input type="checkbox" value={organic} onChange={(e)=>setOrganic(e.target.value)}></input>false
-          <label>AGE:</label>
+          {countError?<span className="error">{countError}</span>:null}<br/>
+          <label>Organic </label>
+          <input type="text" placeholder="eg: true or false" value={organic} onChange={(e)=>setOrganic(e.target.value)} required></input>
+          {organicError?<span className="error">{organicError}</span>:null}<br/>
+          <label>Age</label>
           <input type="number" placeholder="Age" value={age} onChange={(e)=>setAge(e.target.value)} required></input>
-          <label>SELLING PERIOD:</label>
+          {ageError?<span className="error">{ageError}</span>:null}<br/>
+          <label>Selling period</label>
           <input type="text" placeholder="Selling period" value={sellingPeriod} onChange={(e)=>setSelling(e.target.value)} required></input>
+          {sellingError?<span className="error">{sellingError}</span>:null}<br/>
           <button className="login-form button"  type="submit" onClick={submitHandle}>submit</button>
         </form >
       </div>
