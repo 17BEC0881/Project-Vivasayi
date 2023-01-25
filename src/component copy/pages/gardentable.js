@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -20,7 +21,7 @@ const Gardentable=()=>{
         const dele=gar.filter((x,index,arr)=>index!==i);
         console.log(dele);
         dispatch(Gardenn([...dele]));
-        axios.put("https://a8b2-49-204-136-220.in.ngrok.io/garden/",{
+        axios.put("https://a77b-49-204-112-10.in.ngrok.io/garden/",{
             gardenDetails:[...dele]
         }).catch((error) => {
             if (error.response) {
@@ -59,7 +60,7 @@ const Gardentable=()=>{
     return(
         <Layout>
             <div className="garden">
-                <h1 className="login h1">Garden table </h1>
+                <h1>table</h1>
             
                 <table className="garden table">
                     <thead>

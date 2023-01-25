@@ -11,8 +11,6 @@ const Employee = () => {
             <h1>Employee Login</h1>
             <div className='staff-login'>
                 <Login />
-                <span>Doesn't have an account? </span>
-                <a href="/signup">Sign Up</a>
             </div>
         </div>
         </Fragment>

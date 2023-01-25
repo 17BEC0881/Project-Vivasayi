@@ -1,21 +1,15 @@
-.garden {
+.labour {
     width: 100%;
-    margin-top: -60%
+   
 }
-.garden h1{
-    margin-left: 40%;
-    color: green;
-    font: caption;
-}
-.garden table {
-    margin: 7%;
+.labour table {
     width: 85%;
     border-collapse: collapse;
     margin-left: 7%;
     border: 2px solid green
 
 }
-.garden button {
+.labour button {
     background-color:green;
     border: none;
     border-radius: 3px;
@@ -26,13 +20,13 @@
     font-weight: 700;
     font-size: medium;
 }
-.garden tr:nth-child(odd){
+.labour tr:nth-child(odd){
     background-color:#f9f9f9;
     }
-.garden tr:hover {
+.labour tr:hover {
         background-color:rgb(204, 252, 204);
     }
-.garden tr {
+.labour tr {
         text-align: center;
         height: 2px;
         padding-top: 5px;
@@ -40,7 +34,7 @@
     padding-bottom: 5px;
     padding-left: 10px;
     }
-.garden th {
+.labour th {
     background-color: green;
     color: white;
     text-align: center;

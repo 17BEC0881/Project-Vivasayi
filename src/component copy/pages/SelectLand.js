@@ -8,6 +8,7 @@ import { useDispatch } from "react-redux";
 import { landActions } from "../../store/landStore";
 import { useSelector } from "react-redux";
 import Layout from "../Layout/Layout";
+import instance from "./BaseURL";
 
 const SelectLand = () => {
   const navigate = useNavigate();
@@ -15,11 +16,12 @@ const SelectLand = () => {
   const { landData } = useSelector((state) => state.land);
   const selected = useSelector((state) => state.land.selectedLand);
   const [area, setArea] = useState(selected[0].area);
-  const [interestedFor, setInterestedFor] = useState(selected[0].category);
+  const [interestedFor, setInterestedFor] = useState("takenLease");
   const [addOns, setAddOns] = useState("None");
   const [supervisorID, setSupervisorID] = useState(selected[0].ownerid);
   const [landId, setLandId] = useState(selected[0].landid);
 
+  const { farmer_id } = useSelector((state) => state.farmer);
   const submitHandler = async (e) => {
     e.preventDefault();
     console.log(area, interestedFor, addOns, supervisorID, selected);
@@ -32,16 +34,18 @@ const SelectLand = () => {
     //   supervisorId: supervisorID,
     // };
 
-    await axios({
-      url: "https://66d4-49-204-138-29.in.ngrok.io/land/rent",
+    await instance({
+      url: "/land/rent",
       method: "post",
       data: {
         rentLandDetails: [
           {
-            farmerId: "ABI0021",
-            // farmerId: selected[0].farmerid,
+            // farmerId: farmer_id,
+
+            farmerId: farmer_id[0],
             landId: selected[0].landid,
             ownerId: selected[0].ownerid,
+            area: area,
           },
         ],
       },
@@ -50,10 +54,12 @@ const SelectLand = () => {
         console.log("rentpost", response);
 
         const data = {
-          farmerId: "ABI0021",
+          farmerId: supervisorID,
           // farmerId: selected[0].farmerid,
-          landId: selected[0].landid,
-          ownerId: selected[0].ownerid,
+          landId: landId,
+          supervisorId: farmer_id[0],
+          area: area,
+          category: "takenLease",
         };
         dispatch(landActions.createLand(data));
       })
@@ -80,7 +86,7 @@ const SelectLand = () => {
     // };
     // dispatch(landActions.createLand(data));
 
-    navigate("/landtable");
+    navigate("/land");
   };
 
   return (

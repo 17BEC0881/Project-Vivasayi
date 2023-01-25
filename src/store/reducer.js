@@ -8,6 +8,7 @@ export const FarmerDetails = createSlice({
     editData: {},
     editMachineData: {},
     create: true,
+    fullFarmer: [],
   },
   reducers: {
     create_farmer(state, action) {
@@ -23,6 +24,9 @@ export const FarmerDetails = createSlice({
     edit_machine_data(state, action) {
       state.editMachineData = action.payload;
       state.create = false;
+    },
+    farmerAll(state, action) {
+      state.fullFarmer = action.payload;
     },
   },
 });

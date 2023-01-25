@@ -1,4 +1,4 @@
-.App {
+/* .App {
     font-family: sans-serif;
     text-align: center;
     width: 100%;
@@ -7,23 +7,11 @@
   .App table {
     width: 80%;
     margin-left: 10%;
-    
-   /* margin-left: 2rem; */
   }
-  
-
-/* .App {
-  display: flex;
-  font-size: 0.75em;
-} */
 
 .box {
   padding: 10px;
 }
-
-/* .App table {
-  background-color: white;
-} */
 
 .App thead {
   background-color: grey;
@@ -34,5 +22,72 @@
 }
 
 
+
+ */
+
+ .land {
+  width: 100%;
+  margin-left: 5%;
+  margin-right: 5%;
+  /* border: solid; */
+ 
+  /* position: fixed; */
+}
+.land h4 {
+  margin-bottom: 1rem;
+  margin-left: 40%;
+  color: green;
+  font-size: 20px;
+  font-family: Arial, Helvetica, sans-serif;
+  justify-content: center;
+}
+
+.landcontainer {
+  margin: auto;
+  width: 100%;
+  margin-top: -60%;
+}
+
+.land table {
+  width: 100%;
+  border-collapse: collapse;
+   border: 1px solid green
+  /* border-color: green; */
+}
+.land  button {
+  background-color:green;
+  border: none;
+  border-radius: 3px;
+  margin: 5px;
+  width: 6rem;
+  height: 2rem;
+  color: white;
+  font-weight: 700;
+  font-size: medium;
+  
+}
+/* .land thead {
+  background-color: #e3e3e3;
+} */
+.land tr:nth-child(odd){
+  background-color:#f9f9f9;
+  }
+.land tr:hover {
+      background-color:rgb(204, 252, 204);
+  }
+.land tr {
+      text-align: center;
+      height: 2px;
+      padding-top: 5px;
+  padding-right: 5px;
+  padding-bottom: 5px;
+  /* padding-left: 10px; */
+  }
+.land th {
+  background-color: green;
+  color: white;
+  text-align: center;
+  border-color: white;
+}
 
 

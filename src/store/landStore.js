@@ -7,6 +7,7 @@ export const landSlice = createSlice({
     leaseLands: [],
     rentalLands: [],
     selectedLand: {},
+    delete: [],
   },
   reducers: {
     createLand(state, action) {
@@ -15,11 +16,16 @@ export const landSlice = createSlice({
     updateLeaseLands(state, action) {
       state.leaseLands = action.payload;
     },
-    rentalUpdate(state, action) {
-      state.rentalLands = [...state, action.payload];
-    },
+    // rentalUpdate(state, action) {
+    //   state.rentalLands = [...state, action.payload];
+    // },
     selectedRentalLand(state, action) {
       state.selectedLand = action.payload;
+    },
+    deleteLand(state, action) {
+      state.landData = state.landData.filter(
+        (item) => action.payload !== item.landId
+      );
     },
   },
 });
