@@ -5,6 +5,8 @@ import { livestckk } from "../../store/gardenreducer";
 import "./Gardentable.css";
 import axios from "axios";
 import Layout from "../Layout/Layout";
+import { MdEdit } from "react-icons/md";
+import { AiTwotoneDelete } from "react-icons/ai";
 
 const Livestocktable=()=>{
     const liv=useSelector((state)=>state.user.livestck);
@@ -18,7 +20,7 @@ const Livestocktable=()=>{
         const dele=liv.filter((x,index,arr)=>index!==i);
         console.log(dele);
         dispatch(livestckk([...dele]));
-        axios.put("https://a77b-49-204-112-10.in.ngrok.io/livestock/",{
+        axios.put("https://53aa-49-204-114-250.in.ngrok.io/livestock/",{
             livestockDetails:[...dele]
         }).catch((error) => {
             if (error.response) {
@@ -49,14 +51,25 @@ const Livestocktable=()=>{
             <td>{x.place}</td>
             <td>{x.season}</td>
             <td>{x.type}</td>
-            <td><button className="garden button" onClick={()=>editHandle(x,index)}>edit</button></td>
-            <td><button className="garden button" onClick={()=>deleteHandle(index)} >delete</button></td>
+            <td>
+                    <MdEdit
+                      size={15}
+                      style={{ margin: "5px" }}
+                      onClick={()=>editHandle(x,index)}
+                    />
+                    <AiTwotoneDelete
+                      size={15}
+                      style={{ margin: "5px" }}
+                      onClick={()=>deleteHandle(index)}
+                    />
+            </td>
         </tr>
 
     );
     return(
         <Layout>
             <div className="garden">
+                <h1 className="login h1" style={{"fontSize":"x-large"}}>Livestock table</h1>
                 <table className="garden table">
                     <thead>
                         <tr className="garden tr">
@@ -67,8 +80,8 @@ const Livestocktable=()=>{
                             <th>place</th>
                             <th>season</th>
                             <th>type</th>
-                            <th></th>
-                            <th></th>
+                            <th>Actions</th>
+                            
                         </tr>
                     </thead>
                     <tbody>

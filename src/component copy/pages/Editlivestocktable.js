@@ -56,7 +56,7 @@ const EditLivestock=()=>{
             let datacopy=[...dataa];
             datacopy[location.state.index]=data;
             dispatch(livestckk([...datacopy]));
-            axios.put("https://a8b2-49-204-136-220.in.ngrok.io/livestock/",{
+            axios.put("https://53aa-49-204-114-250.in.ngrok.io/livestock/",{
                 livestockDetails:[...datacopy]
             }).then((res)=>{
                 if(res.status===200){

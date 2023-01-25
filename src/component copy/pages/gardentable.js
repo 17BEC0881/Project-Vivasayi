@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -6,6 +5,8 @@ import { Gardenn } from "../../store/gardenreducer";
 import axios from "axios"
 import "./Gardentable.css";
 import Layout from "../Layout/Layout";
+import { MdEdit } from "react-icons/md";
+import { AiTwotoneDelete } from "react-icons/ai";
 const Gardentable=()=>{
     const navigate=useNavigate();
     const dispatch=useDispatch();
@@ -21,7 +22,7 @@ const Gardentable=()=>{
         const dele=gar.filter((x,index,arr)=>index!==i);
         console.log(dele);
         dispatch(Gardenn([...dele]));
-        axios.put("https://a77b-49-204-112-10.in.ngrok.io/garden/",{
+        axios.put("https://53aa-49-204-114-250.in.ngrok.io/garden/",{
             gardenDetails:[...dele]
         }).catch((error) => {
             if (error.response) {
@@ -50,19 +51,27 @@ const Gardentable=()=>{
             <td>{x.variety}</td>
             <td>{x.brand}</td>
             <td>{x.count}</td>
-            <td>{x.organic}</td>
+            <td>{x.organic.toString()}</td>
             <td>{x.age}</td>
             <td>{x.sellingPeriod}</td>
-            <td><button className="garden button" onClick={()=>editHandle(x,index)}>edit</button></td>
-            <td><button className="garden button" onClick={()=>deleteHandle(index)}>delete</button></td>
+            <td><MdEdit
+                      size={15}
+                      style={{ margin: "5px" }}
+                        onClick={()=>editHandle(x,index)}
+                    />
+                    <AiTwotoneDelete
+                      size={15}
+                      style={{ margin: "5px" }}
+                      onClick={()=>deleteHandle(index)}
+                    />
+            </td>
         </tr>);
         console.log(tablebody);
     return(
         <Layout>
             <div className="garden">
-                <h1>table</h1>
-            
-                <table className="garden table">
+                <h1 className="login h1" style={{"fontSize":"x-large"}}><b>Garden table</b></h1>
+                <table className="gardencontainer">
                     <thead>
                         <tr className="garden tr">
                             <th>s.no</th>
@@ -76,16 +85,16 @@ const Gardentable=()=>{
                             <th>organic</th>
                             <th>age</th>
                             <th>sellingPeriod</th>
-                            <th></th>
-                            <th></th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
                         {tablebody}
                     </tbody>
                 </table>
-                <button onClick={cancelbuttonhandle} className="garden button">cancel</button>
-                <button onClick={nextbuttonhandle} className="garden button">next</button>
+                
+                    <button onClick={cancelbuttonhandle} className="garden button" >cancel</button>
+                    <button onClick={nextbuttonhandle} className="garden button">next</button>
             </div>
         </Layout>
     )
