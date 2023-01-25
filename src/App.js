@@ -16,10 +16,10 @@ import LabourWorkForm from "./component copy/pages/LabourWorkForm";
 import Scroll from "./component copy/pages/Scroll";
 import SelectLand from "./component copy/pages/SelectLand";
 import LandTable from "./component copy/pages/LandTable";
-import Editgarden from "./component copy/pages/editgarden";
 import EditLivestock from "./component copy/pages/Editlivestocktable";
 import Livestocktable from "./component copy/pages/Livestocktable";
 import Gardentable from "./component copy/pages/Gardentable";
+import Editgarden from "./component copy/pages/editgarden";
 
 function App() {
   return (
