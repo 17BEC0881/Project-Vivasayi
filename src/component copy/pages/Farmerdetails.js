@@ -127,7 +127,7 @@ const Farmerdetails = () => {
     event.preventDefault();
     setEnteredState(event.target.value);
     await instance
-      .get(`/farmer/states`)
+      .get(`https://53aa-49-204-114-250.in.ngrok.io/farmer/states`)
       .then((response) => {
         console.log(response);
         if (response) {
@@ -158,7 +158,9 @@ const Farmerdetails = () => {
     event.preventDefault();
     setEnteredDistrict(event.target.value);
     await instance
-      .get(`/farmer/districts/?state=${state_val}`)
+      .get(
+        `https://53aa-49-204-114-250.in.ngrok.io/farmer/districts/?state=${state_val}`
+      )
       .then((response) => {
         console.log(response);
         if (response) {
@@ -186,7 +188,9 @@ const Farmerdetails = () => {
     event.preventDefault();
     setEnteredUnion(event.target.value);
     await instance
-      .get(`/farmer/unions/?district=${district_val}`)
+      .get(
+        `https://53aa-49-204-114-250.in.ngrok.io/farmer/unions/?district=${district_val}`
+      )
       .then((response) => {
         console.log(response);
         if (response) {
@@ -215,7 +219,9 @@ const Farmerdetails = () => {
     event.preventDefault();
     setEnteredPanchayat(event.target.value);
     await instance
-      .get(`/farmer/panchayats/?union=${union_val}`)
+      .get(
+        `https://53aa-49-204-114-250.in.ngrok.io/farmer/panchayats/?union=${union_val}`
+      )
       .then((response) => {
         console.log(response);
         if (response) {
@@ -244,7 +250,9 @@ const Farmerdetails = () => {
     event.preventDefault();
     setEnteredVillage(event.target.value);
     await instance
-      .get(`/farmer/villages/?panchayat=${panchayat_val}`)
+      .get(
+        `https://53aa-49-204-114-250.in.ngrok.io/farmer/villages/?panchayat=${panchayat_val}`
+      )
       .then((response) => {
         console.log(response);
         if (response) {
