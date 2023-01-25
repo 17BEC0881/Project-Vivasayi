@@ -28,7 +28,7 @@ const Login = () => {
 
   const submitHandler = (event) => {
     event.preventDefault();
-    instance.post(`/employee/login`, data).then((response) => {
+    instance.post(`https://53aa-49-204-114-250.in.ngrok.io/employee/login`, data).then((response) => {
       response = response.data;
       //console.log(response)
       let token = response["access"];

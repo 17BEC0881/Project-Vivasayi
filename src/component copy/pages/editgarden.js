@@ -144,14 +144,14 @@ const Editgarden=()=>{
           <label>Count</label>
           <input type="number" placeholder="Count" value={count} onChange={(e)=>setCount(e.target.value)} required></input>
           {countError?<span style={{"color":"red","display":"block","fontSize":"x-small"}}>{countError}</span>:null}<br/>
-          <label>Organic: </label>
-          <input type="checkbox" value={organic} onChange={(e)=>setOrganic(!organic)}></input>
           <label>Age</label>
           <input type="number" placeholder="Age" value={age} onChange={(e)=>setAge(e.target.value)} required></input>
           {ageError?<span style={{"color":"red","display":"block","fontSize":"x-small"}}>{ageError}</span>:null}<br/>
           <label>Selling period</label>
           <input type="text" placeholder="Selling period" value={sellingPeriod} onChange={(e)=>setSelling(e.target.value)} required></input>
           {sellingError?<span style={{"color":"red","display":"block","fontSize":"x-small"}}>{sellingError}</span>:null}<br/>
+          <label>Organic: </label>
+          <input type="checkbox" value={organic} onChange={(e)=>setOrganic(!organic)}></input>
           <button className="login-form button"  type="submit" onClick={submitHandle}>submit</button>
         </form >
       </div>
