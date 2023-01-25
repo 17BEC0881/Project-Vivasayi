@@ -98,25 +98,26 @@ const Garden=()=>{
       <div className={classes.login}>
         <form>
           <h1 className="login h1">Garden form</h1>
-          
-          <label>Type</label>
-          <input type="text" placeholder="Type" value={type} onChange={(e)=>setType(e.target.value)} required></input>
-          {typeError?<span style={{"color":"red","display":"block","fontSize":"x-small"}}>{typeError}</span>:null}<br/>
-          <label>Name</label>
-          <input type="text" placeholder="Name" value={name} onChange={(e)=>setName(e.target.value)} required></input>
-          {nameError?<span style={{"color":"red","display":"block","fontSize":"x-small"}} >{nameError}</span>:null}<br/>
           <label>Variety</label>
           <input type="text" placeholder="Variety" value={variety} onChange={(e)=>setVariety(e.target.value)} required></input>
           {varietyError?<span style={{"color":"red","display":"block","fontSize":"x-small"}}>{varietyError}</span>:null}<br/>
+          <label>Type</label>
+          <input type="text" placeholder="Type" value={type} onChange={(e)=>setType(e.target.value)} required></input>
+          {typeError?<span style={{"color":"red","display":"block","fontSize":"x-small"}}>{typeError}</span>:null}<br/>
           <label>Brand</label>
           <input type="text" placeholder="Brand" value={brand} onChange={(e)=>setBrand(e.target.value)} required></input>
           {brandError?<span style={{"color":"red","display":"block","fontSize":"x-small"}}>{brandError}</span>:null}<br/>
+          
+          
           <label>Area</label>
           <input type="number" placeholder="Area" required value={area} onChange={(e)=>setArea(e.target.value)} ></input>
           {areaError? <span style={{"color":"red","display":"block","fontSize":"x-small"}}>{areaError}</span>:null}<br/>
           <label>Count</label>
           <input type="number" placeholder="Count" value={count} onChange={(e)=>setCount(e.target.value)} required></input>
           {countError?<span style={{"color":"red","display":"block","fontSize":"x-small"}}>{countError}</span>:null}<br/>
+          <label>Name</label>
+          <input type="text" placeholder="Name" value={name} onChange={(e)=>setName(e.target.value)} required></input>
+          {nameError?<span style={{"color":"red","display":"block","fontSize":"x-small"}} >{nameError}</span>:null}<br/>
           <label>Age</label>
           <input type="number" placeholder="Age" value={age} onChange={(e)=>setAge(e.target.value)} required></input>
           {ageError?<span style={{"color":"red","display":"block","fontSize":"x-small"}}>{ageError}</span>:null}<br/>
