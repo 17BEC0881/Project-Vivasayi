@@ -1,18 +1,18 @@
 .land {
     width: 100%;
-    margin-left: 10%;
+    margin-left: 5%;
     margin-right: 10%;
     /* border: solid; */
-    margin-top: -60%;
+    margin-top: -25%;
     /* position: fixed; */
 }
 .land h4 {
-    margin-bottom: 1rem;
-    margin-left: 40%;
+    
+    margin-bottom: -10%;
+    /* margin-left: 40%; */
     color: green;
     font-size: 20px;
     font-family: Arial, Helvetica, sans-serif;
-    justify-content: center;
 }
 
 .landcontainer {

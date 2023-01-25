@@ -1,10 +1,12 @@
+
 .login {
     width: 100%;
-    margin-top: -60%;
+    margin-top: -55%;
 }
 .login form {
     width : 500px;
     margin:auto;
+    font-family: 'Times New Roman', Times, serif;
     /* margin-top:15%; */
     
 }
@@ -34,10 +36,22 @@
     border: 2px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
+    font-size: 1rem;
     background-color: green;
+    font-family: 'Times New Roman', Times, serif;
+    color: white;
 }
 .login h1{
     text-align: center;
     color: green;
     /* font-size: 20px; */
+}
+.login label {
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.MealsLoading {
+        text-align: center;
+        color: white;
+     
 }

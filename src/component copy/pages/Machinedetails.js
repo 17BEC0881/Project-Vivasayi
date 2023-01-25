@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import classes from "./Machinedetails.module.css";
 import { useSelector } from "react-redux";
@@ -6,15 +6,22 @@ import Layout from "../Layout/Layout";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { authActions } from "../../store/auth";
+import { farmerActions } from "../../store/reducer";
+import ViewMachine from "./Viewmachine";
+import instance from "./BaseURL";
+
 const Machinedetails = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const api = "http://abbf-182-65-110-25.in.ngrok.io";
   // const Attachments = ["Backhoe","Bedformer","Front Dozer","Furrower","Harvester","Planter","Trailer"]
   const { create } = useSelector((state) => state.farmer);
   // console.log("bool",create);
-  const { editMachineData } = useSelector((state) => state.farmer);
-  // console.log("new",editMachineData.type);
+  const { machine_detail } = useSelector((state) => state.farmer);
+  console.log("whole", machine_detail);
+  const { farmer_id } = useSelector((state) => state.farmer);
+  console.log("f", farmer_id);
+  // const { editMachineData } = useSelector((state) => state.farmer);
+  // console.log("new",editMachineData);
   var [enteredType, setEnteredType] = useState("");
   var [enteredSubtype, setEnteredSubtype] = useState("");
   var [enteredAttachment, setEnteredAttachment] = useState("");
@@ -22,9 +29,15 @@ const Machinedetails = () => {
   var [enteredCount, setEnteredCount] = useState("");
   var [enteredDay, setEnteredDay] = useState("");
   var [enteredRent, setEnteredRent] = useState("");
+  const [areaDetails, setAreaDetails] = useState("");
   const [Subtype, setSubtype] = useState([]);
   const [Attachment, setAttachment] = useState([]);
-  const [machine, setMachine] = useState([]);
+  // const [machine,setMachine] = useState([]);
+  var [showLand, setShowLand] = useState(false);
+  var [click, setClick] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(false);
+  const [error1, setError1] = useState({});
+
   const selectHandler = () => {
     if (enteredType === "Mowers") {
       setSubtype([
@@ -204,85 +217,119 @@ const Machinedetails = () => {
       ]);
     }
   };
-  if (!create) {
-    enteredType = editMachineData.type;
-    enteredSubtype = editMachineData.subType;
-    enteredAttachment = editMachineData.attachments;
-    enteredBrand = editMachineData.brand;
-    enteredCount = editMachineData.count;
-    enteredDay = editMachineData.rentalBasis;
-    enteredRent = editMachineData.rent;
-  }
+
+  useEffect(() => {
+    if (enteredDay === "Area") {
+      setShowLand(true);
+    } else {
+      setShowLand(false);
+    }
+  }, [enteredDay]);
+
+  // const editHandler = (machineId) => {
+  //     // const newEditMachinedata = machine.filter((item) => { item.machineDetails.map((input,id) => input === Input )});
+  //     const newEditMachinedata = farmer.filter(
+  //         (input) => input.id === machineId
+  //     );
+  //     console.log("edit",newEditMachinedata);
+  //     dispatch (farmerActions.edit_machine_data(newEditMachinedata))
+  // }
+
+  // useEffect(() => {
+  //     if(!create){
+  //             setEnteredType(editMachineData.type);
+  //             setEnteredSubtype(editMachineData.subType);
+  //             setEnteredAttachment(editMachineData.attachments);
+  //             setEnteredBrand(editMachineData.brand);
+  //             setEnteredCount(editMachineData.count);
+  //             setEnteredDay(editMachineData.rentalBasis);
+  //             setEnteredRent(editMachineData.rent);
+  //     }
+  //   },[editMachineData]);
+  //   console.log("machine",machine_detail);
+  // var output = []
+
   const saveHandler = async (e) => {
     e.preventDefault();
 
     const inputdata = {
-      farmerId: "SWE0003",
+      // id: farmer.length+1,
+      farmerId: farmer_id,
       type: enteredType,
       subType: enteredSubtype,
       attachments: enteredAttachment,
       brand: enteredBrand,
       count: enteredCount,
       rentalBasis: enteredDay,
+      areaDetail: areaDetails,
       rent: enteredRent,
     };
     console.log("data", inputdata);
-    // await axios
-    //   .post(`${api}/machinery/create`, { machineDetails: [inputdata] })
-    //   .then((response) => {
-    //     console.log(response);
-    //     setMachine(response.data);
-    //   })
-    //   .catch((error) => {
-    //     if (error.response) {
-    //       console.log(error.response);
-    //       console.log(error.response.status);
-    //     } else if (error.request) {
-    //       console.log("network error");
-    //     } else {
-    //       console.log(error);
-    //     }
-    //   });
-    dispatch(authActions.farmerLogout());
-    navigate("/viewfarmer");
-  };
 
-  const editHandler = async (e) => {
-    e.preventDefault();
-
-    const inputdata = {
-      farmerId: "SWE0003",
-      type: enteredType,
-      subType: enteredSubtype,
-      attachments: enteredAttachment,
-      brand: enteredBrand,
-      count: enteredCount,
-      rentalBasis: enteredDay,
-      rent: enteredRent,
-    };
-    console.log("data", inputdata);
-    await axios
-      .put(`${api}/machinery/`, { machineDetails: [inputdata] })
+    await instance
+      .post(`/machinery/create`, { machineDetails: [inputdata] })
       .then((response) => {
         console.log(response);
+        if (response.status === 200) {
+          console.log(response.data);
+          dispatch(farmerActions.create_machine_detail(inputdata));
+        }
       })
       .catch((error) => {
         if (error.response) {
           console.log(error.response);
           console.log(error.response.status);
+          var errorMsg = error.response.data;
+          setErrorMessage(true);
+          setError1(errorMsg);
         } else if (error.request) {
           console.log("network error");
         } else {
           console.log(error);
         }
       });
+    setClick(true);
+    // dispatch(authActions.farmerLogout());
+    // navigate("/viewfarmer");
+  };
+
+  const editHandler = async (e) => {
+    e.preventDefault();
+    navigate("/preview");
+    // const inputdata = {
+    //     farmerId: farmer_id[0],
+    //     type: enteredType,
+    //     subType: enteredSubtype,
+    //     attachments: enteredAttachment,
+    //     brand: enteredBrand,
+    //     count: enteredCount,
+    //     rentalBasis: enteredDay,
+    //     areaDetail: areaDetails,
+    //     rent: enteredRent
+    // };
+    // console.log("data",inputdata);
+
+    // await axios.put(`${api}/machinery/`,{ machineDetails : [output] })
+    // .then((response) => {
+    //     console.log(response);
+    // }).catch((error) => {
+    //     if (error.response) {
+    //         console.log(error.response);
+    //         console.log(error.response.status);
+    //     } else if (error.request) {
+    //         console.log("network error");
+    //     } else {
+    //         console.log(error);
+    //     }
+    // })
   };
 
   return (
     <Layout>
       <section className={classes.box}>
         <form>
-          <h1>Machine Details</h1>
+          <h3>Machine Details</h3>
+          {/* <label style={{ fontFamily: "Times New Roman" }}>Type:</label> */}
           <select
             name="type"
             id="type"
@@ -304,32 +351,38 @@ const Machinedetails = () => {
             <option value="Saw Mills">Saw Mills</option>
             <option value="Others">Others</option>
           </select>
+          {error1 && <p>{error1.type}</p>}
+          {/* <label style={{ fontFamily: "Times New Roman" }}>Subtype:</label> */}
           <select
             name="subtype"
             id="subtype"
             value={enteredSubtype}
             onChange={(e) => setEnteredSubtype(e.target.value)}
           >
-            <option value="sub-type">Sub-type</option>
+            <option value="subtype">Sub Type</option>
             {Subtype.map((x, y) => (
               <option key={y} value={x}>
                 {x}
               </option>
             ))}
           </select>
+          {error1 && <p>{error1.subType}</p>}
+          {/* <label style={{ fontFamily: "Times New Roman" }}>Attachment:</label> */}
           <select
             name="attach"
             id="attach"
             value={enteredAttachment}
             onChange={(e) => setEnteredAttachment(e.target.value)}
           >
-            <option value="type">Attachments</option>
+            <option value="attachment">Attachments</option>
             {Attachment.map((x, y) => (
               <option key={y} value={x}>
                 {x}
               </option>
             ))}
           </select>
+          {error1 && <p>{error1.attachments}</p>}
+          {/* <label style={{ fontFamily: "Times New Roman" }}>Brand:</label> */}
           <input
             type="text"
             name="brand"
@@ -338,6 +391,8 @@ const Machinedetails = () => {
             value={enteredBrand}
             onChange={(e) => setEnteredBrand(e.target.value)}
           />
+          {error1 && <p>{error1.brand}</p>}
+          {/* <label style={{ fontFamily: "Times New Roman" }}>Count:</label> */}
           <input
             type="text"
             name="count"
@@ -346,6 +401,8 @@ const Machinedetails = () => {
             value={enteredCount}
             onChange={(e) => setEnteredCount(e.target.value)}
           />
+          {error1 && <p>{error1.count}</p>}
+          {/* <label style={{ fontFamily: "Times New Roman" }}>Rental Basics:</label> */}
           <select
             name="rentalbasics"
             id="rentalbasics"
@@ -357,6 +414,22 @@ const Machinedetails = () => {
             <option value="Day">Day</option>
             <option value="Area">Area</option>
           </select>
+          {error1 && <p>{error1.rentalBasis}</p>}
+          {showLand ? (
+            <label style={{ fontFamily: "Times New Roman" }}>Area Size:</label>
+          ) : null}
+          {showLand ? (
+            <input
+              type="text"
+              name="landdetails"
+              id="landdetails"
+              placeholder="Area size"
+              value={areaDetails}
+              onChange={(e) => setAreaDetails(e.target.value)}
+            />
+          ) : null}
+          {/* <input type="text" name="landdetails" id="landdetails" /> */}
+          {/* <label style={{ fontFamily: "Times New Roman" }}>Rent Price:</label> */}
           <input
             type="number"
             name="rent"
@@ -365,11 +438,16 @@ const Machinedetails = () => {
             value={enteredRent}
             onChange={(e) => setEnteredRent(e.target.value)}
           />
-          {/* <button type="submit" onClick={editHandler}>Edit</button> */}
+          {error1 && <p>{error1.rent}</p>}
+          <button type="submit" onClick={editHandler}>
+            Preview
+          </button>
           <button type="submit" onClick={saveHandler}>
             Save
           </button>
         </form>
+        {/* {click && <ViewMachine /> } */}
+        {/* <ViewMachine /> */}
       </section>
     </Layout>
   );

@@ -42,7 +42,7 @@ const SelectLand = () => {
           {
             // farmerId: farmer_id,
 
-            farmerId: farmer_id[0],
+            farmerId: farmer_id,
             landId: selected[0].landid,
             ownerId: selected[0].ownerid,
             area: area,
@@ -57,7 +57,7 @@ const SelectLand = () => {
           farmerId: supervisorID,
           // farmerId: selected[0].farmerid,
           landId: landId,
-          supervisorId: farmer_id[0],
+          supervisorId: farmer_id,
           area: area,
           category: "takenLease",
         };
@@ -97,6 +97,7 @@ const SelectLand = () => {
         <form>
           <div>
             <div>
+              <label>Category</label>
               <select
                 placeholder="category"
                 value={interestedFor}
@@ -112,6 +113,7 @@ const SelectLand = () => {
             </div>
 
             <div>
+              <label>Area</label>
               <input
                 placeholder="Area"
                 value={area}
@@ -121,66 +123,24 @@ const SelectLand = () => {
             </div>
 
             <div>
+              <label>SupervisorID</label>
               <input
                 placeholder="supervisorID"
                 value={supervisorID}
                 onChange={(e) => setSupervisorID(e.target.value)}
               />
-              {/* <select
-                  disabled
-                  name="states"
-                  id="states"
-                  onChange={(e) => setAddOns(e.target.value)}
-                >
-                  <option value="">addOn </option>
-                  {/* {farmingList.map((state) => ( */}
-              {/* <option
-                    key={selectedLand.landid}
-                    value={selectedLand.farmerid}
-                  >
-                    {selectedLand.farmerid}
-                  </option>
-                  ))}
-                </select> */}
             </div>
 
             <div>
-              {/* <select
-                  name="states"
-                  id="states"
-                  onChange={(e) => setSupervisorID(e.target.value)}
-                >
-                  <option value="">supervisorId </option>
-                  {supervisor}
-                  {/* {selected.map((state) => (
-                    <option key={state.landid} value={state.landid}>
-                      {state.farmerid}
-                    </option>
-                  ))} */}
-              {/* </select> */}
-            </div>
-
-            <div>
+              <label>LandID</label>
               <input
                 placeholder="landID"
                 value={landId}
                 onChange={(e) => setLandId(e.target.value)}
               />
-              {/* <select
-                  name="states"
-                  id="states"
-                  onChange={(e) => setLandid(e.target.value)}
-                >
-                  <option value="">land Id </option>
-                  {list.map((state) => (
-                    <option key={state} value={state}>
-                      {state}
-                    </option>
-                  ))}
-                </select> */}
             </div>
             <div>
-              <button onClick={submitHandler}>submit</button>
+              <button onClick={submitHandler}>SUBMIT</button>
             </div>
           </div>
         </form>

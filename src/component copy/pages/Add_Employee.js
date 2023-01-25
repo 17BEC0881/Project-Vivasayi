@@ -3,6 +3,7 @@ import "./Add_Employee.css";
 import axios from "axios";
 import { Fragment } from "react";
 import Layout from "../Layout/Layout";
+import { useNavigate } from "react-router-dom";
 
 const Add = () => {
   const [firstname, setFirstname] = useState("");
@@ -10,10 +11,17 @@ const Add = () => {
   const [username, setUsername] = useState("");
   const [phoneNumber, setPhoneNumber] = useState();
   const [email, setEmail] = useState("");
+  const [errorMessage, seterrorMessage] = useState(false);
+  const [error, setError] = useState({});
+  const [fnameclicked, setFnameClicked] = useState(false);
+  const [unameclicked, setUnameClicked] = useState(false);
+  const [phonenumberclicked, setPhonenumberClicked] = useState(false);
 
+  const navigate = useNavigate();
   const firstnameChangeHandler = (event) => {
     event.preventDefault();
     setFirstname(event.target.value);
+    setFnameClicked(true);
   };
 
   const lastnameChangeHandler = (event) => {
@@ -24,10 +32,12 @@ const Add = () => {
   const usernameChangeHandler = (event) => {
     event.preventDefault();
     setUsername(event.target.value);
+    setUnameClicked(true);
   };
 
   const phonenumberChangeHandler = (event) => {
     event.preventDefault();
+    setPhonenumberClicked(true);
     setPhoneNumber(event.target.value);
   };
 
@@ -46,6 +56,8 @@ const Add = () => {
 
   const registerHandler = (event) => {
     event.preventDefault();
+    setUnameClicked(false);
+    setPhonenumberClicked(false);
     const admintoken = {
       headers: {
         Authorization: "Bearer " + localStorage.getItem("token"),
@@ -53,23 +65,28 @@ const Add = () => {
     };
     axios
       .post(
-        `https://6e93-49-204-135-131.in.ngrok.io/employee/create`,
+        `https://53aa-49-204-114-250.in.ngrok.io/employee/create`,
         details,
         admintoken
       )
       .then((response) => {
-        console.log(response);
+        if (response.status === 201) {
+          setFirstname("");
+          setLastname("");
+          setUsername("");
+          setPhoneNumber("");
+          setEmail("");
+          setError("");
+          alert("added successfully!");
+        }
+        navigate("/view_employee");
       })
       .catch((error) => {
-        const Error = error.response;
-        console.log(Error);
+        const Error = error.response.data;
+        // console.log(Error)
+        seterrorMessage(true);
+        setError(Error);
       });
-    //console.log(admintoken)
-    setFirstname("");
-    setLastname("");
-    setUsername("");
-    setPhoneNumber("");
-    setEmail("");
   };
 
   return (
@@ -78,7 +95,8 @@ const Add = () => {
       <div className="Add">
         <form className="Add-form">
           <h1>Add Employee</h1>
-          <div className="Add-name">
+          <div className="Add-details">
+            <label>First Name:</label>
             <input
               type="text"
               placeholder="First Name*"
@@ -86,15 +104,17 @@ const Add = () => {
               onChange={firstnameChangeHandler}
               required
             />
+            <label>Last Name:</label>
             <input
               type="text"
-              placeholder="Last Name*"
+              placeholder="Last Name"
               value={lastname}
               onChange={lastnameChangeHandler}
-              required
             />
-          </div>
-          <div className="Add-details">
+            {!fnameclicked && errorMessage && (
+              <div className="error">{error.first_name}</div>
+            )}
+            <label>User Name:</label>
             <input
               type="text"
               placeholder="User Name*"
@@ -102,6 +122,10 @@ const Add = () => {
               onChange={usernameChangeHandler}
               required
             />
+            {!unameclicked && errorMessage && (
+              <div className="error">{error.username}</div>
+            )}
+            <label>Phone Number:</label>
             <input
               type="number"
               placeholder="Phone Number*"
@@ -109,12 +133,15 @@ const Add = () => {
               onChange={phonenumberChangeHandler}
               required
             />
+            {!phonenumberclicked && errorMessage && (
+              <div className="error">{error.contact_number}</div>
+            )}
+            <label>Email:</label>
             <input
               type="text"
-              placeholder="Email*"
+              placeholder="Email"
               value={email}
               onChange={emailChangeHandler}
-              required
             />
           </div>
           <div className="Add-button">

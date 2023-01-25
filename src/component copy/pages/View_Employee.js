@@ -7,10 +7,12 @@ import { Fragment } from "react";
 import Layout from "../Layout/Layout";
 import { MdEdit } from "react-icons/md";
 import { AiTwotoneDelete } from "react-icons/ai";
+import { useNavigate } from "react-router-dom";
 
 const View = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.user);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const formtoken = {
@@ -19,32 +21,53 @@ const View = () => {
       },
     };
     axios
-      .get(`https://a77b-49-204-112-10.in.ngrok.io/employee/all`, formtoken)
+      .get(`https://53aa-49-204-114-250.in.ngrok.io/employee/all`, formtoken)
       .then((response) => {
         console.log(response.data);
         dispatch(authActions.employee(response.data));
       });
   }, []);
 
-  const editHandler = (event) => {};
+  const editHandler = (data) => {
+    dispatch(authActions.edit(data));
+    navigate("/edit_employee");
+  };
 
-  const deleteHandler = (event) => {};
+  const deleteHandler = (employee) => {
+    if (window.confirm("Are you sure want to delete?") === true) {
+      const formtoken = {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      };
+      axios
+        .delete(
+          `https://53aa-49-204-114-250.in.ngrok.io/employee/${employee.userName}`,
+          formtoken
+        )
+        .then((response) => {
+          console.log(response.data);
+          dispatch(authActions.employee(response.data));
+        });
+    }
+  };
 
   return (
     <Fragment>
       <Layout />
       <div className="view-employee">
         <div className="view-container">
-          <h4>Employee Details</h4>
+          <h1>Employee Details</h1>
           <table border="1" className="view-table">
             <thead>
               <tr className="view-table-head-row">
-                <th>S.No</th>
+                <th>SlNo</th>
                 <th>Name</th>
                 <th>User Name</th>
                 <th>Email</th>
                 <th>Phone Number</th>
-                <th>Actions</th>
+                <th>Edit</th>
+                <th>Delete</th>
               </tr>
             </thead>
             <tbody>
@@ -58,20 +81,10 @@ const View = () => {
                   <td>{employee.email}</td>
                   <td>{employee.phoneNumber}</td>
                   <td>
-                    <MdEdit
-                      size={15}
-                      style={{ margin: "5px" }}
-                      // onClick={() =>
-                      //    editHandler(input.farmerDetails.farmerId)}
-                    />
-                    <AiTwotoneDelete
-                      size={15}
-                      style={{ margin: "5px" }}
-                      // onClick={
-                      //   // (e) =>
-                      //   // deleteHandler(input.farmerDetails.farmerId)
-                      // }
-                    />
+                    <MdEdit onClick={() => editHandler(employee)} />
+                  </td>
+                  <td>
+                    <AiTwotoneDelete onClick={() => deleteHandler(employee)} />
                   </td>
                 </tr>
               ))}

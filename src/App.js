@@ -16,6 +16,8 @@ import LabourWorkForm from "./component copy/pages/LabourWorkForm";
 import Scroll from "./component copy/pages/Scroll";
 import SelectLand from "./component copy/pages/SelectLand";
 import LandTable from "./component copy/pages/LandTable";
+import Edit from "./component copy/pages/Edit_Employee";
+import Preview from "./component copy/pages/Preview";
 
 function App() {
   return (
@@ -34,10 +36,11 @@ function App() {
       <Route path="/livestock" element={<Livestock />} />
       <Route path="/garden" element={<Garden />} />
       <Route path="/labour" element={<LabourWorkForm />} />
-
+      <Route path="/edit_employee" element={<Edit />} />
       <Route path="selectlandtable" element={<Scroll />} />
       <Route path="selectlandpage" element={<SelectLand />} />
       <Route path="landtable" element={<LandTable />} />
+      <Route path="/preview" element={<Preview />} />
     </Routes>
   );
 }

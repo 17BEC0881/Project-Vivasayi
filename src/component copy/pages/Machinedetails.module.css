@@ -1,9 +1,10 @@
 * {
     box-sizing: border-box;
+    /* font-family: 'Times New Roman', Times, serif; */
 }
 .box {
     width: 100%;
-    margin-top: -65%;
+    margin-top: -60%;
     /* border: solid; */
 }
 .box form {
@@ -16,7 +17,14 @@
     margin: 0px 150px 5px 150px;
     color: green;
     font-size: 20px;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Times New Roman', Times, serif;
+}
+.box form p {
+    color: red;
+    font-size: medium;
+    /* margin-right: 10px; */
+    margin-left: 150px;
+    font-family: 'Times New Roman', Times, serif;
 }
 .box form input {
     width: 100%;
@@ -51,13 +59,11 @@
     box-sizing: border-box;
     background-color: green;
 }
-.box form h1 {
+.box form h4 {
     /* margin: 0px 180px 5px 180px; */
-    /* color: black;
+    color: black;
     font-size: 16px;
-    font-family: Arial, Helvetica, sans-serif; */
-    text-align: center;
-    color: green;
+    font-family: 'Times New Roman', Times, serif;
 }
 .box div {
     width: 100%;

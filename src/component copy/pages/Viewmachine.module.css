@@ -1,24 +1,28 @@
 .land {
     width: 100%;
-    margin-top: 0%;
-    font-family: 'Times New Roman', Times, serif;
-  
+    margin-left: 10%;
+    margin-right: 10%;
+    /* border: solid; */
+    /* margin-top: -60%; */
+    /* position: fixed; */
+}
+.land h4 {
+    margin-bottom: 1rem;
+    margin-left: 40%;
+    color: green;
+    font-size: 20px;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
-.container {
+.landcontainer {
     margin: auto;
-    width: 80%;
+    width: 100%;
 }
-.land table {
-    border: 1px solid green;
-    margin-bottom: 0rem;
-    
-  }
+
 .land table {
     width: 100%;
     border-collapse: collapse;
-    margin: auto;
-    border-color: green;
+     border: 1px solid green
     /* border-color: green; */
   }
  .land  button {
@@ -48,23 +52,11 @@
         padding-top: 5px;
     padding-right: 5px;
     padding-bottom: 5px;
-    padding-left: 10px;
-    border-color: green;
+    /* padding-left: 10px; */
     }
 .land th {
-    background-color: white;
+    background-color: green;
     color: white;
     text-align: center;
-    border-color: green;
-    color: green;
+    border-color: white;
  }
-
- .land h1{
-    text-align: center;
-    color: green;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-    /* font-size: 20px; */
-}
-
-

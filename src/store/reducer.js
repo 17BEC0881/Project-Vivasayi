@@ -4,8 +4,11 @@ export const FarmerDetails = createSlice({
   name: "farmer",
   initialState: {
     farmer: [],
-    farmer_id: [],
+    farmername: "",
+    farmer_id: "",
     editData: {},
+    machine_detail: [],
+    update_machine_detail: [],
     editMachineData: {},
     create: true,
     fullFarmer: [],
@@ -16,6 +19,15 @@ export const FarmerDetails = createSlice({
     },
     create_id(state, action) {
       state.farmer_id = action.payload;
+    },
+    create_name(state, action) {
+      state.farmername = action.payload;
+    },
+    create_machine_detail(state, action) {
+      state.machine_detail.push(action.payload);
+    },
+    up_machine_det(state, action) {
+      state.update_machine_detail = action.payload;
     },
     edit_data(state, action) {
       state.editData = action.payload;
