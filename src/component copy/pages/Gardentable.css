@@ -40,8 +40,8 @@
     padding-left: 10px;
     }
 .garden th {
-    background-color: green;
-    color: white;
+    /* background-color: green; */
+    color: green;
     text-align: center;
     border-color: white;
  }
