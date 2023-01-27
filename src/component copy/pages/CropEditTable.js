@@ -1,526 +1,321 @@
-import axios from "axios"
-import { useState } from "react"
-import { Navigate, useNavigate } from "react-router-dom"
-import classes from './CropEditTable.module.css'
-import { useLocation } from "react-router-dom"
-import { useDispatch } from "react-redux"
+import classes from "./CropForm.module.css";
+import { useState } from "react";
+import axios from "axios";
+import Layout from "../Layout/Layout";
+import { useNavigate } from "react-router-dom";
+import instance from "./BaseURL";
+import { cropActions } from "../../store/cropDetailsReducer";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+// import CropEditTable from "./CropEditTable";
+import { useEffect } from "react";
+import { farmerActions } from "../../store/reducer";
+// import CropEditTable from "./CropEditTable";
+// import classes from './CropEditTable.module.css'
+import CropTable from "./CropTable";
 
-import { farmeractions } from "../store/reducer"
-import { useEffect } from "react"
-import { useSelector } from "react-redux"
-import { cropActions } from "../store/cropReducer"
+const CropEditTable = () => {
 
-const CropEditTable =()=> {
-    // const [crop, setCrop] = useState(CropEditData)
-    // const  {farmer}  = useSelector ((state)=> state.farmer)
-    // console.log('farmer', farmer)
-    const  {cropData}  = useSelector ((state)=> state.crop)
-    console.log('cropData', cropData)
-    const  {cropEditData}  = useSelector ((state)=> state.crop)
-     console.log('cropEditData', cropEditData)
-
-    const dispatch= useDispatch()
+const {farmer_id} = useSelector((state)=> state.farmer)
+console.log('idid',  farmer_id.toString())
+const {addCrop} = useSelector((state)=> state.crop)
+console.log('addCrop', addCrop)
+const {cropEditData} = useSelector((state)=> state.crop)
+console.log('cropEditData',  cropEditData.organic)
 
 
-    useEffect(() => {
-      // const submitHandler =(event)=> {
-      //     event.preventDefault()
+// const editData = cropEditData.map((item)=> {
+//   return console.log('editData',  item.farmerId)
+// })
+//console.log('editData',  editData)
+const organicVal = cropEditData.harvestPeriod
+console.log('organicVal',   organicVal)
+//const table = []
+
+
+// const {cropData} = useSelector((state)=> state.crop)
+// console.log('cropData', cropData)
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch()
+  var [inputdata, setInputData] = useState([]);
+
+  const [farmerId, setFarmerId] = useState(cropEditData.farmerId);
+  const [area, setArea] = useState(cropEditData.area);
+  const [type, setType] = useState(cropEditData.type);
+  const [name, setName] = useState(cropEditData.name);
+  const [variety, setVariety] = useState(cropEditData.variety);
+  const [brand, setBrand] = useState(cropEditData.brand);
+  const [cropedAt, setCropedAt] = useState(cropEditData.croppedAt);
+  const [organic, setOrganic] = useState(cropEditData.organic);
+  const [seedingType, setSeedingType] = useState(cropEditData.seedingType);
+  var [harvestPeriod, setHarvestPeriod] = useState(organicVal);
+
+  // const [num, setNum] = useState();
+  // const [text, setText] = useState();
+
+  // harvestPeriod = num + " " + text;
+  // console.log("t", harvestPeriod);
+
+  const [tableDetail, setTableDetail] = useState();
+  const [error, setError] = useState();
+  const [show, setShow] = useState(false);
+  const[errorMsg, setErrorMsg] = useState()
+  var [areaUnit, setAreaUnit] = useState()
+  var [areaNum, setAreaNum] = useState()
+
+
+  var [placeholderValue, setPlaceholderValue] = useState()
+
+
+  const data = 
+  {
+    farmerId: farmer_id,
+    area: +area,
+    type: type,
+    name: name,
+    variety: variety,
+    brand: brand,
+    croppedAt: cropedAt,
+    organic: organic,
+    seedingType: seedingType,
+    harvestPeriod: harvestPeriod,
+  }
+;
+
+console.log("data", data);
+
+
+ const editCrop = []
+const getData = addCrop.map((item, ind)=> {
+  console.log('ind', ind)
+  //console.log('input', Object.values (cropEditData).index)
+
+  console.log('true', cropEditData.index)
+
+if(ind ===  cropEditData.index){
+  console.log('trueIndex',ind )
+  editCrop.push(data)
+ // console.log('dataeditCrop', editCrop)
+}
+else {
+editCrop.push(item)
+
+}
+
+})
+
+
+ console.log('editCrop', editCrop)
+
  
-      axios
-        .get('https://34b9-49-204-116-70.in.ngrok.io/farmer/all')
-        .then((response) => {
-          console.log(response);
-          dispatch(cropActions.create_crop(response.data))
-//         response.data.map((item)=> {
-// console.log('res', item.cropDetails)
-// dispatch(cropActions.create_crop(item))
-//         })
-     
-       //dispatch(cropActions.create_crop(response.data))
-    
-        })
-        
-        .catch((error) => {
-          if (error.response) {
-            console.log(error.response);
-            console.log(error.response.status);
-          } else if (error.request) {
-            console.log("network error");
-          } else {
-            console.log(error);
-          }
-        });
-
-
-   }, []);
-
-
-    const Navigate =useNavigate()
+  const areaValue =  ['Acres', "Hectares", 'Square Meters']
   
 
 
-    // const CropEditData = 
-    //     [    
-    //         {
-    //             "farmerDetails": {
-    //                 "residentialType": "Local",
-    //                 "whatsappNumber": 7654897654,
-    //                 "farmerId": "JEY0001",
-    //                 "nickName": "Hanish",
-    //                 "farmerName": "Hanish Kumar",
-    //                 "age": 11,
-    //                 "gender": "Male",
-    //                 "fatherName": "S",
-    //                 "phoneNumber": 9212660591,
-    //                 "state": "Tamilnadu",
-    //                 "district": "Ramanathapuram",
-    //                 "union": "Mandapam",
-    //                 "panchayat": "pudhumadam",
-    //                 "village": "Ammapattinam",
-    //                 "organic": false,
-    //                 "singleSeed": false,
-    //                 "altCrop": false,
-    //                 "seedVariety": false,
-    //                 "leaseOwnLand": true,
-    //                 "farmRentedLand": false
-    //             },
-    //             "livestockDetails": [
-    //                 {
-    //                     "type": "fyu",
-    //                     "breed": ".kjlk",
-    //                     "name": "kj",
-    //                     "count": 87,
-    //                     "season": "hhym"
-    //                 },
-    //                 {
-    //                     "type": "jgftf",
-    //                     "breed": "hgkj",
-    //                     "name": "kyugliu",
-    //                     "count": 76,
-    //                     "season": "bkoil"
-    //                 }
-    //             ],
-    //             "labourDetails": [
-    //                 {
-    //                     "landPlowing": false,
-    //                     "weedRemoving": false,
-    //                     "pesticideSpraying": false,
-    //                     "handHarvesting": false,
-    //                     "cropSpanking": false,
-    //                     "pumpsetDuty": false,
-    //                     "landCleaning": false,
-    //                     "treeClimbing": false,
-    //                     "paddySteaming": false,
-    //                     "landPlowingWithTractor": false,
-    //                     "fertilization": true
-    //                 }
-    //             ],
-    //             "machineDetails": [],
-    //             "landDetails": [
-    //                 {
-    //                     "supervisorId": "AIS0004",
-    //                     "ownerId": "JEY0001",
-    //                     "category": "leasedLand",
-    //                     "addons": "None",
-    //                     "landId": "JEY0001001",
-    //                     "area": 102
-    //                 },
-    //                 {
-    //                     "supervisorId": "MAH0006",
-    //                     "ownerId": "JEY0001",
-    //                     "category": "leasedLand",
-    //                     "addons": "None",
-    //                     "landId": "JEY0001002",
-    //                     "area": 102
-    //                 },
-    //                 {
-    //                     "supervisorId": "",
-    //                     "ownerId": "JEY0001",
-    //                     "category": "availableForLease",
-    //                     "addons": "None",
-    //                     "landId": "JEY0001006",
-    //                     "area": 102
-    //                 },
-    //                 {
-    //                     "supervisorId": "",
-    //                     "ownerId": "JEY0001",
-    //                     "category": "availableForLease",
-    //                     "addons": "None",
-    //                     "landId": "JEY0001007",
-    //                     "area": 102
-    //                 },
-    //                 {
-    //                     "supervisorId": "",
-    //                     "ownerId": "JEY0001",
-    //                     "category": "availableForLease",
-    //                     "addons": "None",
-    //                     "landId": "JEY0001008",
-    //                     "area": 102
-    //                 },
-    //                 {
-    //                     "supervisorId": "",
-    //                     "ownerId": "JEY0001",
-    //                     "category": "availableForLease",
-    //                     "addons": "None",
-    //                     "landId": "JEY0001009",
-    //                     "area": 102
-    //                 },
-    //                 {
-    //                     "supervisorId": "",
-    //                     "ownerId": "JEY0001",
-    //                     "category": "availableForLease",
-    //                     "addons": "None",
-    //                     "landId": "JEY0001010",
-    //                     "area": 102
-    //                 },
-    //                 {
-    //                     "supervisorId": "",
-    //                     "ownerId": "JEY0001",
-    //                     "category": "availableForLease",
-    //                     "addons": "None",
-    //                     "landId": "JEY0001011",
-    //                     "area": 102
-    //                 },
-    //                 {
-    //                     "supervisorId": "",
-    //                     "ownerId": "JEY0001",
-    //                     "category": "availableForLease",
-    //                     "addons": "None",
-    //                     "landId": "JEY0001012",
-    //                     "area": 102
-    //                 },
-    //                 {
-    //                     "supervisorId": "",
-    //                     "ownerId": "JEY0001",
-    //                     "category": "availableForLease",
-    //                     "addons": "None",
-    //                     "landId": "JEY0001013",
-    //                     "area": 102
-    //                 }
-    //             ],
-    //             "cropDetails": [],
-    //             "gardenDetails": [
-    //                 {
-    //                     "type": "DWKJCX",
-    //                     "name": "DOIU",
-    //                     "variety": "DWOI",
-    //                     "brand": "DRDOI333",
-    //                     "area": 23,
-    //                     "count": 3,
-    //                     "organic": true,
-    //                     "age": 434,
-    //                     "sellingPeriod": "23D"
-    //                 }
-    //             ],
-    //             "buyDetails": [],
-    //             "sellDetails": []
-    //         },
-    //         {
-    //             "farmerDetails": {
-    //                 "residentialType": "Local",
-    //                 "whatsappNumber": 7092660353,
-    //                 "farmerId": "JEY0004",
-    //                 "nickName": "Hanish",
-    //                 "farmerName": "Jeyendran",
-    //                 "age": 11,
-    //                 "gender": "Male",
-    //                 "fatherName": "Jeyendran",
-    //                 "phoneNumber": 7092660353,
-    //                 "state": "Tamilnadu",
-    //                 "district": "Ramanathapuram",
-    //                 "union": "Mandapam",
-    //                 "panchayat": "pudhumadam",
-    //                 "village": "Ammapattinam",
-    //                 "organic": false,
-    //                 "singleSeed": false,
-    //                 "altCrop": false,
-    //                 "seedVariety": false,
-    //                 "leaseOwnLand": false,
-    //                 "farmRentedLand": false
-    //             },
-    //             "livestockDetails": [],
-    //             "labourDetails": [
-    //                 {
-    //                     "landPlowing": false,
-    //                     "weedRemoving": false,
-    //                     "pesticideSpraying": false,
-    //                     "handHarvesting": false,
-    //                     "cropSpanking": false,
-    //                     "pumpsetDuty": false,
-    //                     "landCleaning": false,
-    //                     "treeClimbing": false,
-    //                     "paddySteaming": false,
-    //                     "landPlowingWithTractor": false,
-    //                     "fertilization": false
-    //                 }
-    //             ],
-    //             "machineDetails": [],
-    //             "landDetails": [],
-    //             "cropDetails": [],
-    //             "gardenDetails": [],
-    //             "buyDetails": [],
-    //             "sellDetails": []
-    //         },
-    //         {
-    //             "farmerDetails": {
-    //                 "whatsappNumber": 9629772452,
-    //                 "farmerId": "SWE0003",
-    //                 "nickName": "swe",
-    //                 "farmerName": "Swetha",
-    //                 "age": 22,
-    //                 "gender": "female",
-    //                 "fatherName": "karunanithi",
-    //                 "phoneNumber": 9629772452,
-    //                 "state": "Tamilnadu",
-    //                 "district": "Dindigul",
-    //                 "union": "Oddanchatram",
-    //                 "panchayat": "Tamaraikulam",
-    //                 "village": "Kumbaram",
-    //                 "organic": false,
-    //                 "singleSeed": true,
-    //                 "altCrop": false,
-    //                 "seedVariety": false,
-    //                 "leaseOwnLand": true,
-    //                 "farmRentedLand": false
-    //             },
-    //             "livestockDetails": [],
-    //             "labourDetails": [
-    //                 {
-    //                     "landPlowing": false,
-    //                     "weedRemoving": false,
-    //                     "pesticideSpraying": false,
-    //                     "handHarvesting": false,
-    //                     "cropSpanking": false,
-    //                     "pumpsetDuty": false,
-    //                     "landCleaning": false,
-    //                     "treeClimbing": false,
-    //                     "paddySteaming": false,
-    //                     "landPlowingWithTractor": false,
-    //                     "fertilization": false
-    //                 }
-    //             ],
-    //             "machineDetails": [
-    //                 {
-    //                     "rentalBasis": "Hour",
-    //                     "rent": 900,
-    //                     "count": 1,
-    //                     "brand": "Mahindra",
-    //                     "attachments": "Aerators",
-    //                     "subType": "Push mowers",
-    //                     "type": "Mowers"
-    //                 }
-    //             ],
-    //             "landDetails": [],
-    //             "cropDetails": [
-    //                 {
-    //                     "type": "Wetland",
-    //                     "name": "Rice",
-    //                     "variety": "Brown Rice",
-    //                     "brand": "BRDL Limited",
-    //                     "area": 3,
-    //                     "croppedAt": "2023-01-19",
-    //                     "organic": true,
-    //                     "seedingType": "Seeded",
-    //                     "harvestPeriod": "6 Months"
-    //                 },
-    //                 {
-    //                     "type": "aaaa",
-    //                     "name": "bbbb",
-    //                     "variety": "cccc",
-    //                     "brand": "dddd",
-    //                     "area": 102,
-    //                     "croppedAt": "eeee",
-    //                     "organic": false,
-    //                     "seedingType": "eeee",
-    //                     "harvestPeriod": "9 Months"
-    //                 }
-    //             ],
-    //             "gardenDetails": [],
-    //             "buyDetails": [],
-    //             "sellDetails": []
-    //         },
-    //         {
-    //             "farmerDetails": {
-    //                 "residentialType": "Local",
-    //                 "whatsappNumber": 7092660353,
-    //                 "farmerId": "TES0002",
-    //                 "nickName": "test2",
-    //                 "farmerName": "test3",
-    //                 "age": 11,
-    //                 "gender": "Male",
-    //                 "fatherName": "test3",
-    //                 "phoneNumber": 7092669353,
-    //                 "state": "Tamilnadu",
-    //                 "district": "Ramanathapuram",
-    //                 "union": "Mandapam",
-    //                 "panchayat": "pudhumadam",
-    //                 "village": "Ammapattinam",
-    //                 "organic": false,
-    //                 "singleSeed": false,
-    //                 "altCrop": false,
-    //                 "seedVariety": false,
-    //                 "leaseOwnLand": false,
-    //                 "farmRentedLand": false
-    //             },
-    //             "livestockDetails": [],
-    //             "labourDetails": [
-    //                 {
-    //                     "landPlowing": false,
-    //                     "weedRemoving": false,
-    //                     "pesticideSpraying": false,
-    //                     "handHarvesting": false,
-    //                     "cropSpanking": false,
-    //                     "pumpsetDuty": false,
-    //                     "landCleaning": false,
-    //                     "treeClimbing": false,
-    //                     "paddySteaming": false,
-    //                     "landPlowingWithTractor": false,
-    //                     "fertilization": false
-    //                 }
-    //             ],
-    //             "machineDetails": [],
-    //             "landDetails": [],
-    //             "cropDetails": [],
-    //             "gardenDetails": [],
-    //             "buyDetails": [],
-    //             "sellDetails": []
-    //         }
-    //     ]
-
-     
-    // const maping =     CropEditData.map((item)=> {
-    //     console.log(item.farmerDetails.farmerId);
-        
-    // })
+const  areaChangeHandler =(event)=> {
+  setAreaUnit(event.target.value)
+  areaValue.map((item)=> {
+    console.log('item', item)
+    if(item === event.target.value){
+     setPlaceholderValue(event.target.value)
+    }
+  })
+  console.log('true', placeholderValue)
+}
 
 
-
+  const submitHandler = (event) => {
+    event.preventDefault();
+   
+    // dispatch(cropActions.add_crop([...addCrop,data]));
+     console.log("data", data);
+  
+    instance
+      .put(
+        "/crop/",
+        { cropDetails: [data] }
+      ).then(response=>{
+        console.log('response', response)
+        if(response.status===200){
+          dispatch(cropActions.edit_crop(editCrop));
+          // addCrop.map((item, ind)=> {
+          //     console.log('item', ind)
+          //     //console.log('input', Object.values (cropEditData).index)
+            
+          //     console.log('true', cropEditData.index)
+            
+          //   if(ind ===  cropEditData.index){
+          //     console.log('true',ind )
+            
+          //   }
+            
+          //   })
+            
+          
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
  
+  };
+  
 
-
-const editHandler =(farmer,input)=> {
- console.log('editinput',  input.croppedAt)
-    
-const editData = {
-  farmerId: farmer,
-area: input.area,
-type: input.type,
-name:input.name,
-variety:input.variety,  
-brand: input.brand,
-croppedAt: input.croppedAt,
-organic: input.organic,
-seedingType: input.seedingType,
-harvestPeriod: input.harvestPeriod,
-    
-
-}
- console.log('editData', editData)
-
-dispatch(cropActions.crop_edit_data(editData))
-
-
-Navigate('/cropeditform')
-}
-
-// const deleteHandler =(index)=> {
-
-//   // const newArr   = [...cropData]
-//   // console.log('del', newArr)
-//   // const index = cropData.findIndex((contact) => contact.id === input);
-
-//   // newArr.splice(index,1)
-//  const del = cropDetail.filter((x,i,arr)=> 
-
-//    i !== index)
-//  //console.log('del', del)
-
-//  dispatch(farmeractions.delete_data([...del]))
-//}
-
-    return (
-  <div className={classes.crop}>
-  <h1>View Crop Table</h1>
-
-<table>
-    <tr>
-        <th>Farmer Id</th>
-    <th>Type</th>
-    <th>Name</th>
-    <th>Variety</th>
-    <th>Brand</th>
-    <th>Area</th>
-    <th>Cropped At</th>
-    <th>Seeding Type</th>
-    <th>Organic</th>
-    <th>harvest Period</th>
-    <th>Action</th>
-
-    </tr>
-
-
- {cropData.map((item)=> {
-  //console.log('farmerid', item.farmerDetails.farmerId)
-const farmer = item.farmerDetails.farmerId;
-//console.log('famee', farmer)
   return (
-    item.cropDetails.map((input)=> {
-      // console.log('input', input)
-     
-      return (
-        <tr key={input}>
-        <td>{farmer}</td>
-           <td>{input.type}</td>
-             <td>{input.name}</td>
-             <td>{input.variety}</td>
-              <td>{input.brand}</td>
-             <td>{input.area}</td>
-             <td>{input.croppedAt}</td>
-              <td>{input.seedingType}</td>
-              <td>{input.organic.toString()}</td>
-            <td>{input.harvestPeriod}</td>
+    <Layout>
 
-            <td><button onClick={()=> {editHandler(farmer,input)}}>Edit</button></td>
-              
-        </tr>
-     
-      )
-    })
-  )
-})} 
+    <div className={classes.div}>
+      <h1 className={classes.header}>Edit Crop Details</h1>
 
-{/* 
-  {cropData.map((item)=> {
-  
-    return (
-        item.map((input,index)=> {
-       
-           return (
-            <tr key={index}>
-     
-                <td>{input.type}</td>
-              <td>{input.name}</td>
-              <td>{input.variety}</td>
-              <td>{input.brand}</td>
-              <td>{input.area}</td>
-              <td>{input.croppedAt}</td>
-              <td>{input.seedingType}</td>
-              <td>{input.organic.toString()}</td>
-              <td>{input.harvestPeriod}</td>
+      <form className={classes.crop_form}>
+        <label>Select land type</label>
+        <select
+          value={type}
+          name="type"
+          onChange={(event) => setType(event.target.value)}
+        >
+          <option hidden value="">Select Type of Land </option>
+          <option value="DryLand">Dryland</option>
+          <option value="Wetland">Wetland</option>
+        </select>
+        {/* {errMsg && type.length<=0?<h5>This field may not be blank</h5> : ''} */}
+{/* <h5>{errorMsg.type}</h5> */}
+<label>Crop Name</label>
+        <input
+          placeholder="Enter Crop Name"
+          type="text"
+          value={name}
+          name="name"
+          onChange={(event) => setName(event.target.value)}
+        />
+{/* {errMsg && name.length<=0?<h5>This field may not be blank</h5> : ''} */}
+{/* <h5>{errorMsg.name}</h5> */}
+<label>Crop Type</label>
+        <input
+          type="text"
+          placeholder="Enter Crop type"
+          value={variety}
+          name="variety"
+          onChange={(event) => setVariety(event.target.value)}
+        />
+        {/* {errMsg && variety.length<=0?<h5>This field may not be blank</h5> : ''} */}
+        {/* <h5>{errorMsg.variety}</h5> */}
+        <label>Brand Name</label>
+        <input
+          type="text"
+          placeholder="Enter Brand"
+          value={brand}
+          name="brand"
+          onChange={(event) => setBrand(event.target.value)}
+        />
+   {/* {errMsg && brand.length<=0?<h5>This field may not be blank</h5> : ''} */}
+   {/* <h5>{errorMsg.brand}</h5> */}
+   <div className ={classes.area}>
+   <label>Select Area Unit</label>
+<select
+            value={areaUnit}
+            // onChange={(event) => setAreaUnit(event.target.value)}
+            onChange={areaChangeHandler}
+            placeholder="Select  Unit"
+          >
+            <option hidden value="">Select Area Units</option>
+            <option value="Square Meters">Square Meters</option>
+            <option value="Acres">Acres</option>
 
-              <td><button onClick={()=> {editHandler(input)}}>Edit</button>
-              <button onClick={()=> {deleteHandler(index)}}>Delete</button></td>
-             
-            </tr>
-           )
-        })
-    )
-})}    */}
-
-</table>
+            <option value="Hectares">Hectares</option>
+          </select>
+          
+          <input
+          type="number"
+          placeholder={'in' + " " + placeholderValue}
+          value={area}
+          name="area"
+          onChange={(event) => setArea(event.target.value)}
+        />
+          </div>
+          {/* <h5>{errorMsg.area}</h5> */}
+          <div className={classes.date}>
+          <label>croppedAt(Starting Date)</label>
+    <input
+       type="date"
+        required="required" 
+        placeholder="Enter Cropped at Date(Starting Date)"
+        value={cropedAt}
+        onChange={(event) => setCropedAt(event.target.value)}
+    />
+    {/* {errMsg && cropedAt.length<=0?<h5>This field may not be blank</h5> : ''} */}
+    {/* <h5>{errorMsg.croppedAt}</h5> */}
         </div>
-    )
 
-}
+        <div className={classes.dropdown}>
+        <label>Harvest Period</label>
+        <select
+            value={harvestPeriod}
+            onChange={(event) => setHarvestPeriod(event.target.value)}
+            // onChange={harvestChangeHandler}
+            placeholder="Select Harvest Period"
+          >
+            <option hidden value="">Select Period</option>
+            <option value="January-February">January-February</option>
+            <option value="February-March">February-March</option>
 
-export default CropEditTable
+            <option value="March-April<">March-April</option>
+            <option value="April-May">April-May</option>
+            <option value="May-June">May-June</option>
+            <option value="June-July">June-July</option>
+            <option value="September-October">September-October</option>
+            <option value="October-November">October-November</option>
+            <option value="November-December">November-December</option>
+            <option value="December-January">December-January</option>
+          </select>
+        
+        
+        
+        {/* {errMsg && harvestPeriod.length<=0?<h5>This field may not be blank</h5> : ''} */}
+        {/* <h5>{errorMsg.harvestPeriod}</h5> */}
+        </div>
+      
+        <label>Seeding type</label>
+
+        <select
+          value={seedingType}
+          name="seedingType"
+          onChange={(event) => setSeedingType(event.target.value)}
+          placeholder ='choose planted or seeded'
+         // selected disabled 
+        >
+       <option hidden value >Select Seeding Type </option>
+          <option value="Planted">Planted</option>
+
+          <option value="Seeded">Seeded</option>
+        </select>
+        {/* {errMsg && seedingType.length<=0?<h5>This field may not be blank</h5> : ''} */}
+        {/* <h5>{errorMsg.seedingType}</h5> */}
+      </form>
+
+      <div className={classes.check}>
+
+        <input
+          type="checkbox"
+          value={organic}
+          name="organic"
+           onChange={() => setOrganic(!organic)}
+        />
+         <label for="checkbox">Organic</label>
+         {/* <h5>{errorMsg.organic}</h5> */}
+      </div>
+
+      <button onClick={submitHandler} className={classes.btn}>
+        SUBMIT
+      </button>
+
+<button onClick={()=> navigate('/cropform')}>nxt</button>
+     
+     
+    </div>
+  </Layout>
+  );
+};
+
+export default CropEditTable;

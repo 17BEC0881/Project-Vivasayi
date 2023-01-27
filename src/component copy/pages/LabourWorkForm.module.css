@@ -1,84 +1,60 @@
-.input {
-    display: flex;
-    background-color: rgb(172, 210, 218);
-    margin-bottom: 1px;
-    margin-top: 4px;
-    margin-left: 3px;
-    border-radius: 3px;
-    display: inline-block;
-    padding-left: 1px;
-    padding-right: 1px;
-    padding-top: 0px;
-    padding-bottom: 1px;
-    align-items: center;
-    justify-content: center;
-    align-self:flex-end;
-    list-style-type: none;
-    
-}
-
-.forms {
-
-    width : 50%;
-    margin:auto;
-    margin-top:-60%;
-   
-}
-.forms label{
-    font-size: 13px;
-    margin-left: 12px;
-   
-
-}
-.forms select {
-
+.labour {
     width: 100%;
-    padding: 8px 10px;
-    margin: 8px 0;
-    border: 1px solid green;
-    border-radius: 4px;
-    box-sizing: border-box;
-  
+    margin-top: -60%;
+
+
 }
 
 
+.check {
+    width: 100%;
+   
+}
+.checkbox {
+    width : 500px;
+    /* border: solid; */
+    margin:auto;
+    margin-top: 50px;
+    /* margin-top: 5%; */
+}
+.labour h1{
+    margin: 0px 180px 5px 180px;
+    color: green;
+    font-size: 20px;
+    font-family: 'Times New Roman', Times, serif;
+    margin-left: 45%;
 
-.display {
-    margin-left: 3rem;
-    display: flex;
-    background-color: rgb(244, 246, 247);
-    margin-top: 4rem;
-    /* margin-bottom: 1rem; */
-    margin-right: 20rem;
-    margin-left: 20rem;
-    padding-left: 3rem;
-    padding-right: 3rem;
-    padding-bottom: 1rem;
+
+}
+.labour h2{
+    margin: 0px 180px 5px 180px;
+    color: green;
+    font-size: 15px;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    margin-left: 45%;
+    margin-top: 50px
+
+
+}
+.checkbox input {
     display: inline-block;
-    box-shadow: 1px 1px rgb(221, 219, 219);
-     resize:horizontal 
+ 
+    margin-left: 6rem;
+    /* margin-left: 5rem; */
+    /* margin-right: 1rem */
+ 
+}
+.checkbox label {
+    display: inline-block;
 }
 .labour button {
-    width: 30%;
+    width: 50%;
     padding: 8px 10px;
-    margin: 8px 0;
+    margin: 15px 5px 0px 15px;
     border: 2px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
     background-color: green;
-    margin-left: 34% ;
-    margin-top: 30px;
     color: white;
-    font-size: 17px;
-}
-.labour h1{
-    text-align: center;
-    color: green;
-}
-.labour h3{
-    font: 14px  open_sansregular;
-    font-family: Arial, Helvetica, sans-serif;
-    
-    width: 50%;
-    margin-left: 26%;
+    margin-left: 28%;
 }
