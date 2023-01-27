@@ -5,7 +5,7 @@ import {useDispatch, useSelector} from "react-redux";
 import { Gardenn} from "../../store/gardenreducer";
 import { useNavigate } from "react-router-dom";
 import Layout from "../Layout/Layout";
-
+import instance from "./BaseURL";
 
 const Garden=()=>{
   const dispatch =useDispatch();
@@ -48,7 +48,7 @@ const Garden=()=>{
         "sellingPeriod":sellingPeriod
       };
       
-      axios.post("https://53aa-49-204-114-250.in.ngrok.io/garden/create",{
+      instance.post("/garden/create",{
         gardenDetails: [data]
       }).then(res=>{
         if(res.status===200){

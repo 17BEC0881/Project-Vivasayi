@@ -16,6 +16,7 @@ const Add = () => {
   const [fnameclicked, setFnameClicked] = useState(false);
   const [unameclicked, setUnameClicked] = useState(false);
   const [phonenumberclicked, setPhonenumberClicked] = useState(false);
+   const [emailClicked, setEmailClicked] = useState(false);
 
   const navigate = useNavigate();
   const firstnameChangeHandler = (event) => {
@@ -44,6 +45,7 @@ const Add = () => {
   const emailChangeHandler = (event) => {
     event.preventDefault();
     setEmail(event.target.value);
+    setEmailClick(true);
   };
 
   const details = {
@@ -55,9 +57,12 @@ const Add = () => {
   };
 
   const registerHandler = (event) => {
-    event.preventDefault();
-    setUnameClicked(false);
-    setPhonenumberClicked(false);
+     event.preventDefault()
+     setUnameClicked(false);
+     setPhonenumberClicked(false);
+     setEmailClicked(false)
+     setError({});
+     seterrorMessage(false)
     const admintoken = {
       headers: {
         Authorization: "Bearer " + localStorage.getItem("token"),
@@ -96,7 +101,7 @@ const Add = () => {
         <form className="Add-form">
           <h1>Add Employee</h1>
           <div className="Add-details">
-            <label>First Name:</label>
+            <label>First Name*:</label>
             <input
               type="text"
               placeholder="First Name*"
@@ -114,7 +119,7 @@ const Add = () => {
             {!fnameclicked && errorMessage && (
               <div className="error">{error.first_name}</div>
             )}
-            <label>User Name:</label>
+            <label>User Name*:</label>
             <input
               type="text"
               placeholder="User Name*"
@@ -125,7 +130,7 @@ const Add = () => {
             {!unameclicked && errorMessage && (
               <div className="error">{error.username}</div>
             )}
-            <label>Phone Number:</label>
+            <label>Phone Number*:</label>
             <input
               type="number"
               placeholder="Phone Number*"
@@ -143,6 +148,7 @@ const Add = () => {
               value={email}
               onChange={emailChangeHandler}
             />
+           {!emailClicked && errorMessage && <div className='error'>{error.email}</div>}
           </div>
           <div className="Add-button">
             <button type="submit" onClick={registerHandler}>

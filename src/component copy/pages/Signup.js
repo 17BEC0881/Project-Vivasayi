@@ -36,37 +36,57 @@ const Signup = () => {
     setCpassClicked(true);
   };
 
-  const submitHandler = (event) => {
+   const submitHandler = (event) => {
     event.preventDefault();
     setNameClicked(false);
     setPassClicked(false);
     setCpassClicked(false);
-    if (newPassword === confirmPassword) {
+    setError({});
+    seterrorMessage(false);
+    const Password = newPassword.trim();
+    const uppercaseRegExp   = /(?=.*?[A-Z])/;
+    const lowercaseRegExp   = /(?=.*?[a-z])/;
+    const digitsRegExp      = /(?=.*?[0-9])/;
+    const specialCharRegExp = /(?=.*?[#?!@$%^&*-])/;
+    const minLengthRegExp   = /.{8,}/;
+    const passwordLength = Password.length;
+    const uppercasePassword = uppercaseRegExp.test(Password);
+    const lowercasePassword =   lowercaseRegExp.test(Password);
+    const digitsPassword =      digitsRegExp.test(Password);
+    const specialCharPassword = specialCharRegExp.test(Password);
+    const minLengthPassword =   minLengthRegExp.test(Password);
+    const validation = passwordLength && uppercasePassword && lowercasePassword &&
+               digitsPassword && specialCharPassword && minLengthPassword;
+    if (validation){
+      if (newPassword === confirmPassword){
       // console.log(password)
-      let credentials = {
-        userName: name,
-        password: newPassword,
-      };
-      console.log("crete", credentials);
-      instance
-        .post(`/employee/signup`, credentials)
-        .then((response) => {
-          if (response.status === 201 || response.status === 200) {
-            console.log(response.data);
+       var credentials = {
+           userName : name,
+           password : newPassword
+      }}
+      else{
+        setError({ mismatch : "Password mismatched" })
+     }}else{
+        setError({ mismatch : "password must contain min 8 characters atleast one upper case, one special character and numbers..." })
+     }
+      console.log("crete",credentials)
+      axios.post(`https://c017-49-204-129-170.in.ngrok.io/employee/signup`,credentials)
+      .then((response) => {
+          if(response.status === 201 || response.status === 200){
+            console.log(response.data)
             alert("registered successfully!");
-            navigate("/employee");
+            navigate("/employee")
           }
-        })
-        .catch((error) => {
-          const Error = error.response.data;
-          console.log(Error);
-          seterrorMessage(true);
-          setError(Error);
-        });
-    } else {
-      setError({ mismatch: "Password mismatched" });
+      })
+      .catch((error) => {
+          const Error =  error.response.data
+          console.log(Error)
+          seterrorMessage(true)
+          setError(Error)
+      })
+      console.log(error)
     }
-  };
+
 
   return (
     <Fragment>
