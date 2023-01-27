@@ -85,7 +85,7 @@ const Login = () => {
         <button type="button" onClick={submitHandler}>
           SIGN IN
         </button>
-        {errorMessage && <div className="error">{errorMessage.detail}</div>}
+        {errorMessage && <div className="error">{error.detail}</div>}
       </form>
     </div>
   );
