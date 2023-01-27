@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import classes from "./landtable.module.css";
+import classes from "./ViewFarmer.module.css";
 // import Layout from "../Layout/Layout";
 import instance from "./BaseURL";
 import { landActions } from "../../store/landStore";
@@ -50,15 +50,14 @@ const LandTable = () => {
   return (
     // <Layout>
     <div className={classes.land}>
-      <div className={classes.container}>
-        <h1>Land Details</h1>
-
+      <h1 style={{ marginTop: "16rem" }}>Land Details</h1>
+      <div className={classes.container} style={{ marginTop: "16rem" }}>
         {/* <div className="remove-button">
           <button onClick={() => addHandler()}>Add Land</button>
         </div> */}
         <SimpleBarReact
           autoHide={true}
-          style={{ maxHeight: 150 }}
+          style={{ maxHeight: 130 }}
           className={classes.land}
         >
           <table border="1" className="table">

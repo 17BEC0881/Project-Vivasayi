@@ -17,22 +17,42 @@ const Land = () => {
 
   const dispatch = useDispatch();
   const { landData } = useSelector((state) => state.land);
-  console.log(landData, "landdetails");
+  const { farmer_id } = useSelector((state) => state.farmer);
+  // console.log(landData, "landdetails");
   const [area, setArea] = useState("");
   const [interestedFor, setInterestedFor] = useState("");
   const [addOns, setAddOns] = useState("None");
   const [supervisorID, setSupervisorID] = useState("");
   const [landId, setLandId] = useState("");
   const { selectedLand } = useSelector((state) => state.land);
-  console.log(("selectedland", selectedLand));
+  // console.log(("selectedland", selectedLand));
   const { isFarmerEdit } = useSelector((state) => state.auth);
+  const [loading, setLoading] = useState(false);
+  const farmingList = ["interestedToClean", "cleanupTOFarm", "None"];
   //check
   const [ownFarmingCheck, setOwnFarmingCheck] = useState(false);
   const [takenLeaseCheck, setTakenLeaseCheck] = useState(false);
-  const [initial, setInitial] = useState(false);
+  const [error, setError] = useState(false);
+  const [table, setTable] = useState(false);
+  const [apiError, setApiError] = useState("");
+  const [click, setClick] = useState(false);
+  // const [initial, setInitial] = useState(false);
 
-  const [loading, setLoading] = useState(false);
-  const farmingList = ["interestedToClean", "cleanupTOFarm", "None"];
+  useEffect(() => {
+    if (landData == []) {
+      setTable(true);
+    } else {
+      setTable(true);
+    }
+    if (click && (interestedFor.trim() || addOns.trim() || area.trim()) == "") {
+      setError(true);
+    } else if (
+      click &&
+      (interestedFor.trim() && addOns.trim() && area.trim()) !== ""
+    ) {
+      setError(false);
+    }
+  }, [landData, error, interestedFor, addOns, area]);
 
   useEffect(() => {
     instance
@@ -51,10 +71,9 @@ const Land = () => {
         }
       });
   }, [dispatch]);
-  console.log("interestedfor", interestedFor);
+  // console.log("interestedfor", interestedFor);
   useEffect(() => {
     if (interestedFor === "") {
-      setInitial(true);
       setOwnFarmingCheck(false);
       setTakenLeaseCheck(false);
     } else if (
@@ -62,23 +81,20 @@ const Land = () => {
       interestedFor === "availableForLease" ||
       interestedFor === "wasteLand"
     ) {
-      setInitial(false);
       setOwnFarmingCheck(true);
       setTakenLeaseCheck(false);
     } else if (interestedFor === "takenLease") {
-      setInitial(false);
       setOwnFarmingCheck(false);
       setTakenLeaseCheck(true);
     }
   }, [interestedFor]);
 
-  const { farmer_id } = useSelector((state) => state.farmer);
-  console.log("farmerid", farmer_id);
+  // console.log("farmerid", farmer_id);
 
   const submitHandler = async (e) => {
     e.preventDefault();
     console.log(area, interestedFor, addOns, supervisorID);
-
+    setClick(true);
     await instance({
       url: "/land/create",
       method: "post",
@@ -112,16 +128,20 @@ const Land = () => {
         if (isFarmerEdit) {
           navigate("/editland");
         }
+        setError(false);
+        setArea("");
+        setSupervisorID("");
+        setAddOns("no");
+        setInterestedFor("");
+        setLandId("");
+        setTable(true);
+        setClick(false);
       })
       .catch((error) => {
         console.log("err", error);
+        setError(true);
+        setApiError(error.response.data);
       });
-    setArea("");
-    setSupervisorID("");
-    setAddOns("");
-    setInterestedFor("");
-    setLandId("");
-    //without using api
   };
 
   if (loading) {
@@ -131,6 +151,7 @@ const Land = () => {
       </section>
     );
   }
+
   const landHandler = () => {
     instance
       .get(`/farmer/all`)
@@ -155,12 +176,12 @@ const Land = () => {
   return (
     <Layout>
       {/* {ownFarmingCheck && */}
-      <div className={classes.container}>
+      <div className={classes.container} style={{ marginLeft: "2rem" }}>
         <div className={classes.login}>
           <form>
             <h1>Add Land</h1>
             <div>
-              {/* <label style={{ display: "table-cell" }}>Category: </label> */}
+              <label style={{ display: "table-cell" }}>Category: </label>
               <span>
                 <select
                   placeholder="category"
@@ -184,10 +205,10 @@ const Land = () => {
             )}
 
             <div>
-              {/* <label>Area:</label> */}
+              <label>Area:</label>
               <span>
                 <input
-                  placeholder="Area"
+                  placeholder="Area in sq.ft"
                   value={area}
                   onChange={(e) => setArea(e.target.value)}
                   type="number"
@@ -196,14 +217,14 @@ const Land = () => {
             </div>
 
             <div>
-              {/* <label>AddOns:</label> */}
+              <label>AddOns:</label>
               <span>
                 <select
                   name="states"
                   id="states"
                   onChange={(e) => setAddOns(e.target.value)}
                 >
-                  <option value="">addOn </option>
+                  <option value="no">addOn </option>
                   {farmingList.map((state) => (
                     <option key={state} value={state}>
                       {state}
@@ -214,7 +235,7 @@ const Land = () => {
             </div>
 
             <div>
-              {/* <label>SupervisorID: </label> */}
+              <label>SupervisorID: </label>
 
               {ownFarmingCheck ? (
                 <span>
@@ -238,7 +259,7 @@ const Land = () => {
               )}
             </div>
             <div>
-              {/* <label>LandID: </label> */}
+              <label>LandID: </label>
               {!ownFarmingCheck ? (
                 <span>
                   <input
@@ -260,11 +281,13 @@ const Land = () => {
             </div>
             <div>
               <button onClick={submitHandler}>SUBMIT</button>
+              {error && <p>Please Fill Required Details</p>}
+              {/* {error && <p>{apiError}</p>} */}
             </div>
           </form>
         </div>
       </div>
-      {!isFarmerEdit && <LandTable />}
+      {table && !isFarmerEdit && <LandTable />}
     </Layout>
   );
 };

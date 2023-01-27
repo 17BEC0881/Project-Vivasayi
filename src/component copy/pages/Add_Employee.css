@@ -2,7 +2,7 @@
     width: 75%;
     /* border: solid; */
     margin-left: 15%;
-    margin-top: -40%;
+    margin-top: -45%;
 }
 .Add-form {
     width:50%;
@@ -13,7 +13,7 @@
 .Add h1{
     text-align: center;
     color: green;
-    font-size: 20px;
+    /* font-size: 20px; */
     font-family: 'Times New Roman', Times, serif;
 }
 /* .Add-name input{

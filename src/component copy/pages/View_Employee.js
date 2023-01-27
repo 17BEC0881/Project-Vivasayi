@@ -1,5 +1,6 @@
 import "./View_Employee.css";
 import axios from "axios";
+import instance from "./BaseURL";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { authActions } from "../../store/auth";
@@ -20,12 +21,10 @@ const View = () => {
         Authorization: "Bearer " + localStorage.getItem("token"),
       },
     };
-    axios
-      .get(`https://53aa-49-204-114-250.in.ngrok.io/employee/all`, formtoken)
-      .then((response) => {
-        console.log(response.data);
-        dispatch(authActions.employee(response.data));
-      });
+    instance.get(`/employee/all`, formtoken).then((response) => {
+      console.log(response.data);
+      dispatch(authActions.employee(response.data));
+    });
   }, []);
 
   const editHandler = (data) => {
@@ -40,11 +39,8 @@ const View = () => {
           Authorization: "Bearer " + localStorage.getItem("token"),
         },
       };
-      axios
-        .delete(
-          `https://53aa-49-204-114-250.in.ngrok.io/employee/${employee.userName}`,
-          formtoken
-        )
+      instance
+        .delete(`/employee/${employee.userName}`, formtoken)
         .then((response) => {
           console.log(response.data);
           dispatch(authActions.employee(response.data));

@@ -1,4 +1,3 @@
-import axios from "axios";
 import SimpleBarReact from "simplebar-react";
 import { useState, useEffect } from "react";
 import { farmerActions } from "../../store/reducer";
@@ -99,7 +98,7 @@ const ViewFarmer = () => {
     <Layout>
       <div className={classes.land}>
         <div className={classes.landcontainer}>
-          <h4>Farmer Details</h4>
+          <h1>Farmer Details</h1>
           <SimpleBarReact
             autoHide={true}
             style={{ maxHeight: 450 }}

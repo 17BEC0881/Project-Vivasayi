@@ -48,7 +48,7 @@ const SelectLand = () => {
           area: area,
           category: "takenLease",
           addons: addOns,
-          ownerId: farmer_id,
+          ownerId: supervisorID,
           supervisorId: farmer_id,
         };
         dispatch(landActions.createLand(data));

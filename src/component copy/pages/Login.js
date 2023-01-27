@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./Login.css";
+import instance from "./BaseURL";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -33,8 +34,8 @@ const Login = () => {
 
   const submitHandler = (event) => {
     event.preventDefault();
-    axios
-      .post(`https://53aa-49-204-114-250.in.ngrok.io/employee/login`, data)
+    instance
+      .post(`/employee/login`, data)
       .then((response) => {
         if (response.status === 200) {
           response = response.data;

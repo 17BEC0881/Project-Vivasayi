@@ -60,7 +60,6 @@ const LandTable = () => {
           {showland ? (
             <div>
               <h1>Land Details</h1>
-
               <div className="remove-button">
                 <button onClick={() => addHandler()}>Add Land</button>
               </div>
