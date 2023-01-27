@@ -70,6 +70,7 @@ const Gardentable=()=>{
         <Layout>
             <div className="garden">
                 <h1 className="login h1" style={{"fontSize":"x-large"}}><b>Garden Details</b></h1>
+                <div>
                 <button onClick={addHandle}>Add garden</button>
                 <table className="gardencontainer">
                     <thead>
@@ -91,6 +92,7 @@ const Gardentable=()=>{
                         {tablebody}
                     </tbody>
                 </table>
+                </div>
             </div>
         </Layout>
     )
