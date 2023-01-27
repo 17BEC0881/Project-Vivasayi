@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "./Add_Employee.css";
-import axios from "axios";
+import instance from "./BaseURL";
 import { Fragment } from "react";
 import Layout from "../Layout/Layout";
 import { useNavigate } from "react-router-dom";
@@ -68,12 +68,8 @@ const Add = () => {
         Authorization: "Bearer " + localStorage.getItem("token"),
       },
     };
-    axios
-      .post(
-        `https://53aa-49-204-114-250.in.ngrok.io/employee/create`,
-        details,
-        admintoken
-      )
+    instance
+      .post(`/employee/create`, details, admintoken)
       .then((response) => {
         if (response.status === 201) {
           setFirstname("");
@@ -88,7 +84,7 @@ const Add = () => {
       })
       .catch((error) => {
         const Error = error.response.data;
-        // console.log(Error)
+        console.log(Error);
         seterrorMessage(true);
         setError(Error);
       });

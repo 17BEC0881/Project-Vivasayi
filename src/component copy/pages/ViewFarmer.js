@@ -98,7 +98,7 @@ const ViewFarmer = () => {
     <Layout>
       <div className={classes.land}>
         <div className={classes.landcontainer}>
-          <h1>Farmer Details</h1>
+          <h1 style={{ color: "green" }}>Farmer Details</h1>
           <SimpleBarReact
             autoHide={true}
             style={{ maxHeight: 450 }}
@@ -113,7 +113,7 @@ const ViewFarmer = () => {
                   <th>Age</th>
                   <th>Gender</th>
                   <th>Phone Number</th>
-//                   <th>Whatsapp Number</th>
+                  {/* //                   <th>Whatsapp Number</th> */}
                   <th>Village</th>
                   <th>Actions</th>
                 </tr>
@@ -127,7 +127,7 @@ const ViewFarmer = () => {
                     <td>{input.farmerDetails.age}</td>
                     <td>{input.farmerDetails.gender}</td>
                     <td>{input.farmerDetails.phoneNumber}</td>
-//                     <td>{input.farmerDetails.whatsappNumber}</td>
+                    {/* //                     <td>{input.farmerDetails.whatsappNumber}</td> */}
                     <td>{input.farmerDetails.village}</td>
                     <td>
                       <MdEdit

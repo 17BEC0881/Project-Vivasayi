@@ -7,6 +7,7 @@ import { GiFarmer } from "react-icons/gi";
 import { CgProfile } from "react-icons/cg";
 import { Fragment } from "react";
 import { farmerActions } from "../../store/reducer";
+import EditMachinedetails from "../pages/EditMachinedetails";
 //import { Router } from 'react-router-dom';
 
 const Header = () => {
@@ -71,16 +72,32 @@ const Header = () => {
   const addLabourHandler = () => {
     navigate("/labour");
   };
+
+  const viewEditFarmerHandler = (event) => {
+    event.preventDefault();
+    dispatch(authActions.farmerEditLogout());
+    navigate("/viewfarmer");
+  };
   const editFarmerHandler = () => {
     navigate("/farmerdetails");
   };
   const editLandHandler = () => {
     navigate("/editland");
   };
-  const viewEditFarmerHandler = (event) => {
-    event.preventDefault();
-    dispatch(authActions.farmerEditLogout());
-    navigate("/viewfarmer");
+  const editedMachineHandler = () => {
+    navigate("/editmachine");
+  };
+  const editGardenHandler = () => {
+    navigate("/editgarden");
+  };
+  const editLivestockHandler = () => {
+    navigate("/editlivestock");
+  };
+  const editCropHandler = () => {
+    navigate("/editcrop");
+  };
+  const editLabourHandler = () => {
+    navigate("/editlabour");
   };
 
   return (
@@ -254,7 +271,7 @@ const Header = () => {
                       </button>
                     </li>
                     <li>
-                      <button type="submit" onClick={addFarmerHandler}>
+                      <button type="submit" onClick={editFarmerHandler}>
                         Edit Farmer
                       </button>
                     </li>
@@ -264,27 +281,27 @@ const Header = () => {
                       </button>
                     </li>
                     <li>
-                      <button type="submit" onClick={addCropHandler}>
+                      <button type="submit" onClick={editCropHandler}>
                         Edit Crop
                       </button>
                     </li>
                     <li>
-                      <button type="submit" onClick={addGardenHandler}>
+                      <button type="submit" onClick={editGardenHandler}>
                         Edit Garden
                       </button>
                     </li>
                     <li>
-                      <button type="submit" onClick={addLabourHandler}>
+                      <button type="submit" onClick={editLabourHandler}>
                         Edit Labour
                       </button>
                     </li>
                     <li>
-                      <button type="submit" onClick={addLiveStockHandler}>
+                      <button type="submit" onClick={editLivestockHandler}>
                         Edit LiveStock
                       </button>
                     </li>
                     <li>
-                      <button type="submit" onClick={addMachineHandler}>
+                      <button type="submit" onClick={editedMachineHandler}>
                         Edit Machine
                       </button>
                     </li>

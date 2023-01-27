@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "./Edit_Employee.css";
-import axios from "axios";
+import instance from "./BaseURL";
 import { Fragment } from "react";
 import Layout from "../Layout/Layout";
 import { useSelector } from "react-redux";
@@ -51,12 +51,8 @@ const Edit = () => {
         Authorization: "Bearer " + localStorage.getItem("token"),
       },
     };
-    axios
-      .put(
-        `https://53aa-49-204-114-250.in.ngrok.io/employee/${editDetails["username"]}`,
-        editDetails,
-        admintoken
-      )
+    instance
+      .put(`/employee/${editDetails["username"]}`, editDetails, admintoken)
       .then((response) => {
         console.log(response);
         alert("employee details edited succussfully!");

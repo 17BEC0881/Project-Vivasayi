@@ -19,10 +19,11 @@ import SelectLand from "./component copy/pages/SelectLand";
 import LandTable from "./component copy/pages/LandTable";
 import Edit from "./component copy/pages/Edit_Employee";
 import Preview from "./component copy/pages/Preview";
-import Gardentable from "./component copy/pages/Gardentable";
-import Livestocktable from "./component copy/pages/Livestocktable";
+import Gardentable from "./component copy/pages/gardentable";
+import Livestocktable from "./component copy/pages/livestocktable";
 import Editgarden from "./component copy/pages/editgarden";
 import EditLivestock from "./component copy/pages/Editlivestocktable";
+import EditMachinedetails from "./component copy/pages/EditMachinedetails";
 
 function App() {
   return (
@@ -40,10 +41,10 @@ function App() {
       <Route path="/cropform" element={<CropForm />} />
       <Route path="/livestock" element={<Livestock />} />
       <Route path="/garden" element={<Garden />} />
-      <Route path="/gardentable" element={<Gardentable/>}/>
-      <Route path="/livestocktable" element={<Livestocktable/>}/>
-      <Route path="/editgarden" element={<Editgarden/>}/>
-      <Route path="/editlivestock" element={<EditLivestock/>}/>
+      <Route path="/gardentable" element={<Gardentable />} />
+      <Route path="/livestocktable" element={<Livestocktable />} />
+      <Route path="/editgarden" element={<Editgarden />} />
+      <Route path="/editlivestock" element={<EditLivestock />} />
       <Route path="/labour" element={<LabourWorkForm />} />
       <Route path="/edit_employee" element={<Edit />} />
       <Route path="/selectlandtable" element={<Scroll />} />
@@ -51,6 +52,7 @@ function App() {
       <Route path="/landtable" element={<LandTable />} />
       <Route path="/editland" element={<EditLand />} />
       <Route path="/preview" element={<Preview />} />
+      <Route path="/editmachine" element={<EditMachinedetails />} />
     </Routes>
   );
 }

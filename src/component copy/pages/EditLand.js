@@ -8,6 +8,7 @@ import instance from "./BaseURL";
 import { landActions } from "../../store/landStore";
 import SimpleBarReact from "simplebar-react";
 import { AiTwotoneDelete } from "react-icons/ai";
+import { useEffect } from "react";
 
 const LandTable = () => {
   const dispatch = useDispatch();
@@ -16,10 +17,14 @@ const LandTable = () => {
   const { landData } = useSelector((state) => state.land);
   const [showland, setShowLand] = useState(false);
 
-  if (landData == []) {
-    setShowLand(true);
-  }
-  console.log(showland);
+  useEffect(() => {
+    if (landData == []) {
+      setShowLand(false);
+    } else {
+      setShowLand(true);
+    }
+    console.log(showland);
+  }, [showland]);
 
   var land = [];
   const removeHandler = async (id) => {
@@ -42,8 +47,10 @@ const LandTable = () => {
     })
       .then((response) => {
         console.log("deleteresponse", response);
+        alert("Confirm Deletion");
         // console.log("delete", typeof land.landId);
         dispatch(landActions.deleteLand(land.landId));
+        setShowLand(true);
       })
       .catch((error) => {
         console.log("deleteerror", error);
