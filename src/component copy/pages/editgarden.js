@@ -5,6 +5,7 @@ import {useDispatch, useSelector} from "react-redux";
 import { Gardenn } from "../../store/gardenreducer";
 import { useLocation, useNavigate } from "react-router-dom";
 import Layout from "../Layout/Layout";
+import instance from "./BaseURL";
 
 const Editgarden=()=>{
   
@@ -74,7 +75,7 @@ const Editgarden=()=>{
       const datacopy=[...dataa]
       datacopy[location.state.index]=data;
       dispatch(Gardenn([...datacopy]));
-      axios.put("https://53aa-49-204-114-250.in.ngrok.io/garden/",{
+      instance.put("/garden/",{
         gardenDetails:[...datacopy]
       }).then((res)=>{
         if(res.status===200){

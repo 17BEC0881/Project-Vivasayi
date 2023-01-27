@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { livestckk } from "../../store/gardenreducer";
 import Layout from "../Layout/Layout";
+import instance from "./BaseURL";
 import classes from "./garden.module.css";
 const Livestock=()=>{
     const dataa=useSelector((state)=>state.user.livestck);
@@ -34,7 +35,7 @@ const Livestock=()=>{
             season:season,
             type:type
         };
-        axios.post("https://53aa-49-204-114-250.in.ngrok.io/livestock/create",{
+        instance.post("/livestock/create",{
             livestockDetails:[data]
         }).then(res=>{
             if(res.status===200){

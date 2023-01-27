@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import { livestckk } from "../../store/gardenreducer";
 import Layout from "../Layout/Layout";
+import instance from "./BaseURL";
 import classes from "./garden.module.css";
 const EditLivestock=()=>{
     let dataa=useSelector((state)=>state.user.livestck)
@@ -56,7 +57,7 @@ const EditLivestock=()=>{
             let datacopy=[...dataa];
             datacopy[location.state.index]=data;
             dispatch(livestckk([...datacopy]));
-            axios.put("https://53aa-49-204-114-250.in.ngrok.io/livestock/",{
+            instance.put("/livestock/",{
                 livestockDetails:[...datacopy]
             }).then((res)=>{
                 if(res.status===200){

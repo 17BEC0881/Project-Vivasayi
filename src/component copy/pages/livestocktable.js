@@ -7,6 +7,7 @@ import axios from "axios";
 import Layout from "../Layout/Layout";
 import { MdEdit } from "react-icons/md";
 import { AiTwotoneDelete } from "react-icons/ai";
+import instance from "./BaseURL";
 
 const Livestocktable=()=>{
     const liv=useSelector((state)=>state.user.livestck);
@@ -20,7 +21,7 @@ const Livestocktable=()=>{
         const dele=liv.filter((x,index,arr)=>index!==i);
         console.log(dele);
         dispatch(livestckk([...dele]));
-        axios.put("https://53aa-49-204-114-250.in.ngrok.io/livestock/",{
+        instance.put("/livestock/",{
             livestockDetails:[...dele]
         }).catch((error) => {
             if (error.response) {

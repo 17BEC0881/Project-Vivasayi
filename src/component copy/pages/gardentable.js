@@ -7,6 +7,7 @@ import "./Gardentable.css";
 import Layout from "../Layout/Layout";
 import { MdEdit } from "react-icons/md";
 import { AiTwotoneDelete } from "react-icons/ai";
+import instance from "./BaseURL";
 const Gardentable=()=>{
     const navigate=useNavigate();
     const dispatch=useDispatch();
@@ -22,7 +23,7 @@ const Gardentable=()=>{
         const dele=gar.filter((x,index,arr)=>index!==i);
         console.log(dele);
         dispatch(Gardenn([...dele]));
-        axios.put("https://53aa-49-204-114-250.in.ngrok.io/garden/",{
+        instance.put("/garden/",{
             gardenDetails:[...dele]
         }).catch((error) => {
             if (error.response) {
