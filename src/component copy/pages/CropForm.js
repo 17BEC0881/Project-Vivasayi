@@ -1,4 +1,4 @@
-import classes from "./CropDetailForm.module.css";
+import classes from "./CropForm.module.css";
 import { useState } from "react";
 import axios from "axios";
 import Layout from "../Layout/Layout";
