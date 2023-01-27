@@ -88,10 +88,10 @@ const Header = () => {
     navigate("/editmachine");
   };
   const editGardenHandler = () => {
-    navigate("/editgarden");
+    navigate("/gardentable");
   };
   const editLivestockHandler = () => {
-    navigate("/editlivestock");
+    navigate("/livestocktable");
   };
   const editCropHandler = () => {
     navigate("/editcrop");
