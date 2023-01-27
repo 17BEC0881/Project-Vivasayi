@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./Signup.css";
+import instance from "./BaseURL";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Layout from "../Layout/Layout";
@@ -47,11 +48,8 @@ const Signup = () => {
         password: newPassword,
       };
       console.log("crete", credentials);
-      axios
-        .post(
-          `https://53aa-49-204-114-250.in.ngrok.io/employee/signup`,
-          credentials
-        )
+      instance
+        .post(`/employee/signup`, credentials)
         .then((response) => {
           if (response.status === 201 || response.status === 200) {
             console.log(response.data);

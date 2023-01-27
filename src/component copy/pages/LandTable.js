@@ -76,7 +76,7 @@ const LandTable = () => {
             <tbody>
               {landData.map((land, ind) => (
                 <tr key={ind}>
-                  <td>{farmer_id[0]}</td>
+                  <td>{farmer_id}</td>
                   <td> {land.landId} </td>
                   <td>{land.farmerId}</td>
                   <td>{land.category}</td>

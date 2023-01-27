@@ -17,7 +17,7 @@ const SelectLand = () => {
   const selected = useSelector((state) => state.land.selectedLand);
   const [area, setArea] = useState(selected[0].area);
   const [interestedFor, setInterestedFor] = useState("takenLease");
-  const [addOns, setAddOns] = useState("None");
+  const [addOns, setAddOns] = useState(selected[0].addons);
   const [supervisorID, setSupervisorID] = useState(selected[0].ownerid);
   const [landId, setLandId] = useState(selected[0].landid);
 
@@ -26,26 +26,15 @@ const SelectLand = () => {
     e.preventDefault();
     console.log(area, interestedFor, addOns, supervisorID, selected);
 
-    // const userData = {
-    //   farmerId: "JEY0002",
-    //   area: area,
-    //   category: interestedFor,
-    //   addons: addOns,
-    //   supervisorId: supervisorID,
-    // };
-
     await instance({
       url: "/land/rent",
       method: "post",
       data: {
         rentLandDetails: [
           {
-            // farmerId: farmer_id,
-
             farmerId: farmer_id,
-            landId: selected[0].landid,
-            ownerId: selected[0].ownerid,
-            area: area,
+            landId: landId,
+            ownerId: supervisorID,
           },
         ],
       },
@@ -55,38 +44,19 @@ const SelectLand = () => {
 
         const data = {
           farmerId: supervisorID,
-          // farmerId: selected[0].farmerid,
           landId: landId,
-          supervisorId: farmer_id,
           area: area,
           category: "takenLease",
+          addons: addOns,
+          ownerId: farmer_id,
+          supervisorId: farmer_id,
         };
         dispatch(landActions.createLand(data));
+        navigate("/land");
       })
       .catch((error) => {
         console.log("renterror", error);
       });
-
-    //post format => const landDetails: [
-    //     {
-    //       farmerId: "SWE0007",
-    //       area: area,
-    //       category: interestedFor,
-    //       wasteland: wasteland,
-    //       addons: addOns,
-    //       supervisorId: supervisorID,
-    //     },
-    //   ]
-
-    // const data = {
-    //   farmerId: "ABI0021",
-    //   // farmerId: selected[0].farmerid,
-    //   landId: selected[0].landid,
-    //   ownerId: selected[0].ownerid,
-    // };
-    // dispatch(landActions.createLand(data));
-
-    navigate("/land");
   };
 
   return (
@@ -105,7 +75,6 @@ const SelectLand = () => {
               >
                 <option value="choose"> category </option>
                 <option value="ownFarming"> ownFarming </option>
-                {/* <option value="leasedLand"> leasedLand </option> */}
                 <option value="wasteLand"> wasteLand </option>
                 <option value="takenLease"> takenLease </option>
                 <option value="availableForLease"> availableForLease </option>
@@ -144,8 +113,6 @@ const SelectLand = () => {
             </div>
           </div>
         </form>
-
-        {/* <LandTable /> */}
       </div>
     </Layout>
   );

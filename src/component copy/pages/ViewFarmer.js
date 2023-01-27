@@ -2,19 +2,22 @@ import axios from "axios";
 import SimpleBarReact from "simplebar-react";
 import { useState, useEffect } from "react";
 import { farmerActions } from "../../store/reducer";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import classes from "./scroll.module.css";
 import { MdEdit } from "react-icons/md";
 import { AiTwotoneDelete } from "react-icons/ai";
 import Layout from "../Layout/Layout";
 import instance from "./BaseURL";
+import { authActions } from "../../store/auth";
+import { landActions } from "../../store/landStore";
 
 const ViewFarmer = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [farmer, setFarmer] = useState([]);
-
+  const isfarmerLogin = useSelector((state) => state.auth.isLogin);
+  const { isFarmerEdit } = useSelector((state) => state.auth);
   useEffect(() => {
     instance
       .get(`/farmer/all`)
@@ -32,7 +35,7 @@ const ViewFarmer = () => {
           console.log(error);
         }
       });
-  }, []);
+  });
 
   const editHandler = (Id) => {
     const newEditdata = farmer.filter(
@@ -40,8 +43,25 @@ const ViewFarmer = () => {
     );
     console.log("edit", newEditdata);
     dispatch(farmerActions.edit_data(newEditdata));
+    dispatch(authActions.farmerEdited());
+    dispatch(authActions.farmerLogin(true));
+    dispatch(farmerActions.create_id(newEditdata[0].farmerDetails.farmerId));
+
+    dispatch(
+      farmerActions.create_name(newEditdata[0].farmerDetails.farmerName)
+    );
+
+    console.log(isFarmerEdit, isfarmerLogin, newEditdata, "farmerEdit");
+    newEditdata.map((farmerDetails) => {
+      // console.log(farmerDetails, "details");
+      farmerDetails.landDetails.map((land) => {
+        console.log("land0", land);
+        dispatch(landActions.createLand(land));
+      });
+    });
     navigate("/farmerdetails");
   };
+  console.log(isFarmerEdit, "farmerEdit");
 
   const deleteHandler = (Id, e) => {
     if (window.confirm("Are you sure want to delete?") === true) {
@@ -58,9 +78,9 @@ const ViewFarmer = () => {
         .then((response) => {
           console.log(response);
           // alert("Are you sure you want to delete?");
-          if (response.status === 200) {
-            navigate("/farmerdetails");
-          }
+          // if (response.status === 200) {
+          //   navigate("/farmerdetails");
+          // }
         })
         .catch((error) => {
           if (error.response) {

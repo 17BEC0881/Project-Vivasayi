@@ -127,7 +127,7 @@ const Farmerdetails = () => {
     event.preventDefault();
     setEnteredState(event.target.value);
     await instance
-      .get(`https://53aa-49-204-114-250.in.ngrok.io/farmer/states`)
+      .get(`/farmer/states`)
       .then((response) => {
         console.log(response);
         if (response) {
@@ -158,9 +158,7 @@ const Farmerdetails = () => {
     event.preventDefault();
     setEnteredDistrict(event.target.value);
     await instance
-      .get(
-        `https://53aa-49-204-114-250.in.ngrok.io/farmer/districts/?state=${state_val}`
-      )
+      .get(`/farmer/districts/?state=${state_val}`)
       .then((response) => {
         console.log(response);
         if (response) {
@@ -188,9 +186,7 @@ const Farmerdetails = () => {
     event.preventDefault();
     setEnteredUnion(event.target.value);
     await instance
-      .get(
-        `https://53aa-49-204-114-250.in.ngrok.io/farmer/unions/?district=${district_val}`
-      )
+      .get(`/farmer/unions/?district=${district_val}`)
       .then((response) => {
         console.log(response);
         if (response) {
@@ -219,9 +215,7 @@ const Farmerdetails = () => {
     event.preventDefault();
     setEnteredPanchayat(event.target.value);
     await instance
-      .get(
-        `https://53aa-49-204-114-250.in.ngrok.io/farmer/panchayats/?union=${union_val}`
-      )
+      .get(`/farmer/panchayats/?union=${union_val}`)
       .then((response) => {
         console.log(response);
         if (response) {
@@ -250,9 +244,7 @@ const Farmerdetails = () => {
     event.preventDefault();
     setEnteredVillage(event.target.value);
     await instance
-      .get(
-        `https://53aa-49-204-114-250.in.ngrok.io/farmer/villages/?panchayat=${panchayat_val}`
-      )
+      .get(`/farmer/villages/?panchayat=${panchayat_val}`)
       .then((response) => {
         console.log(response);
         if (response) {
@@ -340,7 +332,8 @@ const Farmerdetails = () => {
               if (response.status === 200) {
                 dispatch(farmerActions.create_id(enteredId));
                 dispatch(authActions.farmerLogin(true));
-                navigate("/land");
+                dispatch(farmerActions.create_name(data.farmerName));
+                navigate("/editland");
               }
 
               // if(response.status === 200) {

@@ -6,6 +6,7 @@ import { authActions } from "../../store/auth";
 import { GiFarmer } from "react-icons/gi";
 import { CgProfile } from "react-icons/cg";
 import { Fragment } from "react";
+import { farmerActions } from "../../store/reducer";
 //import { Router } from 'react-router-dom';
 
 const Header = () => {
@@ -15,8 +16,10 @@ const Header = () => {
   const role = useSelector((state) => state.auth.role);
   const isfarmerLogin = useSelector((state) => state.auth.isLogin);
   console.log("farmer", isfarmerLogin);
+  const { isFarmerEdit } = useSelector((state) => state.auth);
   const { farmername } = useSelector((state) => state.farmer);
   console.log(farmername, "farmer");
+
   const username = localStorage.getItem("username");
 
   const addEmployeeHandler = (event) => {
@@ -68,6 +71,17 @@ const Header = () => {
   const addLabourHandler = () => {
     navigate("/labour");
   };
+  const editFarmerHandler = () => {
+    navigate("/farmerdetails");
+  };
+  const editLandHandler = () => {
+    navigate("/editland");
+  };
+  const viewEditFarmerHandler = (event) => {
+    event.preventDefault();
+    dispatch(authActions.farmerEditLogout());
+    navigate("/viewfarmer");
+  };
 
   return (
     <Fragment>
@@ -77,28 +91,29 @@ const Header = () => {
             <ul>
               <GiFarmer style={{ color: "white" }} />
               <NavLink to="/login" className="active">
-                Fafaco
+                FaFaCo
               </NavLink>
             </ul>
           </div>
-          {isfarmerLogin && <p>Welcome {farmername}</p>}
+          {(isFarmerEdit || isfarmerLogin) && <p>Welcome {farmername}</p>}
           <div className="header-back">
             {!isauth && (
               <nav>
                 <ul>
                   <li>
-                    <NavLink to="/" className="active">
-                      Home
+                    <NavLink to="/signup" className="active">
+                      Sign Up
                     </NavLink>
                   </li>
                   <li>
-                    <NavLink to="/signup" className="active">
-                      Sign Up
+                    <NavLink to="/employee" className="active">
+                      Login
                     </NavLink>
                   </li>
                 </ul>
               </nav>
             )}
+
             {isauth && (
               <nav>
                 <ul className="header-button">
@@ -118,27 +133,29 @@ const Header = () => {
             <ul>
               <GiFarmer style={{ color: "white" }} />
               <NavLink to="/login" className="active">
-                Fafaco
+                FaFaCo
               </NavLink>
             </ul>
           </div>
-          {isfarmerLogin && <p>Welcome {farmername}</p>}
+          {(isFarmerEdit || isfarmerLogin) && <p>Welcome {farmername}</p>}
           <div className="header-back">
             {!isauth && (
               <nav>
                 <ul>
                   <li>
-                    <NavLink to="/" className="active">
-                      Home
+                    <NavLink to="/admin" className="active">
+                      Login
                     </NavLink>
                   </li>
                 </ul>
               </nav>
             )}
+
             {isauth && (
               <nav>
                 <ul className="header-button">
-                  <CgProfile className="icon" /> <button>{username}</button>
+                  <CgProfile className="icon" />
+                  <button>{username}</button>
                   <button type="submit" onClick={logoutHandler}>
                     Logout
                   </button>
@@ -180,8 +197,8 @@ const Header = () => {
             <div className="employee">
               <ul>
                 <li>
-                  <button type="submit" onClick={addFarmerHandler}>
-                    Add Farmer
+                  <button type="submit" onClick={editFarmerHandler}>
+                    Edit Farmer
                   </button>
                 </li>
                 <li>
@@ -195,36 +212,85 @@ const Header = () => {
           {isauth && (role || !role) && isfarmerLogin && (
             <div className="employee">
               <ul>
-                <li>
-                  <button type="submit" onClick={addLandHandler}>
-                    Add Land
-                  </button>
-                </li>
-                <li>
-                  <button type="submit" onClick={addCropHandler}>
-                    Add Crop
-                  </button>
-                </li>
-                <li>
-                  <button type="submit" onClick={addGardenHandler}>
-                    Add Garden
-                  </button>
-                </li>
-                <li>
-                  <button type="submit" onClick={addLabourHandler}>
-                    Add Labour
-                  </button>
-                </li>
-                <li>
-                  <button type="submit" onClick={addLiveStockHandler}>
-                    Add LiveStock
-                  </button>
-                </li>
-                <li>
-                  <button type="submit" onClick={addMachineHandler}>
-                    Add Machine
-                  </button>
-                </li>
+                {!isFarmerEdit ? (
+                  <ul>
+                    <li>
+                      <button type="submit" onClick={addLandHandler}>
+                        Add Land
+                      </button>
+                    </li>
+                    <li>
+                      <button type="submit" onClick={addCropHandler}>
+                        Add Crop
+                      </button>
+                    </li>
+                    <li>
+                      <button type="submit" onClick={addGardenHandler}>
+                        Add Garden
+                      </button>
+                    </li>
+                    <li>
+                      <button type="submit" onClick={addLabourHandler}>
+                        Add Labour
+                      </button>
+                    </li>
+                    <li>
+                      <button type="submit" onClick={addLiveStockHandler}>
+                        Add LiveStock
+                      </button>
+                    </li>
+
+                    <li>
+                      <button type="submit" onClick={addMachineHandler}>
+                        Add Machine
+                      </button>
+                    </li>
+                  </ul>
+                ) : (
+                  <div>
+                    <li>
+                      <button type="submit" onClick={viewEditFarmerHandler}>
+                        View Farmer
+                      </button>
+                    </li>
+                    <li>
+                      <button type="submit" onClick={addFarmerHandler}>
+                        Edit Farmer
+                      </button>
+                    </li>
+                    <li>
+                      <button type="submit" onClick={editLandHandler}>
+                        Edit Land
+                      </button>
+                    </li>
+                    <li>
+                      <button type="submit" onClick={addCropHandler}>
+                        Edit Crop
+                      </button>
+                    </li>
+                    <li>
+                      <button type="submit" onClick={addGardenHandler}>
+                        Edit Garden
+                      </button>
+                    </li>
+                    <li>
+                      <button type="submit" onClick={addLabourHandler}>
+                        Edit Labour
+                      </button>
+                    </li>
+                    <li>
+                      <button type="submit" onClick={addLiveStockHandler}>
+                        Edit LiveStock
+                      </button>
+                    </li>
+                    <li>
+                      <button type="submit" onClick={addMachineHandler}>
+                        Edit Machine
+                      </button>
+                    </li>
+                  </div>
+                )}
+
                 {/* <li>
                   <button type="submit" onClick={addBuySell}>
                     Buy & Sell

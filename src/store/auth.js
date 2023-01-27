@@ -5,6 +5,7 @@ const initialAuthState = {
   user: [],
   role: false,
   isLogin: false,
+  isFarmerEdit: false,
   data: {},
 };
 
@@ -35,6 +36,12 @@ const authSlice = createSlice({
     },
     edit(state, action) {
       state.data = action.payload;
+    },
+    farmerEdited(state) {
+      state.isFarmerEdit = true;
+    },
+    farmerEditLogout(state) {
+      state.isFarmerEdit = false;
     },
   },
 });
