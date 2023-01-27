@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import classes from "./ViewFarmer.module.css";
+import classes from "./landtable.module.css";
 // import Layout from "../Layout/Layout";
 import instance from "./BaseURL";
 import { landActions } from "../../store/landStore";
