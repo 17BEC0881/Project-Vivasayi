@@ -148,77 +148,11 @@ const Machinedetails = () => {
         e.preventDefault();
         setClick(!click);
     }
-    for (var i in (Object.values(editData))){
-        console.log(editData[i].machineDetails.length);
-        if((editData[i].machineDetails.length) === 0) {
-            var msg1 = <div className={classes.number}>
-                <h1>No Records Found</h1>
-                <button onClick={clickHandler}>Add Machine</button>
-                </div>;
-        } else {
-            msg1 = <form>
-            <h3>Machine Details</h3>
-            <label style={{ fontFamily: "Times New Roman" }}>Type:</label>
-            <select name="type" id="type" value={enteredType} onChange={(e) => setEnteredType(e.target.value)} onClick={selectHandler}>
-                    <option value="type">Type</option>
-                    <option value="Mowers">Mowers</option>
-                    <option value="Backhoe">Backhoe</option>
-                    <option value="Harrow">Harrow</option>
-                    <option value="Cultivator">Cultivator</option>
-                    <option value="Rake">Rake</option>
-                    <option value="Tractor">Tractor</option>
-                    <option value="Combine Harvester">Combine Harvester</option>
-                    <option value="Sprayers">Sprayers</option>
-                    <option value="Chain Saw">Chain Saw</option>
-                    <option value="Brush cutters">Brush cutters</option>
-                    <option value="Saw Mills">Saw Mills</option>
-                    <option value="Others">Others</option>
-            </select>
-            {error1 && <p>{error1.type}</p>}
-            <label style={{ fontFamily: "Times New Roman" }}>Subtype:</label>
-            <select name="subtype" id="subtype" value={enteredSubtype} onChange={(e) => setEnteredSubtype(e.target.value)}>
-                    <option value="subtype">Sub Type</option>
-                    {Subtype.map( (x,y) => 
-                    <option key={y} value={x}>{x}</option> )}
-            </select>
-            {error1 && <p>{error1.subType}</p>}
-            <label style={{ fontFamily: "Times New Roman" }}>Attachment:</label>
-            <select name="attach" id="attach" value={enteredAttachment} onChange={(e) => setEnteredAttachment(e.target.value)}>
-                    <option value="attachment">Attachments</option>
-                    {Attachment.map( (x,y) => 
-                    <option key={y} value={x}>{x}</option> )}
-            </select>
-            {error1 && <p>{error1.attachments}</p>}
-            <label style={{ fontFamily: "Times New Roman" }}>Brand:</label>
-            <input type="text" name="brand" id="brand" placeholder="Brand" value={enteredBrand} onChange={(e) => setEnteredBrand(e.target.value)}/>
-            {error1 && <p>{error1.brand}</p>}
-            <label style={{ fontFamily: "Times New Roman" }}>Count:</label>
-            <input type="text" name="count" id="count" placeholder="Count" value={enteredCount} onChange={(e) => setEnteredCount(e.target.value)}/>
-            {error1 && <p>{error1.count}</p>}
-            <label style={{ fontFamily: "Times New Roman" }}>Rental Basics:</label>
-            <select name="rentalbasics" id="rentalbasics" value={enteredDay} onChange={(e) => setEnteredDay(e.target.value)}>
-                    <option value="Rental Basics">Rental Basics</option>
-                    <option value="Hour">Hour</option>
-                    <option value="Day">Day</option>
-                    <option value="Area">Area</option>
-            </select>
-            {error1 && <p>{error1.rentalBasis}</p>}
-            {showLand ? <label style={{ fontFamily: "Times New Roman" }}>Area Size:</label> : null}
-            { showLand ? <input type="text" name="landdetails" id="landdetails" placeholder="Area size" value={areaDetails} onChange={(e) => setAreaDetails(e.target.value)} /> : null }
-            {/* <input type="text" name="landdetails" id="landdetails" /> */}
-            <label style={{ fontFamily: "Times New Roman" }}>Rent Price:</label>
-            <input type="number" name="rent" id="rent" placeholder="Rent Price" value={enteredRent} onChange={(e) => setEnteredRent(e.target.value)}/>
-            {error1 && <p>{error1.rent}</p>}
-            {/* <button type="submit" onClick={editHandler}>Edit</button> */}
-            <button type="submit" onClick={saveHandler}>Save</button>
-            </form> }
-    }
-
+    
     return (
         <Layout>
         <section className={classes.box}>
-            {msg1}
-            {click && <form>
+            <form>
             <h3>Machine Details</h3>
             <label style={{ fontFamily: "Times New Roman" }}>Type:</label>
             <select name="type" id="type" value={enteredType} onChange={(e) => setEnteredType(e.target.value)} onClick={selectHandler}>
@@ -273,7 +207,7 @@ const Machinedetails = () => {
             {error1 && <p>{error1.rent}</p>}
             {/* <button type="submit" onClick={editHandler}>Edit</button> */}
             <button type="submit" onClick={saveHandler}>Save</button>
-            </form> }
+            </form>
             {click1 && 
             <div className={classes.land}>
             <table border={1}> 
