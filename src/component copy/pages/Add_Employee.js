@@ -16,7 +16,7 @@ const Add = () => {
   const [fnameclicked, setFnameClicked] = useState(false);
   const [unameclicked, setUnameClicked] = useState(false);
   const [phonenumberclicked, setPhonenumberClicked] = useState(false);
-   const [emailClicked, setEmailClicked] = useState(false);
+  const [emailClicked, setEmailClicked] = useState(false);
 
   const navigate = useNavigate();
   const firstnameChangeHandler = (event) => {
@@ -45,7 +45,7 @@ const Add = () => {
   const emailChangeHandler = (event) => {
     event.preventDefault();
     setEmail(event.target.value);
-    setEmailClick(true);
+    setEmailClicked(true);
   };
 
   const details = {
@@ -57,12 +57,12 @@ const Add = () => {
   };
 
   const registerHandler = (event) => {
-     event.preventDefault()
-     setUnameClicked(false);
-     setPhonenumberClicked(false);
-     setEmailClicked(false)
-     setError({});
-     seterrorMessage(false)
+    event.preventDefault();
+    setUnameClicked(false);
+    setPhonenumberClicked(false);
+    setEmailClicked(false);
+    setError({});
+    seterrorMessage(false);
     const admintoken = {
       headers: {
         Authorization: "Bearer " + localStorage.getItem("token"),
@@ -148,7 +148,9 @@ const Add = () => {
               value={email}
               onChange={emailChangeHandler}
             />
-           {!emailClicked && errorMessage && <div className='error'>{error.email}</div>}
+            {!emailClicked && errorMessage && (
+              <div className="error">{error.email}</div>
+            )}
           </div>
           <div className="Add-button">
             <button type="submit" onClick={registerHandler}>
