@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import classes from "./landtable.module.css";
+import classes from "./scroll.module.css";
 import Layout from "../Layout/Layout";
 import instance from "./BaseURL";
 import { landActions } from "../../store/landStore";
@@ -18,13 +18,13 @@ const LandTable = () => {
   const [showland, setShowLand] = useState(false);
 
   useEffect(() => {
-    if (landData == []) {
+    if (landData.length == [].length) {
       setShowLand(false);
     } else {
       setShowLand(true);
     }
     console.log(showland);
-  }, [showland]);
+  }, [showland, landData]);
 
   var land = [];
   const removeHandler = async (id) => {
@@ -51,6 +51,7 @@ const LandTable = () => {
         // console.log("delete", typeof land.landId);
         dispatch(landActions.deleteLand(land.landId));
         setShowLand(true);
+        navigate("/landtable");
       })
       .catch((error) => {
         console.log("deleteerror", error);

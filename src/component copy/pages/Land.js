@@ -39,10 +39,13 @@ const Land = () => {
   // const [initial, setInitial] = useState(false);
 
   useEffect(() => {
-    if (landData == []) {
-      setTable(true);
+    console.log("yes", landData);
+    if (landData.length == [].length) {
+      console.log(table, "empty");
+      setTable(false);
     } else {
       setTable(true);
+      console.log(table, "data");
     }
     if (click && (interestedFor.trim() || addOns.trim() || area.trim()) == "") {
       setError(true);
@@ -146,7 +149,7 @@ const Land = () => {
 
   if (loading) {
     return (
-      <section className={classes.MealsLoading}>
+      <section className={classes.loading}>
         <p>Loading...</p>
       </section>
     );
@@ -181,9 +184,10 @@ const Land = () => {
           <form>
             <h1>Add Land</h1>
             <div>
-              <label style={{ display: "table-cell" }}>Category: </label>
+              <label style={{ display: "table-cell" }}>*Category: </label>
               <span>
                 <select
+                  type="text"
                   placeholder="category"
                   value={interestedFor}
                   onChange={(e) => setInterestedFor(e.target.value)}
@@ -205,7 +209,7 @@ const Land = () => {
             )}
 
             <div>
-              <label>Area:</label>
+              <label>*Area:</label>
               <span>
                 <input
                   placeholder="Area in sq.ft"
@@ -217,9 +221,10 @@ const Land = () => {
             </div>
 
             <div>
-              <label>AddOns:</label>
+              <label>*AddOns:</label>
               <span>
                 <select
+                  type="text"
                   name="states"
                   id="states"
                   onChange={(e) => setAddOns(e.target.value)}
@@ -242,6 +247,7 @@ const Land = () => {
                   {" "}
                   <input
                     disabled
+                    type="text"
                     placeholder="supervisorID"
                     value={supervisorID}
                     onChange={(e) => setSupervisorID(e.target.value)}
@@ -251,6 +257,7 @@ const Land = () => {
                 <span>
                   {" "}
                   <input
+                    type="text"
                     placeholder="supervisorID"
                     value={supervisorID}
                     onChange={(e) => setSupervisorID(e.target.value)}
@@ -263,6 +270,7 @@ const Land = () => {
               {!ownFarmingCheck ? (
                 <span>
                   <input
+                    type="text"
                     placeholder="landID"
                     value={landId}
                     onChange={(e) => setLandId(e.target.value)}
@@ -272,6 +280,7 @@ const Land = () => {
                 <span>
                   <input
                     disabled
+                    type="text"
                     placeholder="landID"
                     value={landId}
                     onChange={(e) => setLandId(e.target.value)}

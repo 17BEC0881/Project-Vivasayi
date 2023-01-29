@@ -1,10 +1,8 @@
 .land {
     width: 100%;
-    margin-top: 0%;
+    margin-top: -25%;
     font-family: 'Times New Roman', Times, serif;
-  
 }
-
 .container {
     margin: auto;
     width: 80%;
@@ -12,9 +10,6 @@
 .land table {
     border: 1px solid green;
     margin-bottom: 0rem;
-    
-  }
-.land table {
     width: 100%;
     border-collapse: collapse;
     margin: auto;
@@ -30,8 +25,7 @@
     height: 2rem;
     color: white;
     font-weight: 700;
-    font-size: medium;
-    
+    font-size: medium; 
 }
 /* .land thead {
     background-color: #e3e3e3;
@@ -40,31 +34,27 @@
     background-color:#f9f9f9;
     }
 .land tr:hover {
-        background-color:rgb(204, 252, 204);
+    background-color:rgb(204, 252, 204);
     }
 .land tr {
-        text-align: center;
-        height: 2px;
-        padding-top: 5px;
+    text-align: center;
+    height: 2px;
+    padding-top: 5px;
     padding-right: 5px;
     padding-bottom: 5px;
     padding-left: 10px;
     border-color: green;
     }
 .land th {
-    background-color: white;
+    background-color: green;
     color: white;
     text-align: center;
-    border-color: green;
-    color: green;
+    border-color: white;
  }
-
  .land h1{
     text-align: center;
     color: green;
     margin-top: 1rem;
-    margin-bottom: 1rem;
+    margin-bottom: 0rem;
     /* font-size: 20px; */
 }
-
-

@@ -13,10 +13,10 @@
     margin:auto;
     margin-top: 5%;
 }
-.box form h3 {
+.box form h1 {
     margin: 0px 150px 5px 150px;
     color: green;
-    font-size: 20px;
+    /* font-size: 20px; */
     font-family: 'Times New Roman', Times, serif;
 }
 .box form p {

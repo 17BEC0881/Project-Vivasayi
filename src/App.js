@@ -24,6 +24,7 @@ import Livestocktable from "./component copy/pages/livestocktable";
 import Editgarden from "./component copy/pages/editgarden";
 import EditLivestock from "./component copy/pages/Editlivestocktable";
 import EditMachinedetails from "./component copy/pages/EditMachinedetails";
+import EditCrop from "./component copy/pages/CropEditTable";
 
 function App() {
   return (
@@ -53,6 +54,7 @@ function App() {
       <Route path="/editland" element={<EditLand />} />
       <Route path="/preview" element={<Preview />} />
       <Route path="/editmachine" element={<EditMachinedetails />} />
+      <Route path="/editcrop" element={<EditCrop />} />
     </Routes>
   );
 }

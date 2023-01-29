@@ -1,4 +1,3 @@
-import ReactDOM from "react-dom";
 import SimpleBarReact from "simplebar-react";
 import classes from "./scroll.module.css";
 // import style from "./ViewFarmer.module.css";
@@ -8,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { landActions } from "../../store/landStore";
 import { useNavigate } from "react-router-dom";
 import Layout from "../Layout/Layout";
+import { AiOutlineCheck } from "react-icons/ai";
 
 const Scroll = () => {
   const dispatch = useDispatch();
@@ -34,6 +34,7 @@ const Scroll = () => {
           area: land.area,
           category: land.category,
           farmerid: farmer.farmerDetails.farmerId,
+          village: farmer.farmerDetails.village,
         };
         availabelLeaseList.push(data);
         console.log("landdetails", availabelLeaseList);
@@ -61,48 +62,49 @@ const Scroll = () => {
   return (
     <Layout>
       <div className={classes.land}>
-        <div className={classes.landcontainer}>
-          <h4>Lands for Lease</h4>
+        <div className={classes.container}>
+          <h1>Lands for Lease</h1>
           <SimpleBarReact
             autoHide={true}
-            style={{ maxHeight: 450 }}
+            style={{ maxHeight: 400 }}
             className={classes.land}
           >
-            {/* {[...Array(50)].map((x, i) => (
-          <p>{i}</p>
-        ))} */}
-
-            <table>
+            <table border="1" className="table">
               <thead>
-                <tr>
+                <tr className="table-head-row">
                   <th>Name</th>
-                  <th>FatherName</th>
-                  <th>Area</th>
                   <th>Farmer Id</th>
                   <th>Land Id</th>
-                  <th></th>
+                  <th>Area</th>
+                  <th>FatherName</th>
+                  <th>Village</th>
+                  <th>Select Land</th>
                 </tr>
               </thead>
               {availabelLeaseList.map((land) => (
                 <tbody key={land.landid}>
                   <tr key={land.landid}>
                     <td>{land.name}</td>
-                    <td>{land.fathername}</td>
-                    <td>{land.area}</td>
                     <td>{land.ownerid}</td>
                     <td>{land.landid}</td>
+                    <td>{land.area}</td>
+                    <td>{land.fathername}</td>
+                    <td>{land.village}</td>
+
                     <td>
-                      <button onClick={() => selectHandler(land.landid)}>
-                        select
-                      </button>
+                      <AiOutlineCheck
+                        size={20}
+                        style={{ margin: "5px" }}
+                        onClick={() => selectHandler(land.landid)}
+                      />
                     </td>
                   </tr>
                 </tbody>
               ))}
             </table>
           </SimpleBarReact>
+          <button onClick={backHandler}> Back</button>
         </div>
-        <button onClick={backHandler}> Back</button>
       </div>
     </Layout>
   );

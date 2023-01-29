@@ -1,7 +1,4 @@
-* {
-    box-sizing: border-box;
-    /* font-family: 'Times New Roman', Times, serif; */
-}
+
 .box {
     width: 100%;
     margin-top: -60%;
@@ -11,12 +8,12 @@
     width : 500px;
     /* border: solid; */
     margin:auto;
-    margin-top: 5%;
+    /* margin-top: 10%; */
 }
-.box form h1 {
-    margin: 0px 180px 5px 180px;
+.box  h1 {
+    text-align: center;
     color: green;
-    font-size: 20px;
+    /* font-size: 20px; */
     font-family: 'Times New Roman', Times, serif;
 }
 .box form p {

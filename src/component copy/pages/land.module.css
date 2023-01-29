@@ -11,6 +11,14 @@
     
 }
 .login input, select{
+    /* width: 40%;
+    padding: 8px 10px;
+    margin: 8px 5px 0px 15px;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-family: 'Times New Roman', Times, serif; */
+    
     width: 100%;
     padding: 8px 10px;
     margin: 8px 0;
@@ -25,6 +33,16 @@
     outline-width: 0px;
 }
 
+.login select[type=text]:focus {
+   
+    border: 2px solid green;
+    outline-width: 0px;
+}
+.login  input[type=number]:focus {
+   
+    border: 2px solid green;
+    outline-width: 0px;
+}
 /* .states input{
     border-color: black;
     width: 5rem;
@@ -50,8 +68,9 @@
     font-family: 'Times New Roman', Times, serif;
 }
 
-.MealsLoading {
+.loading {
         text-align: center;
         color: white;
      
 }
+

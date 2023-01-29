@@ -97,8 +97,8 @@ const ViewFarmer = () => {
   return (
     <Layout>
       <div className={classes.land}>
-        <div className={classes.landcontainer}>
-          <h1 style={{ color: "green" }}>Farmer Details</h1>
+        <div className={classes.container}>
+          <h1>Farmer Details</h1>
           <SimpleBarReact
             autoHide={true}
             style={{ maxHeight: 450 }}

@@ -51,13 +51,13 @@ const LandTable = () => {
     // <Layout>
     <div className={classes.land}>
       <h1 style={{ marginTop: "16rem" }}>Land Details</h1>
-      <div className={classes.container} style={{ marginTop: "16rem" }}>
+      <div className={classes.container} style={{ marginTop: "14rem" }}>
         {/* <div className="remove-button">
           <button onClick={() => addHandler()}>Add Land</button>
         </div> */}
         <SimpleBarReact
           autoHide={true}
-          style={{ maxHeight: 130 }}
+          style={{ maxHeight: 120 }}
           className={classes.land}
         >
           <table border="1" className="table">

@@ -20,7 +20,7 @@ const Header = () => {
   const { isFarmerEdit } = useSelector((state) => state.auth);
   const { farmername } = useSelector((state) => state.farmer);
   console.log(farmername, "farmer");
-
+  const { farmer_id } = useSelector((state) => state.farmer);
   const username = localStorage.getItem("username");
 
   const addEmployeeHandler = (event) => {
@@ -112,7 +112,11 @@ const Header = () => {
               </NavLink>
             </ul>
           </div>
-          {(isFarmerEdit || isfarmerLogin) && <p>Welcome {farmername}</p>}
+          {(isFarmerEdit || isfarmerLogin) && (
+            <p>
+              Welcome {farmername}({farmer_id})
+            </p>
+          )}
           <div className="header-back">
             {!isauth && (
               <nav>
@@ -154,7 +158,11 @@ const Header = () => {
               </NavLink>
             </ul>
           </div>
-          {(isFarmerEdit || isfarmerLogin) && <p>Welcome {farmername}</p>}
+          {(isFarmerEdit || isfarmerLogin) && (
+            <p>
+              Welcome {farmername}({farmer_id})
+            </p>
+          )}
           <div className="header-back">
             {!isauth && (
               <nav>
