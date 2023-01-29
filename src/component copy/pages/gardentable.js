@@ -36,12 +36,10 @@ const Gardentable=()=>{
             }
           });
     }
-    const cancelbuttonhandle=()=>{
+    const addHandle=()=>{
         navigate("/garden");
     }
-    const nextbuttonhandle=()=>{
-        navigate("/labour");
-    }
+    
     let tablebody=gar.map((x,index)=>
         <tr key={index}>
             <td>{index+1}</td>
@@ -71,21 +69,22 @@ const Gardentable=()=>{
     return(
         <Layout>
             <div className="garden">
-                <h1 className="login h1" style={{"fontSize":"x-large"}}><b>Garden table</b></h1>
+                <h1 className="login h1" style={{"fontSize":"x-large"}}><b>Garden Details</b></h1>
+                <div>
+                <button onClick={addHandle}>Add garden</button>
                 <table className="gardencontainer">
                     <thead>
                         <tr className="garden tr">
-                            <th>s.no</th>
                             <th>farmer id</th>
-                            <th>area</th>
-                            <th>type</th>
-                            <th>name</th>
                             <th>variety</th>
+                            <th>type</th>
                             <th>brand</th>
-                            <th>count</th>
-                            <th>organic</th>
+                            <th>area</th>
                             <th>age</th>
+                            <th>count</th>
+                            <th>name</th>
                             <th>sellingPeriod</th>
+                            <th>organic</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -93,9 +92,7 @@ const Gardentable=()=>{
                         {tablebody}
                     </tbody>
                 </table>
-                
-                    <button onClick={cancelbuttonhandle} className="garden button" >cancel</button>
-                    <button onClick={nextbuttonhandle} className="garden button">next</button>
+                </div>
             </div>
         </Layout>
     )

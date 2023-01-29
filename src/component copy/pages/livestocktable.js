@@ -35,12 +35,9 @@ const Livestocktable=()=>{
           });
 
     }   
-    const cancelbuttonhandle=()=>{
-        navigate("/livestock");
-    }
-    const nextbuttonhandle=()=>{
-        navigate("/machinedetails");
-    }
+   const addHandle=()=>{
+    navigate("/livestock");
+   }
     
     console.log("LIVE",liv);
     const tablebody=liv.map((x, index)=>
@@ -70,27 +67,25 @@ const Livestocktable=()=>{
     return(
         <Layout>
             <div className="garden">
-                <h1 className="login h1" style={{"fontSize":"x-large"}}>Livestock table</h1>
-                <table className="garden table">
+                <h1 className="login h1" style={{"fontSize":"x-large"}}><b>Livestock Details</b></h1>
+                <button onClick={addHandle}>Add Livestock</button>
+                <table>
                     <thead>
-                        <tr className="garden tr">
-                            <th>farmerid</th>
-                            <th>breed</th>
-                            <th>count</th>
-                            <th>name</th>
+                        <tr>
+                            <th>Farmer id</th>
                             <th>place</th>
-                            <th>season</th>
                             <th>type</th>
-                            <th>Actions</th>
-                            
+                            <th>breed</th>
+                            <th>name</th>
+                            <th>count</th>
+                            <th>season</th>
                         </tr>
                     </thead>
                     <tbody>
                         {tablebody}
                     </tbody>
                 </table>
-                <button onClick={cancelbuttonhandle} className="garden button">cancel</button>
-                <button onClick={nextbuttonhandle} className="garden button">next</button>
+               
             </div>
         </Layout>
     )

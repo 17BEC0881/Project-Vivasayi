@@ -18,13 +18,13 @@ import Scroll from "./component copy/pages/Scroll";
 import SelectLand from "./component copy/pages/SelectLand";
 import LandTable from "./component copy/pages/LandTable";
 import Edit from "./component copy/pages/Edit_Employee";
-import Preview from "./component copy/pages/Preview";
-import Gardentable from "./component copy/pages/gardentable";
-import Livestocktable from "./component copy/pages/livestocktable";
+// import Preview from "./component copy/pages/Preview";
 import Editgarden from "./component copy/pages/editgarden";
 import EditLivestock from "./component copy/pages/Editlivestocktable";
 import EditMachinedetails from "./component copy/pages/EditMachinedetails";
 import EditCrop from "./component copy/pages/CropEditTable";
+import Gardentable from "./component copy/pages/Gardentable";
+import Livestocktable from "./component copy/pages/Livestocktable";
 
 function App() {
   return (
@@ -52,7 +52,7 @@ function App() {
       <Route path="/selectlandpage" element={<SelectLand />} />
       <Route path="/landtable" element={<LandTable />} />
       <Route path="/editland" element={<EditLand />} />
-      <Route path="/preview" element={<Preview />} />
+      {/* <Route path="/preview" element={<Preview />} /> */}
       <Route path="/editmachine" element={<EditMachinedetails />} />
       <Route path="/editcrop" element={<EditCrop />} />
     </Routes>
