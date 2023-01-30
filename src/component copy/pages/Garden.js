@@ -225,7 +225,7 @@ const Garden = () => {
             </span>
           ) : null}
           <br />
-          {/* <div className={classes.check}>
+          <div className={classes.check}>
             <label style={{ display: "inline" }}>Organic:</label>
             <input
               style={{ display: "inline" }}
@@ -233,7 +233,7 @@ const Garden = () => {
               value={organic}
               onChange={(e) => setOrganic(!organic)}
             />
-          </div> */}
+          </div>
 
           {/* <div className={classes.check}>
             <input
