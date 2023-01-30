@@ -28,7 +28,7 @@ const EditLivestock=()=>{
     console.log(location);
     const e=(location.state.input);
     const getLivestock=()=>{
-        setFarmerid(e.farmerId);
+        setFarmerid(location.state.farmerid);
         
         setBreed(e.breed);
         setCount(e.count);

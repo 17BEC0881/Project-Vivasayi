@@ -17,6 +17,7 @@ const Gardentable = () => {
   //   console.log(gar1);
   //   const gar = gar1[0].gardenDetails;
   //   console.log(gar, "gar");
+  console.log(gar);
   const { farmer_id } = useSelector((state) => state.farmer);
 
   let editHandle = (input, index) => {
@@ -38,6 +39,7 @@ const Gardentable = () => {
           console.log(error.response.status);
         } else if (error.request) {
           console.log("network error");
+          alert("network error");
         } else {
           console.log(error);
         }
@@ -49,17 +51,16 @@ const Gardentable = () => {
 
   let tablebody = gar.map((x, index) => (
     <tr className="table-head-row" key={index}>
-      {/* <td>{index + 1}</td> */}
       <td>{farmer_id}</td>
-      <td>{x.area}</td>
-      <td>{x.type}</td>
-      <td>{x.name}</td>
       <td>{x.variety}</td>
+      <td>{x.type}</td>
       <td>{x.brand}</td>
-      <td>{x.count}</td>
-      <td>{x.organic.toString()}</td>
+      <td>{x.area}</td>
       <td>{x.age}</td>
+      <td>{x.count}</td>
+      <td>{x.name}</td>
       <td>{x.sellingPeriod}</td>
+      <td>{x.organic.toString()}</td>
       <td>
         <MdEdit
           size={15}

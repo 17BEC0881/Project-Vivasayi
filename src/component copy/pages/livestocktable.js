@@ -12,11 +12,12 @@ import instance from "./BaseURL";
 
 const Livestocktable = () => {
   const liv = useSelector((state) => state.user.livestck);
+  const farmerid=useSelector((state)=>state.farmer.farmer_id);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const editHandle = (input, index) => {
+  const editHandle = (farmerid,input, index) => {
     console.log("editing...");
-    navigate("/editlivestock", { state: { input, index } });
+    navigate("/editlivestock", { state: {farmerid, input, index } });
   };
   const deleteHandle = (i) => {
     const dele = liv.filter((x, index, arr) => index !== i);
@@ -32,6 +33,7 @@ const Livestocktable = () => {
           console.log(error.response.status);
         } else if (error.request) {
           console.log("network error");
+          alert("network error");
         } else {
           console.log(error);
         }
@@ -44,19 +46,19 @@ const Livestocktable = () => {
   console.log("LIVE", liv);
   const tablebody = liv.map((x, index) => (
     <tr key={index}>
-      <td>{x.farmerId}</td>
-      <td>{x.name}</td>
-      <td>{x.breed}</td>
-      <td>{x.count}</td>
-
+      <td>{farmerid}</td>
       <td>{x.place}</td>
-      <td>{x.season}</td>
       <td>{x.type}</td>
+      <td>{x.breed}</td>
+
+      <td>{x.name}</td>
+      <td>{x.count}</td>
+      <td>{x.season}</td>
       <td>
         <MdEdit
           size={15}
           style={{ margin: "5px" }}
-          onClick={() => editHandle(x, index)}
+          onClick={() => editHandle(farmerid,x, index)}
         />
         <AiTwotoneDelete
           size={15}
@@ -85,10 +87,10 @@ const Livestocktable = () => {
             <thead>
               <tr className="table-head-row">
                 <th>Farmer id</th>
-                <th>name</th>
                 <th>place</th>
                 <th>type</th>
                 <th>breed</th>
+                <th>name</th>
 
                 <th>count</th>
                 <th>season</th>

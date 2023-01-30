@@ -11,6 +11,7 @@ import instance from "./BaseURL";
 import { authActions } from "../../store/auth";
 import { landActions } from "../../store/landStore";
 import { cropActions } from "../../store/cropDetailsReducer";
+import { Gardenn, livestckk } from "../../store/gardenreducer";
 
 const ViewFarmer = () => {
   const navigate = useNavigate();
@@ -47,6 +48,8 @@ const ViewFarmer = () => {
     dispatch(authActions.farmerLogin(true));
     dispatch(farmerActions.create_id(newEditdata[0].farmerDetails.farmerId));
     dispatch(cropActions.add_crop(newEditdata[0].cropDetails));
+    dispatch(livestckk(newEditdata[0].livestockDetails));
+    dispatch(Gardenn(newEditdata[0].gardenDetails));
     dispatch(
       farmerActions.create_name(newEditdata[0].farmerDetails.farmerName)
     );
