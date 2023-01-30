@@ -10,6 +10,7 @@ import Layout from "../Layout/Layout";
 import instance from "./BaseURL";
 import { authActions } from "../../store/auth";
 import { landActions } from "../../store/landStore";
+import { cropActions } from "../../store/cropDetailsReducer";
 
 const ViewFarmer = () => {
   const navigate = useNavigate();
@@ -34,21 +35,22 @@ const ViewFarmer = () => {
           console.log(error);
         }
       });
-  });
+  }, []);
 
   const editHandler = (Id) => {
     const newEditdata = farmer.filter(
       (input) => input.farmerDetails.farmerId === Id
     );
-    console.log("edit", newEditdata);
+    console.log(newEditdata[0].labourDetails, "edit");
     dispatch(farmerActions.edit_data(newEditdata));
     dispatch(authActions.farmerEdited());
     dispatch(authActions.farmerLogin(true));
     dispatch(farmerActions.create_id(newEditdata[0].farmerDetails.farmerId));
-
+    dispatch(cropActions.add_crop(newEditdata[0].cropDetails));
     dispatch(
       farmerActions.create_name(newEditdata[0].farmerDetails.farmerName)
     );
+    dispatch(cropActions.labour_edit_data(newEditdata[0].labourDetails));
 
     console.log(isFarmerEdit, isfarmerLogin, newEditdata, "farmerEdit");
     newEditdata.map((farmerDetails) => {

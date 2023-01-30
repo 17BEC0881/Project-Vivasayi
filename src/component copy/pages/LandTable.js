@@ -40,21 +40,25 @@ const LandTable = () => {
         console.log("deleteresponse", response);
         console.log("delete", typeof land.landId);
         dispatch(landActions.deleteLand(land.landId));
-        navigate("/land");
+        // navigate("/land");
       })
       .catch((error) => {
         console.log("deleteerror", error);
       });
+  };
+  const addHandler = () => {
+    navigate("/land");
   };
 
   return (
     // <Layout>
     <div className={classes.land}>
       <h1 style={{ marginTop: "16rem" }}>Land Details</h1>
+      {/* <button onClick={() => addHandler()}>Add Land</button> */}
       <div className={classes.container} style={{ marginTop: "14rem" }}>
-        {/* <div className="remove-button">
-          <button onClick={() => addHandler()}>Add Land</button>
-        </div> */}
+        {/* <div className="remove-button"> */}
+
+        {/* </div> */}
         <SimpleBarReact
           autoHide={true}
           style={{ maxHeight: 120 }}
@@ -86,9 +90,6 @@ const LandTable = () => {
                       style={{ margin: "5px" }}
                       onClick={() => removeHandler(land.landId)}
                     />
-                    {/* <button onClick={() => removeHandler(land.landId)}>
-                      Remove
-                    </button> */}
                   </div>
                 </tr>
               ))}

@@ -8,6 +8,9 @@ import { CgProfile } from "react-icons/cg";
 import { Fragment } from "react";
 import { farmerActions } from "../../store/reducer";
 import EditMachinedetails from "../pages/EditMachinedetails";
+import { cropActions } from "../../store/cropDetailsReducer";
+import { gardenLogout } from "../../store/gardenreducer";
+import { landActions } from "../../store/landStore";
 //import { Router } from 'react-router-dom';
 
 const Header = () => {
@@ -45,7 +48,11 @@ const Header = () => {
   const logoutHandler = (event) => {
     dispatch(authActions.logout());
     dispatch(authActions.farmerLogout());
-
+    dispatch(authActions.authLogout());
+    dispatch(cropActions.cropLogout());
+    dispatch(gardenLogout());
+    dispatch(landActions.landLogout());
+    dispatch(farmerActions.farmerLogout());
     console.log("far", isfarmerLogin);
     localStorage.clear();
     navigate("/");
@@ -85,7 +92,7 @@ const Header = () => {
     navigate("/editland");
   };
   const editedMachineHandler = () => {
-    navigate("/editmachine");
+    navigate("/machinetable");
   };
   const editGardenHandler = () => {
     navigate("/gardentable");
@@ -94,7 +101,7 @@ const Header = () => {
     navigate("/livestocktable");
   };
   const editCropHandler = () => {
-    navigate("/editcrop");
+    navigate("/croptable");
   };
   const editLabourHandler = () => {
     navigate("/editlabour");

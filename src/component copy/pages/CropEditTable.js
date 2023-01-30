@@ -20,7 +20,9 @@ const CropEditTable = () => {
   const { addCrop } = useSelector((state) => state.crop);
   console.log("addCrop", addCrop);
   const { cropEditData } = useSelector((state) => state.crop);
-  console.log("cropEditData", cropEditData.organic);
+  console.log("cropEditData", cropEditData[0], cropEditData.brand);
+  // const { editData } = useSelector((state) => state.farmer);
+  // console.log(editData[0].cropDetails[0].name, "cropDetails");
 
   // const editData = cropEditData.map((item)=> {
   //   return console.log('editData',  item.farmerId)
@@ -132,6 +134,7 @@ const CropEditTable = () => {
           //   }
 
           //   })
+          navigate("/croptable");
         }
       })
       .catch((error) => {

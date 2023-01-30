@@ -18,7 +18,7 @@ const LandTable = () => {
   const [showland, setShowLand] = useState(false);
 
   useEffect(() => {
-    if (landData.length == [].length) {
+    if (landData.length === [].length) {
       setShowLand(false);
     } else {
       setShowLand(true);
@@ -68,7 +68,7 @@ const LandTable = () => {
           {showland ? (
             <div>
               <h1>Land Details</h1>
-              <div className="remove-button">
+              <div style={{ marginLeft: "10rem" }}>
                 <button onClick={() => addHandler()}>Add Land</button>
               </div>
               <SimpleBarReact
@@ -113,11 +113,9 @@ const LandTable = () => {
               </SimpleBarReact>
             </div>
           ) : (
-            <div>
+            <div className={classes.land}>
               <h1>No Lands Found</h1>
-              <div style={{ marginLeft: "22rem" }} className="remove-button">
-                <button onClick={() => addHandler()}>Add Land</button>
-              </div>
+              <button onClick={() => addHandler()}>Add Land</button>
             </div>
           )}
         </div>

@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import axios from "axios";
 import classes from "./garden.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { Gardenn } from "../../store/gardenreducer";
@@ -36,7 +35,7 @@ const Garden = () => {
   const submitHandle = (e) => {
     e.preventDefault();
     let data = {
-      farmerId: farmerid[0],
+      farmerId: farmerid,
       area: area,
       type: type,
       name: name,

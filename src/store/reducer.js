@@ -40,6 +40,17 @@ export const FarmerDetails = createSlice({
     farmerAll(state, action) {
       state.fullFarmer = action.payload;
     },
+    farmerLogout(state) {
+      state.farmer = [];
+      state.farmername = "";
+      state.farmer_id = "";
+      state.editData = {};
+      state.machine_detail = [];
+      state.update_machine_detail = [];
+      state.editMachineData = {};
+      state.create = true;
+      state.fullFarmer = [];
+    },
   },
 });
 

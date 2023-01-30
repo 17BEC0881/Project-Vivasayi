@@ -2,11 +2,13 @@
     width: 100%;
     margin-left: 10%;
     margin-right: 10%;
+    margin-top: -10%;
     /* border: solid; */
     /* margin-top: -60%; */
     /* position: fixed; */
 }
 .land h4 {
+    
     margin-bottom: 1rem;
     margin-left: 40%;
     color: green;

@@ -28,7 +28,7 @@ const CropForm = () => {
   const [variety, setVariety] = useState("");
   const [brand, setBrand] = useState("");
   const [cropedAt, setCropedAt] = useState("");
-  const [organic, setOrganic] = useState();
+  const [organic, setOrganic] = useState(false);
   const [seedingType, setSeedingType] = useState("");
   var [harvestPeriod, setHarvestPeriod] = useState("");
 
@@ -83,6 +83,7 @@ const CropForm = () => {
         if (response.status === 200) {
           dispatch(cropActions.add_crop(data));
           setShow(true);
+          navigate("/croptable");
         }
       })
       .catch((error) => {

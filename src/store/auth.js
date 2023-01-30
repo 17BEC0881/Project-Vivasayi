@@ -43,6 +43,14 @@ const authSlice = createSlice({
     farmerEditLogout(state) {
       state.isFarmerEdit = false;
     },
+    authLogout(state) {
+      state.isAuthenticated = false;
+      state.user = [];
+      state.role = false;
+      state.isLogin = false;
+      state.isFarmerEdit = false;
+      state.data = {};
+    },
   },
 });
 export const authActions = authSlice.actions;

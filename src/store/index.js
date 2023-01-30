@@ -4,7 +4,7 @@ import authReducer from "./auth";
 import landReducer from "./landStore";
 import formReducer from "./gardenreducer";
 import cropDetailsReducer from "./cropDetailsReducer";
-import labourWorkReducer from "./labourWorkReducer";
+
 const store = configureStore({
   reducer: {
     farmer: farmerReducer,
@@ -12,7 +12,6 @@ const store = configureStore({
     land: landReducer,
     user: formReducer,
     crop: cropDetailsReducer,
-    labour: labourWorkReducer,
   },
 });
 

@@ -12,7 +12,7 @@
     margin-bottom: 0rem;
     width: 100%;
     border-collapse: collapse;
-    margin: auto;
+   
     border-color: green;
     /* border-color: green; */
   }
@@ -20,12 +20,13 @@
     background-color:green;
     border: none;
     border-radius: 3px;
-    margin: 5px;
+   margin-left:29rem;
     width: 6rem;
     height: 2rem;
     color: white;
     font-weight: 700;
     font-size: medium; 
+   
 }
 /* .land thead {
     background-color: #e3e3e3;

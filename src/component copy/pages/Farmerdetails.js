@@ -302,7 +302,7 @@ const Farmerdetails = () => {
         ? await instance
             .post(`/farmer/create`, { farmerDetails: data })
             .then((response) => {
-              console.log(response);
+              console.log("res", response);
               if (response.status === 200) {
                 dispatch(farmerActions.create_id(response.data.farmerId));
                 dispatch(authActions.farmerLogin(true));

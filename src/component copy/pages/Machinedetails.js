@@ -418,7 +418,7 @@ const Machinedetails = () => {
             Save
           </button>
         </form>
-        {click1 && (
+        {/* {click1 && (
           <div className={classes.land}>
             <table border={1}>
               <thead>
@@ -462,9 +462,9 @@ const Machinedetails = () => {
                   </tr>
                 ))}
               </tbody>
-            </table>
-          </div>
-        )}
+            </table> */}
+        {/* </div> */}
+        {/* )} */}
       </section>
     </Layout>
   );

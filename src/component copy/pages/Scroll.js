@@ -14,8 +14,6 @@ const Scroll = () => {
   const navigate = useNavigate();
   const availabelLeaseList = [];
 
-  const { leaseLands } = useSelector((state) => state.land);
-  console.log(leaseLands, "leaselands");
   const { fullFarmer } = useSelector((state) => state.farmer);
   const { farmer_id } = useSelector((state) => state.farmer);
 

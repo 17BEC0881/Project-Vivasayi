@@ -26,7 +26,7 @@ const Livestock = () => {
     e.preventDefault();
     console.log("livestock...");
     const data = {
-      farmerId: farmerid[0],
+      farmerId: farmerid,
       breed: breed,
       count: count,
       name: name,

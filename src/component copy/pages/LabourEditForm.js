@@ -1,53 +1,91 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
+//import classes from "./LabourWorkForm.module.css";
 import classes from "./LabourWorkForm.module.css";
 // import Layout from "../Layout/Layout";
 import Layout from "../Layout/Layout";
 import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { farmerActions } from "../../store/reducer";
 import instance from "./BaseURL";
+import { cropActions } from "../../store/cropDetailsReducer";
 
-const LabourWorkForm = () => {
-  const dispatch = useDispatch();
-
+const LabourEditForm = () => {
   const { farmer_id } = useSelector((state) => state.farmer);
   console.log("farmer_id", farmer_id.toString());
-  // const { labourWork } = useSelector((state) => state.labour);
-  // console.log("labourWork", labourWork);
+  // const {labourWork} = useSelector((state)=> state.labour)
+  // console.log('labourWork', labourWork)
+  const { labourEditData } = useSelector((state) => state.crop);
+  console.log("labourEditData", labourEditData);
+  //     const labour=
+  //         {
 
-  const input = [
-    "landPlowing",
-    "landPlowingWithTractor",
-    "fertilization",
-    "weedRemoving",
-    "pesticideSpraying",
-    "handHarvesting",
-    "cropSpanking",
-    "pumpsetDuty",
-    "landCleaning",
-    "treeClimbing",
-    "paddySteaming",
-    "others",
-  ];
+  //             landPlowing: true,
+  //             "landPlowingWithTractor": false,
+  //             "fertilization": true,
+  //             "weedRemoving": false,
+  //             "pesticideSpraying": true,
+  //             "handHarvesting": false,
+  //             "cropSpanking": true,
+  //             "pumpsetDuty": false,
+  //             "landCleaning": true,
+  //             "treeClimbing": false,
+  //             "paddySteaming": true,
+  //         }
 
-  const [labour, setLabour] = useState("");
-  const [landPlowing, setLandPlowing] = useState(false);
-  const [landPlowingWithTractor, setLandPlowingWithTractor] = useState(false);
-  const [fertilization, setFertilization] = useState(false);
-  const [weedRemoving, setWeedRemoving] = useState(false);
-  const [pesticideSpraying, setPesticideSpraying] = useState(false);
-  const [handHarvesting, setHandHarvesting] = useState(false);
-  const [cropSpanking, setCropSpanking] = useState(false);
-  const [pumpsetDuty, setPumpsetDuty] = useState(false);
-  const [landCleaning, setLandCleaning] = useState(false);
-  const [treeClimbing, setTreeClimbing] = useState(false);
-  const [paddySteaming, setPaddyStreaming] = useState(false);
+  // console.log('ans', typeof labour.landPlowing )
+  //   const input = [
+
+  //             "landPlowing",
+  //             "landPlowingWithTractor",
+  //             "fertilization",
+  //             "weedRemoving",
+  //             "pesticideSpraying",
+  //             "handHarvesting",
+  //             "cropSpanking",
+  //             "pumpsetDuty",
+  //             "landCleaning",
+  //             "treeClimbing",
+  //             "paddySteaming",
+  //             'others'
+
+  //     ]
+
+  // const [labour, setLabour] = useState("");
+  const [landPlowing, setLandPlowing] = useState(labourEditData[0].landPlowing);
+  const [landPlowingWithTractor, setLandPlowingWithTractor] = useState(
+    labourEditData[0].landPlowingWithTractor
+  );
+  const [weedRemoving, setWeedRemoving] = useState(
+    labourEditData[0].weedRemoving
+  );
+  const [pesticideSpraying, setPesticideSpraying] = useState(
+    labourEditData[0].pesticideSpraying
+  );
+  const [handHarvesting, setHandHarvesting] = useState(
+    labourEditData[0].handHarvesting
+  );
+  const [cropSpanking, setCropSpanking] = useState(
+    labourEditData[0].cropSpanking
+  );
+  const [pumpsetDuty, setPumpsetDuty] = useState(labourEditData[0].pumpsetDuty);
+  const [landCleaning, setLandCleaning] = useState(
+    labourEditData[0].landCleaning
+  );
+  const [treeClimbing, setTreeClimbing] = useState(
+    labourEditData[0].treeClimbing
+  );
+  const [paddySteaming, setPaddyStreaming] = useState(
+    labourEditData[0].paddySteaming
+  );
+  const [fertilization, setFertilization] = useState(
+    labourEditData[0].fertilization
+  );
   const [others, setOthers] = useState(false);
 
   const navigate = useNavigate();
-  const [show, setShow] = useState(false);
+
   // const[update, setUpdate] = useState(false)
 
   const [farmerId, setFarmerId] = useState(farmer_id);
@@ -124,27 +162,6 @@ const LabourWorkForm = () => {
   ];
   console.log("labourData", labourData);
 
-  const submitHandler = (event) => {
-    event.preventDefault();
-
-    instance
-      .post("/labour/create", {
-        labourDetails: labourData,
-      })
-      .then((response) => {
-        console.log("response", response);
-        if (response.status === 200) {
-          // dispatch(cropActions.add_crop([...add,data]))
-
-          setShow(true);
-          // navigate("/livestocktable");
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-    //navigate("/livestock");
-  };
   const updateHandler = (event) => {
     event.preventDefault();
 
@@ -154,6 +171,7 @@ const LabourWorkForm = () => {
       })
       .then((response) => {
         console.log(response);
+        alert("successfully updated");
       })
       .catch((error) => {
         console.log(error);
@@ -174,6 +192,7 @@ const LabourWorkForm = () => {
                 name="landPlowing"
                 // value={landPlowing}
                 // onChange={()=> setLandPlowing(!landPlowing)}
+                checked={landPlowing}
                 value="landPlowing"
                 onChange={handleChange}
               />
@@ -186,6 +205,7 @@ const LabourWorkForm = () => {
                 name="landPlowingWithTractor"
                 //value={landPlowingWithTractor}
                 //onChange={()=> setLandPlowingWithTractor(!landPlowingWithTractor)}
+                checked={landPlowingWithTractor}
                 value="landPlowingWithTractor"
                 onChange={handleChange}
               />
@@ -197,6 +217,7 @@ const LabourWorkForm = () => {
                 name="fertilization"
                 //value={fertilization}
                 //onChange={()=> setFertilization(!fertilization)}
+                checked={fertilization}
                 value="fertilization"
                 onChange={handleChange}
               />
@@ -208,6 +229,7 @@ const LabourWorkForm = () => {
                 name="weedRemoving"
                 //value={weedRemoving}
                 //onChange={()=> setWeedRemoving(!weedRemoving)}
+                checked={weedRemoving}
                 onChange={handleChange}
                 value="weedRemoving"
               />
@@ -220,6 +242,7 @@ const LabourWorkForm = () => {
                 name="pesticideSpraying"
                 //value={pesticideSpraying}
                 //onChange={()=> setPesticideSpraying(!pesticideSpraying)}
+                checked={pesticideSpraying}
                 value="pesticideSpraying"
                 onChange={handleChange}
               />
@@ -232,6 +255,7 @@ const LabourWorkForm = () => {
                 name="handHarvesting"
                 //value={handHarvesting}
                 // onChange={()=> setHandHarvesting(!handHarvesting)}
+                checked={handHarvesting}
                 value="handHarvesting"
                 onChange={handleChange}
               />
@@ -244,6 +268,7 @@ const LabourWorkForm = () => {
                 name="cropSpanking"
                 // value={cropSpanking}
                 //onChange={()=> setCropSpanking(!cropSpanking)}
+                checked={cropSpanking}
                 onChange={handleChange}
                 value="cropSpanking"
               />
@@ -256,6 +281,7 @@ const LabourWorkForm = () => {
                 name="pumpsetDuty"
                 //value={pumpsetDuty}
                 //onChange={()=> setPumpsetDuty(!pumpsetDuty)}
+                checked={pumpsetDuty}
                 onChange={handleChange}
                 value="pumpsetDuty"
               />
@@ -268,6 +294,7 @@ const LabourWorkForm = () => {
                 name="landCleaning"
                 // value={landCleaning}
                 //onChange={()=> setlandCleaning(!landCleaning)}
+                checked={landCleaning}
                 value="landCleaning"
                 onChange={handleChange}
               />
@@ -280,6 +307,7 @@ const LabourWorkForm = () => {
                 name="treeClimbing"
                 //value={treeClimbing}
                 //onChange={()=> setTreeClimbing(!treeClimbing)}
+                checked={treeClimbing}
                 value="treeClimbing"
                 onChange={handleChange}
               />
@@ -293,6 +321,7 @@ const LabourWorkForm = () => {
                 //value={paddySteaming}
 
                 //onChange={()=> setPaddyStreaming(!paddySteaming)}
+                checked={paddySteaming}
                 value="paddySteaming"
                 onChange={handleChange}
               />
@@ -305,42 +334,18 @@ const LabourWorkForm = () => {
                 name="others"
                 //value={others}
                 //onChange={()=> setOthers(!others)}
+
                 onChange={handleChange}
                 value="others"
               />
               Others{" "}
             </label>
           </div>
-
-          {show && (
-            <div>
-              <h2>selected works:</h2>
-              <textarea
-                name="response"
-                value={userinfo.response}
-                style={{
-                  height: "150px",
-                  width: "400px",
-                  marginLeft: "300px",
-                  marginTop: "25px",
-                  fontSize: "15px",
-                }}
-                onChange={handleChange}
-              ></textarea>
-            </div>
-          )}
         </div>
-        {/* <ul>
-            <li>{userinfo}</li>
-            </ul> */}
 
-        {/* {!show ? ( */}
-        <button onClick={submitHandler}>Submit</button>
-        {/* ) : (
-          <button onClick={updateHandler}>update</button>
-        )} */}
+        <button onClick={updateHandler}>update</button>
       </div>
     </Layout>
   );
 };
-export default LabourWorkForm;
+export default LabourEditForm;
