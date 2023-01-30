@@ -134,8 +134,8 @@ const Header = () => {
                     </NavLink>
                   </li>
                   <li>
-                    <NavLink to="/employee" className="active">
-                      Login
+                    <NavLink to="/" className="active">
+                      Home
                     </NavLink>
                   </li>
                 </ul>
@@ -175,8 +175,8 @@ const Header = () => {
               <nav>
                 <ul>
                   <li>
-                    <NavLink to="/admin" className="active">
-                      Login
+                    <NavLink to="/" className="active">
+                      Home
                     </NavLink>
                   </li>
                 </ul>
